@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 620" width="850" height="620">
+  <style>
+    @keyframes typing { from { width: 0 } to { width: 100% } }
+    @keyframes blink { 50% { opacity: 0 } }
+    @keyframes fadeIn1 { 0%,15% { opacity: 0 } 20% { opacity: 1 } }
+    @keyframes fadeIn2 { 0%,30% { opacity: 0 } 35% { opacity: 1 } }
+    @keyframes fadeIn3 { 0%,42% { opacity: 0 } 47% { opacity: 1 } }
+    @keyframes fadeIn4 { 0%,55% { opacity: 0 } 60% { opacity: 1 } }
+    @keyframes fadeIn5 { 0%,65% { opacity: 0 } 70% { opacity: 1 } }
+    @keyframes fadeIn6 { 0%,75% { opacity: 0 } 80% { opacity: 1 } }
+    @keyframes fadeIn7 { 0%,85% { opacity: 0 } 90% { opacity: 1 } }
+    @keyframes fadeIn8 { 0%,90% { opacity: 0 } 95% { opacity: 1 } }
+    .l1 { animation: fadeIn1 12s infinite; }
+    .l2 { animation: fadeIn2 12s infinite; }
+    .l3 { animation: fadeIn3 12s infinite; }
+    .l4 { animation: fadeIn4 12s infinite; }
+    .l5 { animation: fadeIn5 12s infinite; }
+    .l6 { animation: fadeIn6 12s infinite; }
+    .l7 { animation: fadeIn7 12s infinite; }
+    .l8 { animation: fadeIn8 12s infinite; }
+    .cursor { animation: blink 1s infinite; }
+    text { font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', 'JetBrains Mono', monospace; }
+  </style>
+
+  <!-- Terminal window -->
+  <rect width="850" height="620" rx="12" fill="#0f172a" />
+  <rect width="850" height="38" rx="12" fill="#1e293b" />
+  <rect y="26" width="850" height="12" fill="#1e293b" />
+
+  <!-- Traffic lights -->
+  <circle cx="20" cy="19" r="7" fill="#ef4444"/>
+  <circle cx="42" cy="19" r="7" fill="#f59e0b"/>
+  <circle cx="64" cy="19" r="7" fill="#22c55e"/>
+
+  <!-- Title bar -->
+  <text x="425" y="24" text-anchor="middle" font-size="13" fill="#64748b">nightowl - zsh - 120x40</text>
+
+  <!-- Command -->
+  <text x="20" y="70" font-size="14" fill="#64748b">$</text>
+  <text x="35" y="70" font-size="14" fill="#22d3ee">nightowl full</text>
+  <text x="165" y="70" font-size="14" fill="white">https://example.com</text>
+  <text x="373" y="70" font-size="14" fill="#64748b">--mode auto</text>
+
+  <!-- Banner -->
+  <g class="l1">
+    <text x="20" y="100" font-size="13" fill="#22d3ee" font-weight="bold">
+    _   _ _       _     _    ___           _</text>
+    <text x="20" y="115" font-size="13" fill="#22d3ee" font-weight="bold">
+   | \ | (_) __ _| |__ | |_ / _ \__      _| |</text>
+    <text x="20" y="130" font-size="13" fill="#22d3ee" font-weight="bold">
+   |  \| | |/ _` | '_ \| __| | | \ \ /\ / / |</text>
+    <text x="20" y="145" font-size="13" fill="#22d3ee" font-weight="bold">
+   | |\  | | (_| | | | | |_| |_| |\ V  V /| |</text>
+    <text x="20" y="160" font-size="13" fill="#22d3ee" font-weight="bold">
+   |_| \_|_|\__, |_| |_|\__|\___/  \_/\_/ |_|</text>
+    <text x="20" y="175" font-size="13" fill="#22d3ee" font-weight="bold">
+            |___/</text>
+    <text x="20" y="195" font-size="12" fill="#64748b">   Advanced Penetration Testing Framework v1.0.0</text>
+  </g>
+
+  <!-- Scan start -->
+  <g class="l2">
+    <text x="20" y="225" font-size="13" fill="#22c55e">&#x2714;</text>
+    <text x="40" y="225" font-size="13" fill="white">57 modules loaded</text>
+    <text x="20" y="245" font-size="13" fill="#3b82f6">[*]</text>
+    <text x="50" y="245" font-size="13" fill="white">Target: https://example.com</text>
+    <text x="20" y="265" font-size="13" fill="#3b82f6">[*]</text>
+    <text x="50" y="265" font-size="13" fill="white">Mode: Full Auto | Stages: RECON → SCAN → EXPLOIT → POST → REPORT</text>
+  </g>
+
+  <!-- Recon stage -->
+  <g class="l3">
+    <text x="20" y="295" font-size="13" fill="#f59e0b">━━━ Stage: RECON ━━━</text>
+    <text x="20" y="315" font-size="13" fill="#22c55e">[+]</text>
+    <text x="50" y="315" font-size="13" fill="white">DNS: 4 A records, 2 MX, 3 NS, 1 TXT</text>
+    <text x="20" y="333" font-size="13" fill="#22c55e">[+]</text>
+    <text x="50" y="333" font-size="13" fill="white">Subdomains: 12 found (api, admin, staging, dev, mail...)</text>
+    <text x="20" y="351" font-size="13" fill="#22c55e">[+]</text>
+    <text x="50" y="351" font-size="13" fill="white">Ports: 22/ssh, 80/http, 443/https, 3306/mysql, 8080/http-proxy</text>
+    <text x="20" y="369" font-size="13" fill="#ef4444">[!]</text>
+    <text x="50" y="369" font-size="13" fill="#ef4444">AWS S3 bucket PUBLIC: example-backup.s3.amazonaws.com</text>
+    <text x="20" y="387" font-size="13" fill="#ef4444">[!]</text>
+    <text x="50" y="387" font-size="13" fill="#ef4444">SECRET: AWS Access Key found in /assets/app.js</text>
+  </g>
+
+  <!-- Scan stage -->
+  <g class="l5">
+    <text x="20" y="415" font-size="13" fill="#f59e0b">━━━ Stage: SCAN ━━━</text>
+    <text x="20" y="435" font-size="13" fill="#ef4444">[CRITICAL]</text>
+    <text x="110" y="435" font-size="13" fill="white">SQL Injection in /api/users?id= (CVSS: 9.8)</text>
+    <text x="20" y="453" font-size="13" fill="#ef4444">[CRITICAL]</text>
+    <text x="110" y="453" font-size="13" fill="white">SSTI in /search?q= → Jinja2 RCE (CVSS: 9.8)</text>
+    <text x="20" y="471" font-size="13" fill="#ea580c">[HIGH]</text>
+    <text x="85" y="471" font-size="13" fill="white">JWT alg:none bypass — auth token forgeable (CVSS: 8.5)</text>
+    <text x="20" y="489" font-size="13" fill="#ea580c">[HIGH]</text>
+    <text x="85" y="489" font-size="13" fill="white">Subdomain takeover: staging.example.com → Heroku (CVSS: 9.8)</text>
+    <text x="20" y="507" font-size="13" fill="#ca8a04">[MEDIUM]</text>
+    <text x="100" y="507" font-size="13" fill="white">CORS allows *.evil.com with credentials (CVSS: 6.5)</text>
+  </g>
+
+  <!-- Summary -->
+  <g class="l7">
+    <text x="20" y="540" font-size="13" fill="#f59e0b">━━━ RESULTS ━━━</text>
+    <text x="20" y="560" font-size="13" fill="#ef4444">&#9632; CRITICAL: 5</text>
+    <text x="160" y="560" font-size="13" fill="#ea580c">&#9632; HIGH: 8</text>
+    <text x="280" y="560" font-size="13" fill="#ca8a04">&#9632; MEDIUM: 12</text>
+    <text x="420" y="560" font-size="13" fill="#3b82f6">&#9632; LOW: 4</text>
+    <text x="530" y="560" font-size="13" fill="#64748b">&#9632; INFO: 23</text>
+  </g>
+
+  <g class="l8">
+    <text x="20" y="585" font-size="13" fill="#22c55e">&#x2714;</text>
+    <text x="40" y="585" font-size="13" fill="white">Report saved: ./reports/nightowl-report-20260325.html</text>
+    <text x="20" y="605" font-size="13" fill="#22c55e">&#x2714;</text>
+    <text x="40" y="605" font-size="13" fill="white">Scan completed in 47.3s — 52 findings across 57 modules</text>
+  </g>
+
+  <!-- Blinking cursor -->
+  <rect x="510" y="593" width="8" height="16" fill="#22d3ee" class="cursor"/>
+</svg>
