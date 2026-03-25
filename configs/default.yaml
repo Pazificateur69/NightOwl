@@ -1,0 +1,41 @@
+# NightOwl - Default Configuration
+# Copy this file and customize for your engagement
+
+mode: semi  # auto | semi | manual
+threads: 10
+timeout: 30
+log_level: INFO
+output_dir: ./reports
+db_path: ./nightowl.db
+user_agent: "Mozilla/5.0 (NightOwl Security Scanner)"
+wordlist_dir: ./wordlists
+
+# Rate limiting
+rate_limit:
+  requests_per_second: 10
+  burst: 20
+  delay_between_requests: 0.1
+
+# Scope - define authorized targets
+scope:
+  allowed_hosts: []
+    # - example.com
+    # - "*.example.com"
+  allowed_ips: []
+    # - 192.168.1.100
+  allowed_networks: []
+    # - 192.168.1.0/24
+    # - 10.0.0.0/8
+  excluded_hosts: []
+    # - production.example.com
+
+# Module configuration
+modules: []
+  # - name: sqli-scanner
+  #   enabled: true
+  #   options:
+  #     payloads: custom
+  # - name: password-spray
+  #   enabled: false
+  #   options:
+  #     spray_delay: 5.0

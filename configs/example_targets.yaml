@@ -1,0 +1,37 @@
+# NightOwl - Example Target Configuration
+# Use this as a template for your pentest engagements
+
+mode: semi
+log_level: DEBUG
+
+scope:
+  allowed_hosts:
+    - scanme.nmap.org
+    - "*.example.com"
+  allowed_networks:
+    - 192.168.1.0/24
+  excluded_hosts:
+    - mail.example.com
+
+rate_limit:
+  requests_per_second: 5
+  burst: 10
+
+modules:
+  - name: port-scanner
+    enabled: true
+    options:
+      ports: "1-1000"
+
+  - name: dir-bruteforce
+    enabled: true
+    options:
+      delay: 0.2
+
+  - name: password-spray
+    enabled: false
+    options:
+      spray_delay: 5.0
+      passwords:
+        - Password1
+        - Welcome1

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ title }}</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/htmx.org@1.9.10"></script>
+</head>
+<body class="bg-slate-900 text-slate-200 min-h-screen">
+    <nav class="bg-slate-800 border-b border-slate-700 px-6 py-4">
+        <div class="flex items-center justify-between max-w-7xl mx-auto">
+            <div class="flex items-center gap-3">
+                <span class="text-3xl">&#x1F989;</span>
+                <h1 class="text-xl font-bold text-cyan-400">NightOwl</h1>
+            </div>
+            <div class="flex gap-6 text-sm">
+                <a href="/" class="text-cyan-400 hover:text-cyan-300">Dashboard</a>
+                <a href="#" class="text-slate-400 hover:text-slate-200">Scans</a>
+                <a href="#" class="text-slate-400 hover:text-slate-200">Reports</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto p-6">
+        <div class="flex items-center justify-between mb-8">
+            <h2 class="text-2xl font-bold">Dashboard</h2>
+            <button onclick="document.getElementById('newScanModal').classList.toggle('hidden')"
+                class="bg-cyan-600 hover:bg-cyan-500 text-white px-4 py-2 rounded-lg font-medium">
+                + New Scan
+            </button>
+        </div>
+
+        <!-- Stats -->
+        <div id="stats" hx-get="/api/stats" hx-trigger="load" hx-swap="innerHTML"
+            class="grid grid-cols-3 gap-4 mb-8">
+            <div class="bg-slate-800 rounded-lg p-6 border border-slate-700 text-center">
+                <div class="text-3xl font-bold text-cyan-400">{{ scans|length }}</div>
+                <div class="text-slate-400 text-sm">Total Scans</div>
+            </div>
+            <div class="bg-slate-800 rounded-lg p-6 border border-slate-700 text-center">
+                <div class="text-3xl font-bold text-green-400">{{ scans|selectattr('status', 'eq', 'completed')|list|length }}</div>
+                <div class="text-slate-400 text-sm">Completed</div>
+            </div>
+            <div class="bg-slate-800 rounded-lg p-6 border border-slate-700 text-center">
+                <div class="text-3xl font-bold text-orange-400">0</div>
+                <div class="text-slate-400 text-sm">Total Findings</div>
+            </div>
+        </div>
+
+        <!-- Recent Scans -->
+        <h3 class="text-lg font-semibold mb-4">Recent Scans</h3>
+        <div class="bg-slate-800 rounded-lg border border-slate-700 overflow-hidden">
+            <table class="w-full">
+                <thead class="bg-slate-700">
+                    <tr>
+                        <th class="px-4 py-3 text-left text-xs text-slate-400 uppercase">Name</th>
+                        <th class="px-4 py-3 text-left text-xs text-slate-400 uppercase">Status</th>
+                        <th class="px-4 py-3 text-left text-xs text-slate-400 uppercase">Findings</th>
+                        <th class="px-4 py-3 text-left text-xs text-slate-400 uppercase">Started</th>
+                        <th class="px-4 py-3 text-left text-xs text-slate-400 uppercase">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for scan in scans %}
+                    <tr class="border-t border-slate-700 hover:bg-slate-750">
+                        <td class="px-4 py-3">{{ scan.name }}</td>
+                        <td class="px-4 py-3">
+                            <span class="px-2 py-1 rounded text-xs
+                                {% if scan.status == 'completed' %}bg-green-900 text-green-300
+                                {% elif scan.status == 'running' %}bg-blue-900 text-blue-300
+                                {% elif scan.status == 'failed' %}bg-red-900 text-red-300
+                                {% else %}bg-slate-600 text-slate-300{% endif %}">
+                                {{ scan.status }}
+                            </span>
+                        </td>
+                        <td class="px-4 py-3">{{ scan.findings_count }}</td>
+                        <td class="px-4 py-3 text-sm text-slate-400">{{ scan.started_at or 'N/A' }}</td>
+                        <td class="px-4 py-3">
+                            <a href="/scans/{{ scan.id }}" class="text-cyan-400 hover:text-cyan-300 text-sm">View</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    {% if not scans %}
+                    <tr><td colspan="5" class="px-4 py-8 text-center text-slate-500">No scans yet. Start your first scan!</td></tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <!-- New Scan Modal -->
+    <div id="newScanModal" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+        <div class="bg-slate-800 rounded-xl p-6 w-full max-w-md border border-slate-700">
+            <h3 class="text-lg font-bold mb-4">New Scan</h3>
+            <form hx-post="/api/scans" hx-swap="none" hx-on::after-request="location.reload()">
+                <input name="targets" placeholder="Target (e.g. 192.168.1.1)" class="w-full bg-slate-900 border border-slate-600 rounded px-3 py-2 mb-3 text-white" required>
+                <select name="mode" class="w-full bg-slate-900 border border-slate-600 rounded px-3 py-2 mb-4 text-white">
+                    <option value="auto">Full Auto</option>
+                    <option value="semi" selected>Semi-Auto</option>
+                    <option value="manual">Manual</option>
+                </select>
+                <div class="flex gap-3 justify-end">
+                    <button type="button" onclick="this.closest('#newScanModal').classList.add('hidden')" class="px-4 py-2 text-slate-400 hover:text-white">Cancel</button>
+                    <button type="submit" class="bg-cyan-600 hover:bg-cyan-500 text-white px-4 py-2 rounded-lg">Launch Scan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

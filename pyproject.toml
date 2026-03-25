@@ -1,0 +1,64 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nightowl"
+version = "1.0.0"
+description = "NightOwl - Advanced Penetration Testing Framework"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.11"
+authors = [{name = "NightOwl Team"}]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Information Technology",
+    "Topic :: Security",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+dependencies = [
+    "pydantic>=2.0",
+    "sqlalchemy>=2.0",
+    "pyyaml>=6.0",
+    "python-nmap>=0.7",
+    "requests>=2.31",
+    "httpx>=0.25",
+    "beautifulsoup4>=4.12",
+    "dnspython>=2.4",
+    "paramiko>=3.3",
+    "click>=8.1",
+    "rich>=13.0",
+    "fastapi>=0.104",
+    "uvicorn>=0.24",
+    "jinja2>=3.1",
+    "python-multipart>=0.0.6",
+    "markdown>=3.5",
+    "websockets>=12.0",
+]
+
+[project.optional-dependencies]
+full = [
+    "scapy>=2.5",
+    "aiohttp>=3.9",
+    "impacket>=0.11",
+    "ldap3>=2.9",
+    "weasyprint>=60.0",
+    "aiosqlite>=0.19",
+]
+exploit = ["pymetasploit3>=1.0"]
+dev = ["pytest>=7.4", "pytest-asyncio>=0.21", "ruff>=0.1", "mypy>=1.7"]
+
+[project.scripts]
+nightowl = "nightowl.cli.main:cli"
+
+[tool.setuptools.packages.find]
+include = ["nightowl*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]

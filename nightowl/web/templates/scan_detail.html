@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scan {{ scan_id[:8] }} - NightOwl</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+</head>
+<body class="bg-slate-900 text-slate-200 min-h-screen">
+    <nav class="bg-slate-800 border-b border-slate-700 px-6 py-4">
+        <div class="flex items-center gap-3 max-w-7xl mx-auto">
+            <a href="/" class="flex items-center gap-3 hover:opacity-80">
+                <span class="text-3xl">&#x1F989;</span>
+                <h1 class="text-xl font-bold text-cyan-400">NightOwl</h1>
+            </a>
+            <span class="text-slate-500 mx-2">/</span>
+            <span class="text-slate-400">Scan {{ scan_id[:8] }}</span>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto p-6">
+        <!-- Stats Bar -->
+        <div class="grid grid-cols-5 gap-4 mb-8">
+            {% set colors = {'critical': 'red', 'high': 'orange', 'medium': 'yellow', 'low': 'blue', 'info': 'slate'} %}
+            {% for sev in ['critical', 'high', 'medium', 'low', 'info'] %}
+            <div class="bg-slate-800 rounded-lg p-4 border border-slate-700 text-center">
+                <div class="text-2xl font-bold text-{{ colors[sev] }}-400">{{ stats.get(sev, 0) }}</div>
+                <div class="text-slate-400 text-xs uppercase">{{ sev }}</div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="grid grid-cols-3 gap-6">
+            <!-- Chart -->
+            <div class="bg-slate-800 rounded-lg p-6 border border-slate-700">
+                <h3 class="text-sm font-semibold text-slate-400 uppercase mb-4">Severity Distribution</h3>
+                <canvas id="chart" height="200"></canvas>
+            </div>
+
+            <!-- Findings Table -->
+            <div class="col-span-2 bg-slate-800 rounded-lg border border-slate-700 overflow-hidden">
+                <div class="px-4 py-3 bg-slate-700 flex items-center justify-between">
+                    <h3 class="text-sm font-semibold text-slate-400 uppercase">Findings ({{ findings|length }})</h3>
+                    <a href="/api/reports/{{ scan_id }}?fmt=html" target="_blank" class="text-cyan-400 hover:text-cyan-300 text-sm">Export HTML</a>
+                </div>
+                <table class="w-full">
+                    <thead>
+                        <tr class="border-b border-slate-700">
+                            <th class="px-4 py-2 text-left text-xs text-slate-500">#</th>
+                            <th class="px-4 py-2 text-left text-xs text-slate-500">Severity</th>
+                            <th class="px-4 py-2 text-left text-xs text-slate-500">Title</th>
+                            <th class="px-4 py-2 text-left text-xs text-slate-500">Target</th>
+                            <th class="px-4 py-2 text-left text-xs text-slate-500">CVSS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for f in findings %}
+                        {% set sev_colors = {'critical': 'bg-red-600', 'high': 'bg-orange-600', 'medium': 'bg-yellow-600', 'low': 'bg-blue-600', 'info': 'bg-slate-600'} %}
+                        <tr class="border-t border-slate-700/50 hover:bg-slate-750">
+                            <td class="px-4 py-2 text-sm text-slate-500">{{ loop.index }}</td>
+                            <td class="px-4 py-2">
+                                <span class="px-2 py-0.5 rounded text-xs text-white {{ sev_colors.get(f.severity, 'bg-slate-600') }}">{{ f.severity|upper }}</span>
+                            </td>
+                            <td class="px-4 py-2 text-sm">{{ f.title }}</td>
+                            <td class="px-4 py-2 text-sm text-slate-400">{{ f.target }}</td>
+                            <td class="px-4 py-2 text-sm">{{ f.cvss_score }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <script>
+    new Chart(document.getElementById('chart'), {
+        type: 'doughnut',
+        data: {
+            labels: ['Critical', 'High', 'Medium', 'Low', 'Info'],
+            datasets: [{
+                data: [{{ stats.get('critical',0) }}, {{ stats.get('high',0) }}, {{ stats.get('medium',0) }}, {{ stats.get('low',0) }}, {{ stats.get('info',0) }}],
+                backgroundColor: ['#dc2626','#ea580c','#ca8a04','#2563eb','#6b7280']
+            }]
+        },
+        options: { responsive: true, plugins: { legend: { labels: { color: '#e2e8f0' } } } }
+    });
+    </script>
+</body>
+</html>
