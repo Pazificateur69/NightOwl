@@ -1,96 +1,91 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
   <defs>
-    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#0f172a;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#1e293b;stop-opacity:1" />
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0e1a"/>
+      <stop offset="100%" stop-color="#111827"/>
     </linearGradient>
-    <linearGradient id="eyeGlow" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#22d3ee;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#06b6d4;stop-opacity:1" />
+    <linearGradient id="eyeL" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff0040"/>
+      <stop offset="100%" stop-color="#ff3366"/>
     </linearGradient>
-    <linearGradient id="bodyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" style="stop-color:#475569;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#334155;stop-opacity:1" />
+    <linearGradient id="eyeR" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00ffcc"/>
+      <stop offset="100%" stop-color="#00d4ff"/>
     </linearGradient>
-    <filter id="glow">
-      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
-      <feMerge>
-        <feMergeNode in="coloredBlur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
-    <filter id="eyeGlowFilter">
-      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
-      <feMerge>
-        <feMergeNode in="coloredBlur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
+    <linearGradient id="body" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1a1a2e"/>
+      <stop offset="100%" stop-color="#16213e"/>
+    </linearGradient>
+    <filter id="glowR"><feGaussianBlur stdDeviation="10" result="b"/><feComposite in="SourceGraphic" in2="b" operator="over"/></filter>
+    <filter id="glowC"><feGaussianBlur stdDeviation="10" result="b"/><feComposite in="SourceGraphic" in2="b" operator="over"/></filter>
   </defs>
 
-  <!-- Background circle -->
-  <circle cx="256" cy="256" r="250" fill="url(#bgGrad)" stroke="#22d3ee" stroke-width="3" opacity="0.95"/>
+  <rect width="512" height="512" rx="64" fill="url(#bg)"/>
 
-  <!-- Owl body -->
-  <ellipse cx="256" cy="310" rx="120" ry="130" fill="url(#bodyGrad)" />
+  <!-- Scan lines -->
+  <g opacity="0.03"><line x1="0" y1="50" x2="512" y2="50" stroke="#00ffcc"/><line x1="0" y1="100" x2="512" y2="100" stroke="#00ffcc"/><line x1="0" y1="150" x2="512" y2="150" stroke="#00ffcc"/><line x1="0" y1="200" x2="512" y2="200" stroke="#00ffcc"/><line x1="0" y1="250" x2="512" y2="250" stroke="#00ffcc"/><line x1="0" y1="300" x2="512" y2="300" stroke="#00ffcc"/><line x1="0" y1="350" x2="512" y2="350" stroke="#00ffcc"/><line x1="0" y1="400" x2="512" y2="400" stroke="#00ffcc"/><line x1="0" y1="450" x2="512" y2="450" stroke="#00ffcc"/></g>
 
-  <!-- Ear tufts (left) -->
-  <polygon points="160,160 140,90 190,140" fill="#475569" />
-  <polygon points="165,155 150,100 188,138" fill="#64748b" />
+  <!-- Sharp horns -->
+  <polygon points="148,175 105,45 195,135" fill="#1a1a2e" stroke="#00ffcc" stroke-width="1.5" opacity="0.8"/>
+  <polygon points="155,170 120,65 192,138" fill="#16213e"/>
+  <polygon points="364,175 407,45 317,135" fill="#1a1a2e" stroke="#ff0040" stroke-width="1.5" opacity="0.8"/>
+  <polygon points="357,170 392,65 320,138" fill="#16213e"/>
 
-  <!-- Ear tufts (right) -->
-  <polygon points="352,160 372,90 322,140" fill="#475569" />
-  <polygon points="347,155 362,100 324,138" fill="#64748b" />
+  <!-- Angular head -->
+  <path d="M256,120 L370,190 L380,280 L340,350 L256,370 L172,350 L132,280 L142,190 Z" fill="url(#body)" stroke="#2a2a4a" stroke-width="1"/>
+  <path d="M256,140 L350,200 L360,270 L320,330 L256,345 L192,330 L152,270 L162,200 Z" fill="#0f0f23"/>
 
-  <!-- Head -->
-  <ellipse cx="256" cy="210" rx="110" ry="95" fill="#475569" />
+  <!-- V forehead -->
+  <path d="M256,140 L230,180 L256,170 L282,180 Z" fill="#00ffcc" opacity="0.3"/>
 
-  <!-- Face disc (lighter) -->
-  <ellipse cx="256" cy="220" rx="95" ry="80" fill="#64748b" />
+  <!-- Left eye RED -->
+  <path d="M168,220 L220,195 L250,220 L220,250 L168,240 Z" fill="#0a0a15"/>
+  <ellipse cx="210" cy="222" rx="32" ry="22" fill="url(#eyeL)" filter="url(#glowR)"/>
+  <ellipse cx="215" cy="220" rx="14" ry="12" fill="#0a0e1a"/>
+  <ellipse cx="220" cy="216" rx="5" ry="4" fill="#ff6688" opacity="0.9"/>
+  <ellipse cx="210" cy="222" rx="45" ry="30" fill="none" stroke="#ff0040" stroke-width="1" opacity="0.3"/>
 
-  <!-- Left eye socket -->
-  <circle cx="210" cy="210" r="42" fill="#1e293b" />
-  <!-- Right eye socket -->
-  <circle cx="302" cy="210" r="42" fill="#1e293b" />
+  <!-- Right eye CYAN -->
+  <path d="M344,220 L292,195 L262,220 L292,250 L344,240 Z" fill="#0a0a15"/>
+  <ellipse cx="302" cy="222" rx="32" ry="22" fill="url(#eyeR)" filter="url(#glowC)"/>
+  <ellipse cx="307" cy="220" rx="14" ry="12" fill="#0a0e1a"/>
+  <ellipse cx="312" cy="216" rx="5" ry="4" fill="#66ffee" opacity="0.9"/>
+  <ellipse cx="302" cy="222" rx="45" ry="30" fill="none" stroke="#00ffcc" stroke-width="1" opacity="0.3"/>
 
-  <!-- Left eye (cyan glow) -->
-  <circle cx="210" cy="210" r="30" fill="url(#eyeGlow)" filter="url(#eyeGlowFilter)" />
-  <!-- Left pupil -->
-  <circle cx="215" cy="208" r="14" fill="#0f172a" />
-  <!-- Left eye highlight -->
-  <circle cx="222" cy="200" r="6" fill="white" opacity="0.8" />
+  <!-- Angry brows -->
+  <line x1="175" y1="195" x2="240" y2="200" stroke="#ff0040" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+  <line x1="337" y1="195" x2="272" y2="200" stroke="#00ffcc" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
 
-  <!-- Right eye (cyan glow) -->
-  <circle cx="302" cy="210" r="30" fill="url(#eyeGlow)" filter="url(#eyeGlowFilter)" />
-  <!-- Right pupil -->
-  <circle cx="307" cy="208" r="14" fill="#0f172a" />
-  <!-- Right eye highlight -->
-  <circle cx="314" cy="200" r="6" fill="white" opacity="0.8" />
+  <!-- Sharp beak -->
+  <polygon points="256,255 240,282 256,295 272,282" fill="#ff8c00"/>
+  <polygon points="256,258 245,278 256,288 267,278" fill="#ffaa33"/>
 
-  <!-- Beak -->
-  <polygon points="256,240 244,265 268,265" fill="#f59e0b" />
-  <polygon points="256,242 248,260 264,260" fill="#fbbf24" />
+  <!-- Circuit chest -->
+  <path d="M200,350 L256,320 L312,350 L312,430 L256,450 L200,430 Z" fill="#0f0f23" stroke="#1a1a3e"/>
+  <line x1="256" y1="330" x2="256" y2="440" stroke="#00ffcc" stroke-width="1" opacity="0.2"/>
+  <line x1="220" y1="360" x2="292" y2="360" stroke="#00ffcc" stroke-width="1" opacity="0.15"/>
+  <line x1="220" y1="390" x2="292" y2="390" stroke="#ff0040" stroke-width="1" opacity="0.15"/>
+  <circle cx="220" cy="360" r="3" fill="#00ffcc" opacity="0.4"/>
+  <circle cx="292" cy="360" r="3" fill="#00ffcc" opacity="0.4"/>
+  <circle cx="256" cy="390" r="3" fill="#ff0040" opacity="0.4"/>
 
-  <!-- Chest pattern (V shapes) -->
-  <path d="M220,300 L256,330 L292,300" fill="none" stroke="#94a3b8" stroke-width="2" opacity="0.5"/>
-  <path d="M225,315 L256,345 L287,315" fill="none" stroke="#94a3b8" stroke-width="2" opacity="0.4"/>
-  <path d="M230,330 L256,355 L282,330" fill="none" stroke="#94a3b8" stroke-width="2" opacity="0.3"/>
+  <!-- Blade wings -->
+  <path d="M132,270 L60,220 L45,310 L80,380 L132,360 Z" fill="#16213e" stroke="#00ffcc" stroke-width="0.5" opacity="0.7"/>
+  <path d="M380,270 L452,220 L467,310 L432,380 L380,360 Z" fill="#16213e" stroke="#ff0040" stroke-width="0.5" opacity="0.7"/>
 
-  <!-- Wings (left) -->
-  <path d="M136,260 Q100,310 130,400 Q150,370 160,340 Q155,310 140,280 Z" fill="#334155" />
-  <!-- Wings (right) -->
-  <path d="M376,260 Q412,310 382,400 Q362,370 352,340 Q357,310 372,280 Z" fill="#334155" />
+  <!-- Sharp talons -->
+  <path d="M210,445 L195,480 L208,470 L220,485 L228,465 L240,480 L235,445" fill="#ff8c00" stroke="#cc6600"/>
+  <path d="M302,445 L287,480 L300,470 L312,485 L320,465 L332,480 L327,445" fill="#ff8c00" stroke="#cc6600"/>
 
-  <!-- Feet -->
-  <path d="M220,420 L210,445 L225,440 L235,450 L240,435 L250,445 L248,420" fill="#f59e0b" />
-  <path d="M264,420 L262,445 L272,435 L277,450 L287,440 L302,445 L292,420" fill="#f59e0b" />
+  <!-- Targeting overlay -->
+  <circle cx="256" cy="256" r="200" fill="none" stroke="#00ffcc" stroke-width="0.5" opacity="0.08" stroke-dasharray="8,8"/>
+  <circle cx="256" cy="256" r="150" fill="none" stroke="#ff0040" stroke-width="0.5" opacity="0.06" stroke-dasharray="5,5"/>
+  <line x1="256" y1="30" x2="256" y2="482" stroke="#00ffcc" stroke-width="0.3" opacity="0.05"/>
+  <line x1="30" y1="256" x2="482" y2="256" stroke="#00ffcc" stroke-width="0.3" opacity="0.05"/>
 
-  <!-- Binary code decoration (subtle) -->
-  <text x="80" y="470" fill="#22d3ee" opacity="0.15" font-family="monospace" font-size="10">01101001 01101110</text>
-  <text x="320" y="470" fill="#22d3ee" opacity="0.15" font-family="monospace" font-size="10">01110011 01100101</text>
-  <text x="60" y="60" fill="#22d3ee" opacity="0.1" font-family="monospace" font-size="10">10110100 11001010</text>
-  <text x="350" y="60" fill="#22d3ee" opacity="0.1" font-family="monospace" font-size="10">01011001 10100110</text>
-
-  <!-- Scan line effect -->
-  <line x1="50" y1="256" x2="462" y2="256" stroke="#22d3ee" stroke-width="1" opacity="0.1" />
+  <!-- Corner brackets -->
+  <path d="M30,30 L30,80 M30,30 L80,30" fill="none" stroke="#00ffcc" stroke-width="2" opacity="0.2"/>
+  <path d="M482,30 L482,80 M482,30 L432,30" fill="none" stroke="#ff0040" stroke-width="2" opacity="0.2"/>
+  <path d="M30,482 L30,432 M30,482 L80,482" fill="none" stroke="#00ffcc" stroke-width="2" opacity="0.2"/>
+  <path d="M482,482 L482,432 M482,482 L432,482" fill="none" stroke="#ff0040" stroke-width="2" opacity="0.2"/>
 </svg>

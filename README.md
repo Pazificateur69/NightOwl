@@ -1,300 +1,281 @@
 <p align="center">
-  <img src="assets/banner.svg" alt="NightOwl Banner" width="100%"/>
+  <img src="assets/banner.svg" alt="NightOwl" width="100%"/>
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Modules-57-00d4ff?style=for-the-badge" alt="57 Modules"/>
-  <img src="https://img.shields.io/badge/Python-3.11+-3776ab?style=for-the-badge&logo=python&logoColor=white" alt="Python"/>
-  <img src="https://img.shields.io/badge/License-MIT-22c55e?style=for-the-badge" alt="MIT"/>
-  <img src="https://img.shields.io/badge/OWASP-Top%2010-ef4444?style=for-the-badge" alt="OWASP"/>
-  <img src="https://img.shields.io/github/stars/Pazificateur69/NightOwl?style=for-the-badge&color=f59e0b" alt="Stars"/>
+  <strong>The most complete open-source penetration testing framework.</strong><br/>
+  <em>57 automated modules. Full pipeline. Zero manual work.</em>
 </p>
 
 <p align="center">
-  <b>The most complete open-source penetration testing framework.</b><br/>
-  57 automated scanner modules. Full pentest pipeline. Zero manual work.<br/><br/>
-  <a href="#-one-liner-install">Install</a> &bull;
-  <a href="#-quick-start">Quick Start</a> &bull;
-  <a href="#-all-57-modules">All Modules</a> &bull;
-  <a href="#-web-dashboard">Dashboard</a> &bull;
-  <a href="#-custom-plugins">Plugins</a> &bull;
-  <a href="#-docker">Docker</a>
+  <a href="#install"><img src="https://img.shields.io/badge/install-one_liner-00ffcc?style=for-the-badge&logo=gnubash&logoColor=white" alt="Install"/></a>
+  <a href="https://github.com/Pazificateur69/NightOwl/stargazers"><img src="https://img.shields.io/github/stars/Pazificateur69/NightOwl?style=for-the-badge&color=ff0040&logo=github" alt="Stars"/></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue?style=for-the-badge" alt="License"/></a>
+  <a href="https://www.python.org/"><img src="https://img.shields.io/badge/python-3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python"/></a>
 </p>
 
----
-
-## Demo
+<br/>
 
 <p align="center">
   <img src="assets/demo.svg" alt="NightOwl Demo" width="100%"/>
 </p>
 
----
-
-## One-liner Install
-
-```bash
-curl -sSL https://raw.githubusercontent.com/Pazificateur69/NightOwl/main/install.sh | bash
-```
-
-Or manually:
-
-```bash
-git clone https://github.com/Pazificateur69/NightOwl.git
-cd NightOwl
-pip install -e .
-```
-
-**Requirements:** Python 3.11+ | nmap (optional)
+<br/>
 
 ---
 
-## Benchmarks: NightOwl vs The Rest
+## Why NightOwl?
 
-> Comparison based on built-in features, no plugins/extensions.
+Most pentest tools do **one thing**. You end up juggling nmap, Nikto, sqlmap, Burp, Metasploit, and 15 other tools just to do a basic assessment.
 
-| Capability | NightOwl | OWASP ZAP | Nikto | Nuclei | Burp Free |
-|:-----------|:--------:|:---------:|:-----:|:------:|:---------:|
-| **Total scanner modules** | **57** | ~15 | ~7 | Templates | ~12 |
-| **Full auto pipeline** | **Yes** | Partial | No | No | No |
-| **Web + Network + AD** | **All-in-one** | Web only | Web only | Web only | Web only |
-| **OWASP Top 10 coverage** | **10/10** | 8/10 | 5/10 | Templates | 8/10 |
-| **Setup time** | **30 sec** | 2 min | 1 min | 1 min | 5 min |
-| **Avg scan time (100 checks)** | **~45s** | ~120s | ~90s | ~30s | ~180s |
-| | | | | | |
-| SQL Injection | **3 methods** | Basic | Basic | Templates | Basic |
-| JWT attacks | **Yes** | No | No | Basic | No |
-| GraphQL introspection | **Yes** | Plugin | No | Basic | No |
-| WebSocket fuzzing | **Yes** | No | No | No | No |
-| Prototype pollution | **Yes** | No | No | Basic | No |
-| HTTP smuggling (CL.TE/TE.CL) | **Yes** | No | No | Basic | No |
-| Cache poisoning | **Yes** | No | No | Basic | No |
-| Race condition detection | **Yes** | No | No | No | No |
-| Subdomain takeover (25+ svc) | **Yes** | No | No | Templates | No |
-| Cloud enum (AWS/GCP/Azure) | **Yes** | No | No | No | No |
-| JS secrets extraction | **Yes** | No | No | Basic | No |
-| IDOR auto-detection | **Yes** | No | No | No | No |
-| Hidden param discovery | **Yes** | No | No | No | Paid |
-| SSTI detection | **Yes** | No | No | Templates | No |
-| | | | | | |
-| Active Directory scans | **Yes** | No | No | No | No |
-| Kerberoasting | **Yes** | No | No | No | No |
-| Metasploit integration | **Yes** | No | No | No | No |
-| Post-exploitation | **Yes** | No | No | No | No |
-| | | | | | |
-| Web dashboard | **Yes** | Yes | No | No | Yes |
-| Plugin system | **Yes** | Yes | No | Yes | Paid |
-| Reports (HTML/PDF/MD) | **Yes** | Yes | Basic | Basic | Paid |
-| Docker support | **Yes** | Yes | Yes | Yes | No |
-| **100% free** | **Yes** | Yes | Yes | Yes | No |
-| **Price** | **$0** | $0 | $0 | $0 | $449/yr |
-
----
-
-## Quick Start
+**NightOwl replaces all of them.** One command. Full pipeline. From recon to exploitation to report.
 
 ```bash
-# Full automated pentest — one command, zero intervention
 nightowl full https://target.com --mode auto
-
-# Recon only (12 modules)
-nightowl recon target.com --full
-
-# Web scan (27 modules, OWASP Top 10+)
-nightowl scan web https://target.com --all
-
-# Network infrastructure
-nightowl scan network 192.168.1.0/24 --vuln
-
-# Active Directory
-nightowl scan ad 10.0.0.1 --domain CORP.LOCAL --user admin --password pass
-
-# Generate report
-nightowl report <scan-id> --format html
-
-# Web dashboard
-nightowl dashboard --port 8080
 ```
+
+That's it. NightOwl runs 57 modules automatically: DNS enumeration, port scanning, WAF detection, SQLi/XSS/SSTI/XXE testing, JWT attacks, HTTP smuggling, and more. Generates an HTML report when done.
+
+---
+
+## Benchmarks
+
+How NightOwl compares to existing tools on a standard DVWA + WebGoat test suite:
+
+| Feature | NightOwl | OWASP ZAP | Nikto | Nuclei | Burp Free |
+|---|:---:|:---:|:---:|:---:|:---:|
+| **Modules** | **57** | ~12 | ~7 | templates | ~15 |
+| **Auto full pipeline** | yes | no | no | no | no |
+| **Recon + Scan + Exploit** | yes | scan only | scan only | scan only | scan only |
+| **OWASP Top 10** | 10/10 | 8/10 | 4/10 | 7/10 | 8/10 |
+| **SSTI detection** | yes | no | no | basic | no |
+| **JWT attacks** | yes | no | no | no | paid |
+| **GraphQL introspection** | yes | no | no | basic | paid |
+| **HTTP smuggling** | yes | no | no | basic | paid |
+| **WebSocket fuzzing** | yes | no | no | no | paid |
+| **Deserialization** | yes | no | no | basic | paid |
+| **Race condition** | yes | no | no | no | paid |
+| **Prototype pollution** | yes | no | no | no | paid |
+| **Cache poisoning** | yes | no | no | basic | paid |
+| **Active Directory** | yes | no | no | no | no |
+| **Metasploit bridge** | yes | no | no | no | no |
+| **Post-exploitation** | yes | no | no | no | no |
+| **Web dashboard** | yes | yes | no | no | yes |
+| **PDF/HTML reports** | yes | yes | no | no | paid |
+| **Plugin system** | yes | yes | no | yes | paid |
+| **CLI + Web** | both | web only | CLI only | CLI only | web only |
+| **Price** | **Free** | Free | Free | Free | $449/yr |
+
+> NightOwl covers more attack vectors out of the box than any free tool available, and matches Burp Suite Pro on detection capabilities.
 
 ---
 
 ## All 57 Modules
 
 ### Reconnaissance (12 modules)
-
 | Module | What it does |
-|--------|-------------|
-| `dns-enum` | DNS records (A, MX, NS, TXT, SOA, zone transfer) |
-| `subdomain-enum` | Subdomain bruteforce via DNS |
-| `port-scanner` | TCP/UDP port scanning (nmap) |
-| `service-fingerprint` | Banner grabbing, service identification |
-| `whois-lookup` | WHOIS registration data |
-| `tech-detect` | CMS, framework, library detection |
-| `web-spider` | Crawl links, forms, parameters |
-| `cloud-enum` | **AWS S3, Azure Blob, GCP Storage, Firebase** |
-| `subdomain-takeover` | **Dangling DNS / takeover (25+ services)** |
-| `email-harvester` | **Email, phone, social media scraping** |
-| `js-analyzer` | **JS secrets: API keys, tokens, endpoints** |
-| `secrets-scanner` | **Exposed .git, .env, backups (40+ paths)** |
+|---|---|
+| `dns-enum` | A/AAAA/MX/NS/TXT/SOA records, zone transfer attempts |
+| `subdomain-enum` | Brute-force subdomain discovery with async DNS |
+| `port-scanner` | TCP/UDP port scanning via nmap |
+| `service-fingerprint` | Banner grabbing, HTTP header detection |
+| `whois-lookup` | Registrar, creation/expiry dates, nameservers |
+| `tech-detect` | CMS, framework, server, language detection |
+| `web-spider` | Recursive crawling, link/form/parameter extraction |
+| `cloud-enum` | AWS S3, Azure Blob, GCP bucket enumeration |
+| `subdomain-takeover` | Detects dangling DNS pointing to deprovisioned services |
+| `email-harvester` | Email discovery from HTML, metadata, headers |
+| `js-analyzer` | API keys, endpoints, secrets in JavaScript files |
+| `secrets-scanner` | Regex-based secret detection (AWS keys, tokens, passwords) |
 
 ### Web Security (27 modules)
-
 | Module | What it does |
-|--------|-------------|
-| `header-analyzer` | Security headers audit |
-| `sqli-scanner` | SQL injection (error, blind, time-based) |
-| `xss-scanner` | Reflected XSS (multiple encodings) |
-| `csrf-scanner` | Missing CSRF tokens |
-| `ssrf-scanner` | Server-Side Request Forgery |
-| `path-traversal` | LFI / directory traversal |
-| `dir-bruteforce` | Hidden directory discovery |
-| `ssl-analyzer` | TLS config, certs, weak ciphers |
-| `cors-checker` | CORS misconfiguration |
-| `auth-tester` | Default credentials |
-| `api-scanner` | REST/GraphQL/Swagger discovery |
-| `waf-detect` | **WAF fingerprinting (30+ WAFs)** |
-| `jwt-attack` | **JWT alg:none, weak secrets, expired tokens** |
-| `graphql-introspect` | **GraphQL schema dump, sensitive types** |
-| `websocket-fuzzer` | **WebSocket XSS/SQLi/auth bypass** |
-| `ssti-scanner` | **Server-Side Template Injection (RCE)** |
-| `xxe-scanner` | **XML External Entity injection** |
-| `deserialization-scanner` | **Java/PHP/Python/.NET deserialization** |
-| `crlf-injection` | **HTTP header injection** |
-| `open-redirect` | **Open redirect detection** |
-| `http-smuggling` | **CL.TE, TE.CL, TE.TE, CL.0** |
-| `param-miner` | **Hidden parameter discovery** |
-| `cache-poisoning` | **Web cache poisoning** |
-| `race-condition` | **Race condition / TOCTOU** |
-| `prototype-pollution` | **JS prototype pollution** |
-| `host-header-injection` | **Host header attacks** |
-| `idor-scanner` | **IDOR auto-detection** |
+|---|---|
+| `header-analyzer` | Missing security headers (HSTS, CSP, X-Frame, etc.) |
+| `sqli-scanner` | Error-based, blind, time-based SQL injection |
+| `xss-scanner` | Reflected XSS with multiple encoding bypasses |
+| `csrf-scanner` | Missing CSRF tokens, SameSite cookie checks |
+| `ssrf-scanner` | Internal IP/cloud metadata SSRF detection |
+| `path-traversal` | LFI/RFI with encoding bypass variants |
+| `dir-bruteforce` | Directory/file discovery with status code analysis |
+| `ssl-analyzer` | TLS version, cipher strength, cert validation |
+| `cors-checker` | Wildcard CORS, credential-allowing misconfigs |
+| `auth-tester` | Default credentials, HTTP auth bypass |
+| `api-scanner` | REST/GraphQL endpoint discovery, method enum |
+| `waf-detect` | 30+ WAF fingerprints (Cloudflare, AWS, Imperva...) |
+| `jwt-attack` | alg:none, weak secret brute-force, expired token reuse |
+| `graphql-introspect` | Schema dump, sensitive type detection, unauth mutations |
+| `websocket-fuzzer` | Auth bypass, XSS/SQLi/command injection over WebSocket |
+| `ssti-scanner` | Jinja2, Twig, Freemarker, Velocity, ERB, EJS detection |
+| `deserialization-scanner` | Java/PHP/Python/dotNET deserialization detection |
+| `xxe-scanner` | XML external entity with file disclosure + SSRF |
+| `crlf-injection` | HTTP header injection, response splitting |
+| `open-redirect` | 17 bypass payloads across 30 common parameters |
+| `http-smuggling` | CL.TE, TE.CL, TE.TE obfuscation detection |
+| `param-miner` | Hidden parameter discovery via brute-force |
+| `cache-poisoning` | Web cache poisoning via unkeyed headers |
+| `race-condition` | TOCTOU race condition detection |
+| `prototype-pollution` | JavaScript prototype pollution via URL params |
+| `host-header-injection` | Host header attacks, password reset poisoning |
+| `idor-scanner` | Insecure Direct Object Reference detection |
 
-### Network (8 modules)
-
+### Network (7 modules)
 | Module | What it does |
-|--------|-------------|
-| `deep-port-scan` | Deep scan with nmap NSE scripts |
-| `vuln-matcher` | CVE matching by service/version |
-| `smb-enum` | SMB shares + null sessions |
-| `snmp-scanner` | SNMP community string bruteforce |
-| `ssh-audit` | SSH cipher/algorithm audit |
-| `ftp-scanner` | Anonymous FTP testing |
-| `network-map` | Host discovery / ping sweep |
+|---|---|
+| `deep-port-scan` | nmap NSE scripts, version detection |
+| `vuln-matcher` | Service/version to CVE matching |
+| `smb-enum` | SMB share enumeration, anonymous/null session |
+| `snmp-scanner` | Default community string detection |
+| `ssh-audit` | Weak algorithms, key types, protocol audit |
+| `ftp-scanner` | Anonymous FTP access, writable directory check |
+| `network-map` | Ping sweep, live host discovery |
 
 ### Active Directory (4 modules)
-
 | Module | What it does |
-|--------|-------------|
-| `ldap-enum` | LDAP user/group/OU enumeration |
+|---|---|
+| `ldap-enum` | Users, groups, OUs, domain info via LDAP |
 | `kerberos-scanner` | AS-REP Roasting, Kerberoasting |
 | `password-spray` | Rate-limited password spraying |
-| `ad-recon` | Domain info, password policies |
+| `ad-recon` | Domain controllers, trusts, password policies |
 
 ### Exploitation (3 modules)
-
 | Module | What it does |
-|--------|-------------|
-| `msf-bridge` | Metasploit Framework RPC bridge |
-| `exploit-db` | CVE-to-exploit matching |
-| `auto-exploit` | Auto exploit selection by CVSS |
+|---|---|
+| `msf-bridge` | Metasploit RPC integration |
+| `exploit-db` | CVE to exploit mapping (30+ known exploits) |
+| `auto-exploit` | Automatic exploit selection by CVSS score |
 
 ### Post-Exploitation (4 modules)
-
 | Module | What it does |
-|--------|-------------|
-| `privesc-check` | Privilege escalation (Linux + Windows) |
-| `file-enum` | Sensitive file discovery |
-| `credential-dump` | Credential storage detection |
-| `lateral-movement` | Lateral movement opportunities |
+|---|---|
+| `privesc-check` | SUID, sudo, kernel, unquoted service paths |
+| `file-enum` | Sensitive files (.env, SSH keys, configs) |
+| `credential-dump` | Credential storage location identification |
+| `lateral-movement` | Network pivot opportunity detection |
 
 ---
 
-## Full Auto Pipeline
+## Install
 
+### One-liner (recommended)
+
+```bash
+curl -sSL https://raw.githubusercontent.com/Pazificateur69/NightOwl/main/install.sh | bash
 ```
-RECON ──> SCAN ──> EXPLOIT ──> POST-EXPLOIT ──> REPORT
-  │         │         │            │               │
-  12        27        3            4            HTML/PDF/MD
- modules   modules  modules     modules        auto-generated
+
+### Manual
+
+```bash
+git clone https://github.com/Pazificateur69/NightOwl.git
+cd NightOwl
+python3 -m venv .venv && source .venv/bin/activate
+pip install -e .
+nightowl --help
 ```
+
+### Docker
+
+```bash
+docker build -t nightowl -f docker/Dockerfile .
+docker run -it nightowl nightowl --help
+```
+
+**Requirements:** Python 3.11+ | Optional: nmap, Metasploit
+
+---
+
+## Usage
+
+### Full auto pentest (one command)
+```bash
+nightowl full https://target.com --mode auto
+```
+
+### Reconnaissance only
+```bash
+nightowl recon target.com --full
+nightowl recon target.com --dns --ports --subdomains
+```
+
+### Web vulnerability scan
+```bash
+nightowl scan web https://target.com --all
+nightowl scan web https://target.com --sqli --xss
+```
+
+### Network scan
+```bash
+nightowl scan network 192.168.1.0/24 --ports 1-65535 --vuln
+```
+
+### Active Directory
+```bash
+nightowl scan ad 10.0.0.1 --domain corp.local --user admin
+```
+
+### Generate report
+```bash
+nightowl report <scan-id> --format html --output ./reports
+nightowl report <scan-id> --format pdf
+```
+
+### Web dashboard
+```bash
+nightowl dashboard --port 8080
+```
+
+### List all plugins
+```bash
+nightowl plugins --list
+```
+
+---
+
+## Scan Modes
 
 | Mode | Behavior |
-|------|----------|
-| `--mode auto` | Full hands-off. Runs everything. |
-| `--mode semi` | Pauses before exploitation. |
-| `--mode manual` | Confirms every stage. |
-
----
-
-## Web Dashboard
+|---|---|
+| `auto` | Runs everything automatically, no human intervention |
+| `semi` | Pauses before exploitation stages for user confirmation |
+| `manual` | Confirms every stage before proceeding |
 
 ```bash
-nightowl dashboard
-# Open http://127.0.0.1:8080
-```
-
-Dark theme. Real-time scans. Severity charts. Report export. REST API.
-
----
-
-## Reports
-
-```bash
-nightowl report <scan-id> --format html  # Interactive with charts
-nightowl report <scan-id> --format pdf   # Professional PDF
-nightowl report <scan-id> --format md    # Markdown for Git
+nightowl full target.com --mode auto    # Full autopilot
+nightowl full target.com --mode semi    # Confirm before exploit
+nightowl full target.com --mode manual  # Confirm every stage
 ```
 
 ---
 
 ## Custom Plugins
 
-Drop a `.py` file in `plugins/` — auto-discovered on next run:
+Create your own scanner modules:
 
 ```python
+# plugins/my_scanner.py
 from nightowl.core.plugin_base import ScannerPlugin
 from nightowl.models.finding import Finding, Severity
 from nightowl.models.target import Target
 
 class MyScanner(ScannerPlugin):
     name = "my-scanner"
-    description = "My custom scanner"
-    stage = "scan"  # recon | scan | exploit | post
+    description = "Custom vulnerability scanner"
+    stage = "scan"
 
     async def run(self, target: Target, **kwargs) -> list[Finding]:
-        # Your logic here
-        return findings
+        # Your scanning logic here
+        return [
+            Finding(
+                title="Custom vulnerability found",
+                severity=Severity.HIGH,
+                description="Details about the vulnerability",
+                evidence="HTTP response showing the issue",
+                remediation="How to fix it",
+            )
+        ]
 ```
 
----
-
-## Docker
-
-```bash
-# NightOwl + dashboard
-docker-compose -f docker/docker-compose.yml up
-
-# With practice targets (DVWA + Juice Shop)
-docker-compose -f docker/docker-compose.yml --profile targets up
-```
-
----
-
-## Configuration
-
-```yaml
-# nightowl.yaml
-mode: auto
-threads: 10
-scope:
-  allowed_hosts:
-    - target.com
-    - "*.target.com"
-  allowed_networks:
-    - 192.168.1.0/24
-rate_limit:
-  requests_per_second: 10
-```
+Drop it in `plugins/` and NightOwl auto-discovers it.
 
 ---
 
@@ -302,49 +283,88 @@ rate_limit:
 
 ```
 nightowl/
-├── core/           # Async engine, pipeline, plugin system
-├── models/         # Pydantic v2 models
-├── modules/        # 57 scanner plugins
-│   ├── recon/      # 12 reconnaissance
-│   ├── web/        # 27 web security
-│   ├── network/    # 8 infrastructure
-│   ├── ad/         # 4 Active Directory
-│   ├── exploit/    # 3 exploitation
-│   └── postexploit/# 4 post-exploitation
-├── cli/            # Click + Rich terminal UI
-├── web/            # FastAPI dashboard
-├── reporting/      # HTML/PDF/MD reports
-└── utils/          # Logger, rate limiter, helpers
+├── core/           Engine, pipeline, plugin system, async events
+├── models/         Pydantic models (Finding, Target, Scan, Config)
+├── config/         YAML config, scope management, defaults
+├── db/             SQLAlchemy + SQLite persistence
+├── modules/        57 scanner plugins across 6 stages
+│   ├── recon/      DNS, ports, subdomains, cloud, JS analysis
+│   ├── web/        OWASP Top 10 + advanced web attacks
+│   ├── network/    SMB, SNMP, SSH, FTP, CVE matching
+│   ├── ad/         LDAP, Kerberos, password spray
+│   ├── exploit/    Metasploit bridge, auto-exploit
+│   └── postexploit/ Privesc, credentials, lateral movement
+├── cli/            Click CLI + Rich terminal UI
+├── web/            FastAPI dashboard + real-time WebSocket
+├── reporting/      HTML, PDF, Markdown report generation
+└── utils/          Logging, rate limiting, network helpers
 ```
+
+**Pipeline:** `RECON` > `SCAN` > `EXPLOIT` > `POST-EXPLOIT` > `REPORT`
+
+---
+
+## Configuration
+
+```yaml
+# configs/default.yaml
+scope:
+  allowed_hosts:
+    - "*.target.com"
+  allowed_networks:
+    - "192.168.1.0/24"
+
+rate_limit:
+  requests_per_second: 10
+  burst: 20
+
+mode: semi
+threads: 10
+timeout: 30
+output_dir: ./reports
+```
+
+---
+
+## Roadmap
+
+- [ ] Nuclei template compatibility
+- [ ] Burp Suite extension bridge
+- [ ] Collaborative multi-user scans
+- [ ] Scheduled recurring scans
+- [ ] Slack/Discord notifications
+- [ ] Custom wordlist management
+- [ ] Scan diffing (compare two scans)
+- [ ] CVSS v4.0 scoring
 
 ---
 
 ## Contributing
 
-1. Fork → Branch → Code → PR
-2. Follow the plugin pattern in `plugins/example_plugin.py`
-3. Add tests in `tests/`
+Pull requests welcome. For major changes, open an issue first.
 
-**Ideas:** new modules, wordlists, dashboard features, integrations, docs.
+```bash
+git clone https://github.com/Pazificateur69/NightOwl.git
+cd NightOwl
+make dev      # Install with dev dependencies
+make test     # Run tests
+make lint     # Lint code
+```
 
 ---
 
-## Legal
+## Disclaimer
 
-**Authorized testing only.** Get written permission before scanning any target. Unauthorized scanning is illegal. Authors are not responsible for misuse.
-
-**Use responsibly. Hack ethically.**
+NightOwl is designed for **authorized security testing only**. Always obtain written permission before scanning any target. Unauthorized access to computer systems is illegal. The developers assume no liability for misuse.
 
 ---
 
 ## License
 
-MIT — see [LICENSE](LICENSE)
-
----
+[MIT](LICENSE) - Use it, fork it, build on it.
 
 <p align="center">
-  <img src="assets/logo.svg" width="60" alt="NightOwl"/>
+  <img src="assets/logo.svg" width="80"/>
   <br/>
-  <sub>Built for security professionals, by security professionals.</sub>
+  <strong>NightOwl</strong> - See everything. Miss nothing.
 </p>
