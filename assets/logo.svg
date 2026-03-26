@@ -1,91 +1,144 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
   <defs>
     <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0a0e1a"/>
-      <stop offset="100%" stop-color="#111827"/>
+      <stop offset="0%" stop-color="#050508"/>
+      <stop offset="100%" stop-color="#0a0d18"/>
     </linearGradient>
     <linearGradient id="eyeL" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#ff0040"/>
-      <stop offset="100%" stop-color="#ff3366"/>
+      <stop offset="0%" stop-color="#ff0030"/>
+      <stop offset="100%" stop-color="#ff0050"/>
     </linearGradient>
     <linearGradient id="eyeR" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#00ffcc"/>
-      <stop offset="100%" stop-color="#00d4ff"/>
+      <stop offset="0%" stop-color="#ff0030"/>
+      <stop offset="100%" stop-color="#ff0050"/>
     </linearGradient>
     <linearGradient id="body" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#1a1a2e"/>
-      <stop offset="100%" stop-color="#16213e"/>
+      <stop offset="0%" stop-color="#12121f"/>
+      <stop offset="100%" stop-color="#0c0c18"/>
     </linearGradient>
-    <filter id="glowR"><feGaussianBlur stdDeviation="10" result="b"/><feComposite in="SourceGraphic" in2="b" operator="over"/></filter>
-    <filter id="glowC"><feGaussianBlur stdDeviation="10" result="b"/><feComposite in="SourceGraphic" in2="b" operator="over"/></filter>
+    <linearGradient id="scar" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff0040"/>
+      <stop offset="100%" stop-color="#cc0030"/>
+    </linearGradient>
+    <filter id="glowR"><feGaussianBlur stdDeviation="14" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="glowR2"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="glowC"><feGaussianBlur stdDeviation="8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
   </defs>
 
-  <rect width="512" height="512" rx="64" fill="url(#bg)"/>
+  <!-- Pure black BG -->
+  <rect width="512" height="512" rx="56" fill="url(#bg)"/>
 
-  <!-- Scan lines -->
-  <g opacity="0.03"><line x1="0" y1="50" x2="512" y2="50" stroke="#00ffcc"/><line x1="0" y1="100" x2="512" y2="100" stroke="#00ffcc"/><line x1="0" y1="150" x2="512" y2="150" stroke="#00ffcc"/><line x1="0" y1="200" x2="512" y2="200" stroke="#00ffcc"/><line x1="0" y1="250" x2="512" y2="250" stroke="#00ffcc"/><line x1="0" y1="300" x2="512" y2="300" stroke="#00ffcc"/><line x1="0" y1="350" x2="512" y2="350" stroke="#00ffcc"/><line x1="0" y1="400" x2="512" y2="400" stroke="#00ffcc"/><line x1="0" y1="450" x2="512" y2="450" stroke="#00ffcc"/></g>
+  <!-- Blood red scan lines -->
+  <g opacity="0.04">
+    <line x1="0" y1="40" x2="512" y2="40" stroke="#ff0030"/><line x1="0" y1="80" x2="512" y2="80" stroke="#ff0030"/>
+    <line x1="0" y1="120" x2="512" y2="120" stroke="#ff0030"/><line x1="0" y1="160" x2="512" y2="160" stroke="#ff0030"/>
+    <line x1="0" y1="200" x2="512" y2="200" stroke="#ff0030"/><line x1="0" y1="240" x2="512" y2="240" stroke="#ff0030"/>
+    <line x1="0" y1="280" x2="512" y2="280" stroke="#ff0030"/><line x1="0" y1="320" x2="512" y2="320" stroke="#ff0030"/>
+    <line x1="0" y1="360" x2="512" y2="360" stroke="#ff0030"/><line x1="0" y1="400" x2="512" y2="400" stroke="#ff0030"/>
+    <line x1="0" y1="440" x2="512" y2="440" stroke="#ff0030"/><line x1="0" y1="480" x2="512" y2="480" stroke="#ff0030"/>
+  </g>
 
-  <!-- Sharp horns -->
-  <polygon points="148,175 105,45 195,135" fill="#1a1a2e" stroke="#00ffcc" stroke-width="1.5" opacity="0.8"/>
-  <polygon points="155,170 120,65 192,138" fill="#16213e"/>
-  <polygon points="364,175 407,45 317,135" fill="#1a1a2e" stroke="#ff0040" stroke-width="1.5" opacity="0.8"/>
-  <polygon points="357,170 392,65 320,138" fill="#16213e"/>
+  <!-- HUGE SHARP HORNS - way bigger, more aggressive -->
+  <polygon points="140,165 80,18 200,125" fill="#0e0e1a" stroke="#ff0030" stroke-width="2" opacity="0.9"/>
+  <polygon points="148,158 95,35 195,128" fill="#12121f"/>
+  <polygon points="372,165 432,18 312,125" fill="#0e0e1a" stroke="#ff0030" stroke-width="2" opacity="0.9"/>
+  <polygon points="364,158 417,35 317,128" fill="#12121f"/>
+  <!-- Horn tips glow -->
+  <circle cx="88" cy="26" r="8" fill="#ff0030" opacity="0.15" filter="url(#glowR2)"/>
+  <circle cx="424" cy="26" r="8" fill="#ff0030" opacity="0.15" filter="url(#glowR2)"/>
 
-  <!-- Angular head -->
-  <path d="M256,120 L370,190 L380,280 L340,350 L256,370 L172,350 L132,280 L142,190 Z" fill="url(#body)" stroke="#2a2a4a" stroke-width="1"/>
-  <path d="M256,140 L350,200 L360,270 L320,330 L256,345 L192,330 L152,270 L162,200 Z" fill="#0f0f23"/>
+  <!-- Head - sharper, more angular -->
+  <path d="M256,108 L380,185 L395,285 L355,365 L256,388 L157,365 L117,285 L132,185 Z" fill="url(#body)" stroke="#1a1a30" stroke-width="1.5"/>
+  <path d="M256,128 L362,198 L372,275 L338,345 L256,362 L174,345 L140,275 L150,198 Z" fill="#080812"/>
 
-  <!-- V forehead -->
-  <path d="M256,140 L230,180 L256,170 L282,180 Z" fill="#00ffcc" opacity="0.3"/>
+  <!-- SCAR across left eye - aggressive battle damage -->
+  <path d="M180,170 L225,260" stroke="url(#scar)" stroke-width="3" stroke-linecap="round" opacity="0.5"/>
+  <path d="M182,172 L227,258" stroke="#ff3355" stroke-width="1.5" stroke-linecap="round" opacity="0.3"/>
 
-  <!-- Left eye RED -->
-  <path d="M168,220 L220,195 L250,220 L220,250 L168,240 Z" fill="#0a0a15"/>
-  <ellipse cx="210" cy="222" rx="32" ry="22" fill="url(#eyeL)" filter="url(#glowR)"/>
-  <ellipse cx="215" cy="220" rx="14" ry="12" fill="#0a0e1a"/>
-  <ellipse cx="220" cy="216" rx="5" ry="4" fill="#ff6688" opacity="0.9"/>
-  <ellipse cx="210" cy="222" rx="45" ry="30" fill="none" stroke="#ff0040" stroke-width="1" opacity="0.3"/>
+  <!-- V forehead mark - glowing red -->
+  <path d="M256,128 L222,175 L256,162 L290,175 Z" fill="#ff0030" opacity="0.25" filter="url(#glowR2)"/>
+  <path d="M256,135 L232,168 L256,158 L280,168 Z" fill="#ff0030" opacity="0.15"/>
 
-  <!-- Right eye CYAN -->
-  <path d="M344,220 L292,195 L262,220 L292,250 L344,240 Z" fill="#0a0a15"/>
-  <ellipse cx="302" cy="222" rx="32" ry="22" fill="url(#eyeR)" filter="url(#glowC)"/>
-  <ellipse cx="307" cy="220" rx="14" ry="12" fill="#0a0e1a"/>
-  <ellipse cx="312" cy="216" rx="5" ry="4" fill="#66ffee" opacity="0.9"/>
-  <ellipse cx="302" cy="222" rx="45" ry="30" fill="none" stroke="#00ffcc" stroke-width="1" opacity="0.3"/>
+  <!-- Left eye - BLOOD RED, bigger, angrier -->
+  <path d="M152,218 L218,185 L258,218 L218,258 L152,245 Z" fill="#050508"/>
+  <!-- Narrowed angry eye shape -->
+  <path d="M165,222 L215,200 L248,222 L215,244 L165,235 Z" fill="#080812"/>
+  <ellipse cx="208" cy="222" rx="36" ry="18" fill="url(#eyeL)" filter="url(#glowR)"/>
+  <ellipse cx="214" cy="220" rx="16" ry="10" fill="#050508"/>
+  <ellipse cx="218" cy="218" rx="6" ry="5" fill="#ff4466" opacity="0.95"/>
+  <!-- Intense glow rings -->
+  <ellipse cx="208" cy="222" rx="50" ry="28" fill="none" stroke="#ff0030" stroke-width="1.5" opacity="0.2"/>
+  <ellipse cx="208" cy="222" rx="60" ry="35" fill="none" stroke="#ff0030" stroke-width="0.5" opacity="0.1"/>
 
-  <!-- Angry brows -->
-  <line x1="175" y1="195" x2="240" y2="200" stroke="#ff0040" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
-  <line x1="337" y1="195" x2="272" y2="200" stroke="#00ffcc" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+  <!-- Right eye - BLOOD RED, matching -->
+  <path d="M360,218 L294,185 L254,218 L294,258 L360,245 Z" fill="#050508"/>
+  <path d="M347,222 L297,200 L264,222 L297,244 L347,235 Z" fill="#080812"/>
+  <ellipse cx="304" cy="222" rx="36" ry="18" fill="url(#eyeR)" filter="url(#glowR)"/>
+  <ellipse cx="310" cy="220" rx="16" ry="10" fill="#050508"/>
+  <ellipse cx="314" cy="218" rx="6" ry="5" fill="#ff4466" opacity="0.95"/>
+  <ellipse cx="304" cy="222" rx="50" ry="28" fill="none" stroke="#ff0030" stroke-width="1.5" opacity="0.2"/>
+  <ellipse cx="304" cy="222" rx="60" ry="35" fill="none" stroke="#ff0030" stroke-width="0.5" opacity="0.1"/>
 
-  <!-- Sharp beak -->
-  <polygon points="256,255 240,282 256,295 272,282" fill="#ff8c00"/>
-  <polygon points="256,258 245,278 256,288 267,278" fill="#ffaa33"/>
+  <!-- HEAVY angry brows - thick, steep angle -->
+  <line x1="155" y1="185" x2="245" y2="198" stroke="#ff0030" stroke-width="5" stroke-linecap="round" opacity="0.7"/>
+  <line x1="357" y1="185" x2="267" y2="198" stroke="#ff0030" stroke-width="5" stroke-linecap="round" opacity="0.7"/>
+  <!-- Secondary brow shadow -->
+  <line x1="160" y1="190" x2="242" y2="202" stroke="#ff0030" stroke-width="2" stroke-linecap="round" opacity="0.3"/>
+  <line x1="352" y1="190" x2="270" y2="202" stroke="#ff0030" stroke-width="2" stroke-linecap="round" opacity="0.3"/>
 
-  <!-- Circuit chest -->
-  <path d="M200,350 L256,320 L312,350 L312,430 L256,450 L200,430 Z" fill="#0f0f23" stroke="#1a1a3e"/>
-  <line x1="256" y1="330" x2="256" y2="440" stroke="#00ffcc" stroke-width="1" opacity="0.2"/>
-  <line x1="220" y1="360" x2="292" y2="360" stroke="#00ffcc" stroke-width="1" opacity="0.15"/>
-  <line x1="220" y1="390" x2="292" y2="390" stroke="#ff0040" stroke-width="1" opacity="0.15"/>
-  <circle cx="220" cy="360" r="3" fill="#00ffcc" opacity="0.4"/>
-  <circle cx="292" cy="360" r="3" fill="#00ffcc" opacity="0.4"/>
-  <circle cx="256" cy="390" r="3" fill="#ff0040" opacity="0.4"/>
+  <!-- Sharp beak - darker, meaner -->
+  <polygon points="256,260 235,292 256,308 277,292" fill="#cc4400"/>
+  <polygon points="256,264 242,288 256,300 270,288" fill="#e65500"/>
+  <!-- Beak highlight -->
+  <polygon points="256,266 248,282 256,290 264,282" fill="#ff7722" opacity="0.5"/>
 
-  <!-- Blade wings -->
-  <path d="M132,270 L60,220 L45,310 L80,380 L132,360 Z" fill="#16213e" stroke="#00ffcc" stroke-width="0.5" opacity="0.7"/>
-  <path d="M380,270 L452,220 L467,310 L432,380 L380,360 Z" fill="#16213e" stroke="#ff0040" stroke-width="0.5" opacity="0.7"/>
+  <!-- Chest armor - cracked, battle-worn -->
+  <path d="M190,365 L256,330 L322,365 L322,445 L256,468 L190,445 Z" fill="#080812" stroke="#1a1a30" stroke-width="1"/>
+  <!-- Red circuit lines - like veins -->
+  <line x1="256" y1="340" x2="256" y2="458" stroke="#ff0030" stroke-width="1.5" opacity="0.2"/>
+  <line x1="210" y1="375" x2="302" y2="375" stroke="#ff0030" stroke-width="1" opacity="0.2"/>
+  <line x1="215" y1="400" x2="297" y2="400" stroke="#ff0030" stroke-width="1" opacity="0.15"/>
+  <line x1="220" y1="425" x2="292" y2="425" stroke="#ff0030" stroke-width="1" opacity="0.1"/>
+  <!-- Pulsing red nodes -->
+  <circle cx="210" cy="375" r="4" fill="#ff0030" opacity="0.5" filter="url(#glowR2)"/>
+  <circle cx="302" cy="375" r="4" fill="#ff0030" opacity="0.5" filter="url(#glowR2)"/>
+  <circle cx="256" cy="400" r="5" fill="#ff0030" opacity="0.6" filter="url(#glowR2)"/>
+  <circle cx="215" cy="425" r="3" fill="#ff0030" opacity="0.3"/>
+  <circle cx="297" cy="425" r="3" fill="#ff0030" opacity="0.3"/>
+  <!-- Crack lines on chest -->
+  <path d="M240,350 L248,385 L235,410" stroke="#ff0030" stroke-width="0.8" opacity="0.2" fill="none"/>
+  <path d="M275,355 L268,390 L280,415" stroke="#ff0030" stroke-width="0.8" opacity="0.2" fill="none"/>
 
-  <!-- Sharp talons -->
-  <path d="M210,445 L195,480 L208,470 L220,485 L228,465 L240,480 L235,445" fill="#ff8c00" stroke="#cc6600"/>
-  <path d="M302,445 L287,480 L300,470 L312,485 L320,465 L332,480 L327,445" fill="#ff8c00" stroke="#cc6600"/>
+  <!-- RAZOR wings - jagged, blade-like -->
+  <path d="M117,270 L42,200 L20,260 L28,330 L15,370 L55,400 L117,375 Z" fill="#0c0c18" stroke="#ff0030" stroke-width="1" opacity="0.8"/>
+  <path d="M117,280 L55,218 L35,268 L42,328 L30,362 L62,388 L117,370 Z" fill="#101020" opacity="0.5"/>
+  <path d="M395,270 L470,200 L492,260 L484,330 L497,370 L457,400 L395,375 Z" fill="#0c0c18" stroke="#ff0030" stroke-width="1" opacity="0.8"/>
+  <path d="M395,280 L457,218 L477,268 L470,328 L482,362 L450,388 L395,370 Z" fill="#101020" opacity="0.5"/>
 
-  <!-- Targeting overlay -->
-  <circle cx="256" cy="256" r="200" fill="none" stroke="#00ffcc" stroke-width="0.5" opacity="0.08" stroke-dasharray="8,8"/>
-  <circle cx="256" cy="256" r="150" fill="none" stroke="#ff0040" stroke-width="0.5" opacity="0.06" stroke-dasharray="5,5"/>
-  <line x1="256" y1="30" x2="256" y2="482" stroke="#00ffcc" stroke-width="0.3" opacity="0.05"/>
-  <line x1="30" y1="256" x2="482" y2="256" stroke="#00ffcc" stroke-width="0.3" opacity="0.05"/>
+  <!-- DEADLY talons - longer, sharper -->
+  <path d="M205,460 L185,498 L200,485 L215,502 L225,478 L238,498 L232,460" fill="#cc4400" stroke="#992200" stroke-width="1.5"/>
+  <path d="M307,460 L287,498 L302,485 L317,502 L327,478 L340,498 L334,460" fill="#cc4400" stroke="#992200" stroke-width="1.5"/>
+  <!-- Talon tips -->
+  <circle cx="185" cy="498" r="2" fill="#ff6600"/>
+  <circle cx="215" cy="502" r="2" fill="#ff6600"/>
+  <circle cx="287" cy="498" r="2" fill="#ff6600"/>
+  <circle cx="317" cy="502" r="2" fill="#ff6600"/>
 
-  <!-- Corner brackets -->
-  <path d="M30,30 L30,80 M30,30 L80,30" fill="none" stroke="#00ffcc" stroke-width="2" opacity="0.2"/>
-  <path d="M482,30 L482,80 M482,30 L432,30" fill="none" stroke="#ff0040" stroke-width="2" opacity="0.2"/>
-  <path d="M30,482 L30,432 M30,482 L80,482" fill="none" stroke="#00ffcc" stroke-width="2" opacity="0.2"/>
-  <path d="M482,482 L482,432 M482,482 L432,482" fill="none" stroke="#ff0040" stroke-width="2" opacity="0.2"/>
+  <!-- Red targeting reticle -->
+  <circle cx="256" cy="256" r="210" fill="none" stroke="#ff0030" stroke-width="0.8" opacity="0.06" stroke-dasharray="12,6"/>
+  <circle cx="256" cy="256" r="170" fill="none" stroke="#ff0030" stroke-width="0.5" opacity="0.05" stroke-dasharray="6,4"/>
+  <circle cx="256" cy="256" r="130" fill="none" stroke="#ff0030" stroke-width="0.3" opacity="0.04" stroke-dasharray="4,4"/>
+  <!-- Crosshair -->
+  <line x1="256" y1="20" x2="256" y2="492" stroke="#ff0030" stroke-width="0.4" opacity="0.04"/>
+  <line x1="20" y1="256" x2="492" y2="256" stroke="#ff0030" stroke-width="0.4" opacity="0.04"/>
+
+  <!-- Corner brackets - RED, thicker -->
+  <path d="M24,24 L24,85 M24,24 L85,24" fill="none" stroke="#ff0030" stroke-width="3" opacity="0.25"/>
+  <path d="M488,24 L488,85 M488,24 L427,24" fill="none" stroke="#ff0030" stroke-width="3" opacity="0.25"/>
+  <path d="M24,488 L24,427 M24,488 L85,488" fill="none" stroke="#ff0030" stroke-width="3" opacity="0.25"/>
+  <path d="M488,488 L488,427 M488,488 L427,488" fill="none" stroke="#ff0030" stroke-width="3" opacity="0.25"/>
+
+  <!-- Blood drip from left eye scar -->
+  <path d="M210,248 Q208,268 212,290 Q210,310 215,325" stroke="#ff0030" stroke-width="2" fill="none" opacity="0.15" stroke-linecap="round"/>
+  <circle cx="215" cy="328" r="3" fill="#ff0030" opacity="0.12"/>
 </svg>
