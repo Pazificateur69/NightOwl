@@ -1,0 +1,58 @@
+{
+  "target_name": "webgoat",
+  "profile_description": "Authenticated multi-probe benchmark for WebGoat shell routes and lesson menu access.",
+  "expected_modules": [
+    "header-analyzer",
+    "dir-bruteforce",
+    "xss-scanner",
+    "sqli-scanner"
+  ],
+  "probe_urls": [
+    "http://127.0.0.1:8083/WebGoat/",
+    "http://127.0.0.1:8083/WebGoat/welcome.mvc",
+    "http://127.0.0.1:8083/WebGoat/start.mvc?lang=en",
+    "http://127.0.0.1:8083/WebGoat/service/lessonmenu.mvc",
+    "http://127.0.0.1:8083/WebGoat/SqlInjection.lesson",
+    "http://127.0.0.1:8083/WebGoat/CrossSiteScripting.lesson",
+    "http://127.0.0.1:8083/WebGoat/CrossSiteScripting/attack5a?QTY1=1&QTY2=1&QTY3=1&QTY4=1&field1=test&field2=111"
+  ],
+  "url": "http://127.0.0.1:8083/WebGoat",
+  "command": [
+    ".venv/bin/python",
+    "-m",
+    "nightowl.cli.main",
+    "--config",
+    "benchmarks/runs/20260330-094848-webgoat-8f61ab4/probe-01/benchmark-config.yaml",
+    "scan",
+    "web",
+    "http://127.0.0.1:8083/WebGoat/",
+    "--core"
+  ],
+  "commit": "8f61ab4",
+  "started_at": "2026-03-30T09:48:48.334873+00:00",
+  "finished_at": "2026-03-30T09:50:04.466992+00:00",
+  "duration_seconds": 76.132119,
+  "return_code": 0,
+  "findings_count": 50,
+  "scan_id": "4e078c1c-cf2a-4b3b-bb27-3e5058124fa3",
+  "stdout_path": "benchmarks/runs/20260330-094848-webgoat-8f61ab4/stdout.txt",
+  "stderr_path": "benchmarks/runs/20260330-094848-webgoat-8f61ab4/stderr.txt",
+  "raw_session_path": "benchmarks/runs/20260330-094848-webgoat-8f61ab4/metadata.json",
+  "session_markdown_path": "benchmarks/sessions/2026-03-30-webgoat-8f61ab4.md",
+  "findings_json_path": "benchmarks/runs/20260330-094848-webgoat-8f61ab4/findings.json",
+  "stats_json_path": "benchmarks/runs/20260330-094848-webgoat-8f61ab4/stats.json",
+  "verdicts_json_path": "benchmarks/runs/20260330-094848-webgoat-8f61ab4/verdicts.json",
+  "report_markdown_path": "benchmarks/runs/20260330-094848-webgoat-8f61ab4/reports/nightowl-4e078c1c-20260330-095004.md",
+  "report_html_path": "benchmarks/runs/20260330-094848-webgoat-8f61ab4/reports/nightowl-4e078c1c-20260330-095004.html",
+  "probe_results_path": "benchmarks/runs/20260330-094848-webgoat-8f61ab4/probe-results.json",
+  "environment": "python=3.14.3, cwd=/Users/pazent/Desktop/NightOwl, dirty_worktree=True",
+  "reachable": true,
+  "preflight_error": null,
+  "auth_mode": "webgoat-disposable-user",
+  "auth_notes": [
+    "Created disposable WebGoat user nightowl-0dc8f6.",
+    "Authenticated to WebGoat via http://127.0.0.1:8083/WebGoat/login.",
+    "Lesson menu reached at http://127.0.0.1:8083/WebGoat/service/lessonmenu.mvc.",
+    "Final login response landed at http://127.0.0.1:8083/WebGoat/start.mvc?username=nightowl-0dc8f6#lesson/WebGoatIntroduction.lesson."
+  ]
+}

@@ -3,12 +3,10 @@
 import asyncio
 import logging
 
-import httpx
-from bs4 import BeautifulSoup
-
 from nightowl.core.plugin_base import ScannerPlugin
 from nightowl.models.finding import Finding, Severity
 from nightowl.models.target import Target
+from nightowl.utils.web_auth import DEFAULT_LOGIN_PATHS, extract_login_form, login_successful, submit_login_form
 
 logger = logging.getLogger("nightowl")
 
@@ -18,9 +16,6 @@ DEFAULT_CREDS = [
     ("administrator", "administrator"), ("test", "test"),
     ("user", "user"), ("guest", "guest"), ("admin", ""),
 ]
-
-LOGIN_PATHS = ["/login", "/admin", "/wp-login.php", "/administrator", "/auth/login", "/signin", "/user/login"]
-
 
 class AuthTesterPlugin(ScannerPlugin):
     name = "auth-tester"
@@ -32,58 +27,34 @@ class AuthTesterPlugin(ScannerPlugin):
         findings = []
         base_url = (target.url or f"https://{target.host}").rstrip("/")
         delay = self.config.get("delay", 1.0)
+        credentials = self.auth_config.get("default_credentials", DEFAULT_CREDS)
+        max_attempts = int(self.auth_config.get("max_default_credential_attempts", 5) or 5)
 
         try:
-            async with httpx.AsyncClient(verify=False, follow_redirects=True, timeout=10) as client:
-                for path in LOGIN_PATHS:
+            async with self.create_http_client() as client:
+                for path in DEFAULT_LOGIN_PATHS:
                     url = f"{base_url}{path}"
                     try:
-                        resp = await client.get(url)
+                        resp = await client.get(url, headers=self.get_request_headers())
                         if resp.status_code != 200:
                             continue
 
-                        soup = BeautifulSoup(resp.text, "html.parser")
-                        form = soup.find("form")
+                        form = extract_login_form(resp.text, str(resp.url), auth_config=self.auth_config)
                         if not form:
                             continue
 
-                        # Find username and password fields
-                        inputs = form.find_all("input")
-                        user_field = None
-                        pass_field = None
-                        for inp in inputs:
-                            t = inp.get("type", "").lower()
-                            n = inp.get("name", "").lower()
-                            if t == "password" or "pass" in n:
-                                pass_field = inp.get("name")
-                            elif t in ("text", "email") or any(k in n for k in ("user", "email", "login", "name")):
-                                user_field = inp.get("name")
-
-                        if not user_field or not pass_field:
-                            continue
-
-                        action = form.get("action", path)
-                        if not action.startswith("http"):
-                            action = f"{base_url}{action}"
-
                         # Test default creds
-                        for username, password in DEFAULT_CREDS[:5]:  # limit attempts
-                            data = {user_field: username, pass_field: password}
-                            # Grab CSRF tokens
-                            for inp in inputs:
-                                if inp.get("type") == "hidden" and inp.get("name") and inp.get("value"):
-                                    data[inp["name"]] = inp["value"]
-
-                            login_resp = await client.post(action, data=data)
-
-                            # Heuristic: login success if redirect to dashboard or no "invalid" in response
-                            is_success = (
-                                login_resp.status_code in (301, 302, 303)
-                                or ("dashboard" in login_resp.headers.get("location", "").lower())
-                                or ("invalid" not in login_resp.text.lower() and "error" not in login_resp.text.lower() and "failed" not in login_resp.text.lower())
+                        for username, password in credentials[:max_attempts]:
+                            login_resp = await submit_login_form(
+                                client,
+                                form,
+                                username,
+                                password,
+                                headers=self.get_request_headers(),
+                                auth_config=self.auth_config,
                             )
 
-                            if is_success and login_resp.status_code != 200:
+                            if login_successful(login_resp, self.auth_config):
                                 findings.append(Finding(
                                     title=f"Default credentials work: {username}:{password}",
                                     severity=Severity.CRITICAL, cvss_score=9.8,

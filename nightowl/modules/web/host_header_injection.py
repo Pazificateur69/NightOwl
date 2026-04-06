@@ -53,8 +53,8 @@ class HostHeaderInjectionPlugin(ScannerPlugin):
                                 remediation="Use absolute URLs with hardcoded domain in redirects.",
                                 category="host-header",
                             ))
-                except Exception:
-                    pass
+                except (OSError, RuntimeError, ValueError, httpx.RequestError) as exc:
+                    logger.debug(f"Suppressed error: {exc}")
 
                 # Test 2: X-Forwarded-Host
                 try:
@@ -68,8 +68,8 @@ class HostHeaderInjectionPlugin(ScannerPlugin):
                             remediation="Ignore X-Forwarded-Host or validate against trusted proxies.",
                             category="host-header",
                         ))
-                except Exception:
-                    pass
+                except (OSError, RuntimeError, ValueError, httpx.RequestError) as exc:
+                    logger.debug(f"Suppressed error: {exc}")
 
                 # Test 3: Double Host header (supply two)
                 try:
@@ -83,8 +83,8 @@ class HostHeaderInjectionPlugin(ScannerPlugin):
                             remediation="Reject Host headers with CRLF characters.",
                             category="host-header",
                         ))
-                except Exception:
-                    pass
+                except (OSError, RuntimeError, ValueError, httpx.RequestError) as exc:
+                    logger.debug(f"Suppressed error: {exc}")
 
                 # Test 4: Absolute URL with different Host
                 try:
@@ -96,8 +96,8 @@ class HostHeaderInjectionPlugin(ScannerPlugin):
                             evidence=f"Server accepts mismatched Host header with absolute URL",
                             category="host-header",
                         ))
-                except Exception:
-                    pass
+                except (OSError, RuntimeError, ValueError, httpx.RequestError) as exc:
+                    logger.debug(f"Suppressed error: {exc}")
 
         except Exception as e:
             logger.warning(f"Host header injection scan failed: {e}")

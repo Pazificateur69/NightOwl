@@ -1,0 +1,14 @@
+## Probe: http://127.0.0.1:8085/wildcard-credentials
+Target preflight failed: [Errno 1] Operation not permitted
+
+## Probe: http://127.0.0.1:8085/reflect-credentials
+Target preflight failed: [Errno 1] Operation not permitted
+
+## Probe: http://127.0.0.1:8085/null-origin
+Target preflight failed: [Errno 1] Operation not permitted
+
+## Probe: http://127.0.0.1:8085/dangerous-methods
+Target preflight failed: [Errno 1] Operation not permitted
+
+## Probe: http://127.0.0.1:8085/allowlist
+Target preflight failed: [Errno 1] Operation not permitted

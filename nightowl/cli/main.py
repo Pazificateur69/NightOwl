@@ -1,10 +1,12 @@
 """NightOwl CLI - Main entry point."""
 
 import asyncio
+import signal
 import sys
 
 import click
 from rich.prompt import Confirm
+from rich.table import Table
 
 from nightowl import __version__
 from nightowl.cli.formatters import (
@@ -14,13 +16,46 @@ from nightowl.cli.formatters import (
 from nightowl.config.schema import load_config
 from nightowl.core.engine import NightOwlEngine
 from nightowl.core.pipeline import Stage
+from nightowl.models.config import ModuleConfig
 from nightowl.models.scan import ScanMode
 from nightowl.models.target import Target
+
+_engine_ref: NightOwlEngine | None = None
+
+
+def _handle_shutdown(signum, frame):
+    """Handle SIGINT/SIGTERM for graceful shutdown."""
+    print_warning("\nShutdown signal received, cleaning up...")
+    if _engine_ref is not None:
+        try:
+            loop = asyncio.get_event_loop()
+            if loop.is_running():
+                loop.create_task(_engine_ref.shutdown())
+            else:
+                asyncio.run(_engine_ref.shutdown())
+        except RuntimeError:
+            pass
+    sys.exit(130)
 
 
 def run_async(coro):
     """Run an async coroutine from sync context."""
-    return asyncio.get_event_loop().run_until_complete(coro)
+    signal.signal(signal.SIGINT, _handle_shutdown)
+    signal.signal(signal.SIGTERM, _handle_shutdown)
+    return asyncio.run(coro)
+
+
+def _ensure_target_in_scope(config, target_host: str):
+    """Require an explicit scope for CLI scans."""
+    if (
+        not config.scope.allowed_hosts
+        and not config.scope.allowed_ips
+        and not config.scope.allowed_networks
+    ):
+        raise click.ClickException(
+            "No scope defined in config. Refusing to auto-authorize CLI targets. "
+            "Define allowed_hosts/allowed_ips/allowed_networks explicitly."
+        )
 
 
 @click.group()
@@ -63,6 +98,7 @@ def recon(ctx, target, dns, ports, subdomains, tech, full):
     if not modules:
         modules = ["dns-enum", "port-scanner", "tech-detect"]
 
+    _ensure_target_in_scope(config, target)
     print_info(f"Target: {target}")
     print_info(f"Modules: {', '.join(modules)}")
 
@@ -94,28 +130,37 @@ def scan():
 @click.argument("target")
 @click.option("--sqli", is_flag=True, help="SQL injection tests")
 @click.option("--xss", is_flag=True, help="XSS tests")
+@click.option("--core", "core_only", is_flag=True, help="Run the hardened core web modules")
 @click.option("--all", "all_modules", is_flag=True, help="Run all web modules")
 @click.pass_context
-def scan_web(ctx, target, sqli, xss, all_modules):
+def scan_web(ctx, target, sqli, xss, core_only, all_modules):
     """Scan web application for vulnerabilities."""
     print_banner()
     config = load_config(ctx.obj["config_path"])
     engine = NightOwlEngine(config)
 
-    modules = []
     if all_modules:
+        from nightowl.modules import BUILTIN_MODULES
         modules = [
-            "header-analyzer", "sqli-scanner", "xss-scanner", "csrf-scanner",
-            "ssrf-scanner", "path-traversal", "dir-bruteforce", "ssl-analyzer",
-            "cors-checker", "auth-tester", "api-scanner",
+            name for name, path in BUILTIN_MODULES.items()
+            if ".modules.web." in path
         ]
+        # When running all web modules, let the pipeline execute all stages
+        # so modules tagged as 'recon' or 'post' also get a chance to run.
+        stages = None
+    elif core_only:
+        from nightowl.modules import get_core_modules
+        modules = get_core_modules(".modules.web.")
+        stages = [Stage.SCAN]
     else:
         modules = ["header-analyzer"]
         if sqli:
             modules.append("sqli-scanner")
         if xss:
             modules.append("xss-scanner")
+        stages = [Stage.SCAN]
 
+    _ensure_target_in_scope(config, target)
     print_info(f"Target: {target}")
     print_info(f"Modules: {', '.join(modules)}")
 
@@ -123,7 +168,7 @@ def scan_web(ctx, target, sqli, xss, all_modules):
 
     async def _run():
         await engine.initialize()
-        return await engine.run_scan([t], mode="auto", modules=modules, stages=[Stage.SCAN])
+        return await engine.run_scan([t], mode="auto", modules=modules, stages=stages)
 
     session = run_async(_run())
     print_success(f"Scan complete: {session.findings_count} findings")
@@ -143,6 +188,13 @@ def scan_network(ctx, target, ports, vuln):
     modules = ["deep-port-scan"]
     if vuln:
         modules.extend(["vuln-matcher", "smb-enum", "ssh-audit", "ftp-scanner"])
+
+    _ensure_target_in_scope(config, target)
+
+    # Pass port range via proper ModuleConfig so the plugin receives it
+    config.modules.append(
+        ModuleConfig(name="deep-port-scan", enabled=True, options={"port_range": ports})
+    )
 
     print_info(f"Target: {target} | Ports: {ports}")
     t = Target(host=target)
@@ -168,6 +220,7 @@ def scan_ad(ctx, target, domain, user, password):
     engine = NightOwlEngine(config)
 
     modules = ["ldap-enum", "kerberos-scanner", "ad-recon"]
+    _ensure_target_in_scope(config, target)
     print_info(f"Target DC: {target} | Domain: {domain}")
 
     t = Target(host=target, credentials={"domain": domain, "user": user, "password": password})
@@ -199,6 +252,7 @@ def exploit(ctx, target, auto_mode, semi_mode):
     engine = NightOwlEngine(config)
     mode = "auto" if auto_mode else "semi"
 
+    _ensure_target_in_scope(config, target)
     t = Target(host=target)
 
     async def _confirm(stage, findings):
@@ -229,6 +283,7 @@ def full(ctx, target, mode, config_path):
     config = load_config(config_file)
     engine = NightOwlEngine(config)
 
+    _ensure_target_in_scope(config, target)
     t = Target(host=target)
 
     async def _confirm(stage, findings):
@@ -290,11 +345,19 @@ def dashboard(ctx, port, host):
 
 @cli.command("plugins")
 @click.option("--list", "list_plugins", is_flag=True, help="List all plugins")
+@click.option(
+    "--maturity",
+    type=click.Choice(["recommended", "usable-with-caution", "experimental"]),
+    default=None,
+    help="Filter plugins by maturity",
+)
+@click.option("--core-only", is_flag=True, help="Show only the official core modules")
 @click.pass_context
-def plugins_cmd(ctx, list_plugins):
+def plugins_cmd(ctx, list_plugins, maturity, core_only):
     """Manage plugins."""
     if list_plugins:
         from nightowl.core.plugin_loader import PluginLoader
+        from nightowl.modules import get_module_maturity, is_core_module
 
         loader = PluginLoader()
         plugins = loader.load_all()
@@ -302,10 +365,24 @@ def plugins_cmd(ctx, list_plugins):
         table = Table(title="Available Plugins")
         table.add_column("Name", style="cyan")
         table.add_column("Stage")
+        table.add_column("Maturity")
+        table.add_column("Core")
         table.add_column("Description")
 
         for name, cls in sorted(plugins.items()):
-            table.add_row(name, cls.stage, cls.description)
+            module_maturity = get_module_maturity(name)
+            module_core = is_core_module(name)
+            if maturity and module_maturity != maturity:
+                continue
+            if core_only and not module_core:
+                continue
+            table.add_row(
+                name,
+                cls.stage,
+                module_maturity,
+                "yes" if module_core else "no",
+                cls.description,
+            )
 
         console.print(table)
 
@@ -338,10 +415,6 @@ def config(ctx, init_config, validate_config):
                 print_warning(w)
         else:
             print_success("Configuration is valid")
-
-
-# Import Table for plugins command
-from rich.table import Table
 
 
 if __name__ == "__main__":

@@ -65,7 +65,8 @@ class EmailHarvesterPlugin(ScannerPlugin):
                         phone_matches = re.findall(r"[\+]?[(]?[0-9]{1,4}[)]?[-\s\./0-9]{7,15}", text)
                         phones.update(p.strip() for p in phone_matches if len(p.strip()) >= 10)
 
-                    except Exception:
+                    except (OSError, RuntimeError, ValueError, httpx.RequestError) as exc:
+                        logger.debug(f"Suppressed error: {exc}")
                         continue
 
         except Exception as e:

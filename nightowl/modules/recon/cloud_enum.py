@@ -78,5 +78,5 @@ class CloudEnumPlugin(ScannerPlugin):
                     category="cloud-enum",
                     metadata={"cloud": cloud, "service": service, "public": is_public},
                 ))
-        except Exception:
-            pass
+        except (OSError, RuntimeError, ValueError, httpx.RequestError) as exc:
+            logger.debug(f"Suppressed error: {exc}")

@@ -1,0 +1,180 @@
+{
+  "verdict_counts": {
+    "confirmed_hit": 1,
+    "expected_hit": 16,
+    "likely_false_positive": 0,
+    "missed_expected": 0,
+    "inconclusive": 7
+  },
+  "findings": [
+    {
+      "family": "dir-bruteforce:discovered-path:/robots.txt",
+      "verdict": "expected_hit",
+      "rationale": "This finding family is declared as expected signal for the benchmark profile.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /robots.txt (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/media",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /media (301)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/assets",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /assets (301)"
+    },
+    {
+      "family": "header-analyzer:missing-header:Content-Security-Policy",
+      "verdict": "expected_hit",
+      "rationale": "This finding family is declared as expected signal for the benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Content-Security-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-XSS-Protection",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-XSS-Protection"
+    },
+    {
+      "family": "header-analyzer:missing-header:Referrer-Policy",
+      "verdict": "expected_hit",
+      "rationale": "This finding family is declared as expected signal for the benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Referrer-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:Permissions-Policy",
+      "verdict": "expected_hit",
+      "rationale": "This finding family is declared as expected signal for the benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Permissions-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:Content-Security-Policy",
+      "verdict": "expected_hit",
+      "rationale": "This finding family is declared as expected signal for the benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Content-Security-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-XSS-Protection",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-XSS-Protection"
+    },
+    {
+      "family": "header-analyzer:missing-header:Referrer-Policy",
+      "verdict": "expected_hit",
+      "rationale": "This finding family is declared as expected signal for the benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Referrer-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:Permissions-Policy",
+      "verdict": "expected_hit",
+      "rationale": "This finding family is declared as expected signal for the benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Permissions-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:Content-Security-Policy",
+      "verdict": "expected_hit",
+      "rationale": "This finding family is declared as expected signal for the benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Content-Security-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-XSS-Protection",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-XSS-Protection"
+    },
+    {
+      "family": "header-analyzer:missing-header:Referrer-Policy",
+      "verdict": "expected_hit",
+      "rationale": "This finding family is declared as expected signal for the benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Referrer-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:Permissions-Policy",
+      "verdict": "expected_hit",
+      "rationale": "This finding family is declared as expected signal for the benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Permissions-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:Content-Security-Policy",
+      "verdict": "expected_hit",
+      "rationale": "This finding family is declared as expected signal for the benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Content-Security-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-XSS-Protection",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-XSS-Protection"
+    },
+    {
+      "family": "header-analyzer:missing-header:Referrer-Policy",
+      "verdict": "expected_hit",
+      "rationale": "This finding family is declared as expected signal for the benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Referrer-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:Permissions-Policy",
+      "verdict": "expected_hit",
+      "rationale": "This finding family is declared as expected signal for the benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Permissions-Policy"
+    },
+    {
+      "family": "sqli-scanner:SQL Injection (Error-Based) in 'q'",
+      "verdict": "confirmed_hit",
+      "rationale": "This finding family is explicitly reviewed and confirmed for the target profile.",
+      "module_name": "sqli-scanner",
+      "title": "SQL Injection (Error-Based) in 'q'"
+    },
+    {
+      "family": "header-analyzer:missing-header:Content-Security-Policy",
+      "verdict": "expected_hit",
+      "rationale": "This finding family is declared as expected signal for the benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Content-Security-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-XSS-Protection",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-XSS-Protection"
+    },
+    {
+      "family": "header-analyzer:missing-header:Referrer-Policy",
+      "verdict": "expected_hit",
+      "rationale": "This finding family is declared as expected signal for the benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Referrer-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:Permissions-Policy",
+      "verdict": "expected_hit",
+      "rationale": "This finding family is declared as expected signal for the benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Permissions-Policy"
+    }
+  ],
+  "missed_expected": []
+}

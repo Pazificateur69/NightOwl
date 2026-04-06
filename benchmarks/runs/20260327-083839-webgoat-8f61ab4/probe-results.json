@@ -1,0 +1,42 @@
+[
+  {
+    "url": "http://127.0.0.1:8083/WebGoat/",
+    "reachable": true,
+    "preflight_error": "HTTP 200",
+    "return_code": 0,
+    "scan_id": "ed3c992e-34a8-458f-92d3-54443eda763d",
+    "findings_count": 7
+  },
+  {
+    "url": "http://127.0.0.1:8083/WebGoat/login",
+    "reachable": true,
+    "preflight_error": "HTTP 200",
+    "return_code": 0,
+    "scan_id": "098d9f75-8b30-47ac-abfe-eb178ca095d2",
+    "findings_count": 6
+  },
+  {
+    "url": "http://127.0.0.1:8083/WebGoat/WebGoat/login",
+    "reachable": true,
+    "preflight_error": "HTTP 200",
+    "return_code": 0,
+    "scan_id": "4e7557fe-1e5c-4ee7-843e-6302080d668b",
+    "findings_count": 6
+  },
+  {
+    "url": "http://127.0.0.1:8083/WebGoat/WebGoat/login?error=1",
+    "reachable": true,
+    "preflight_error": "HTTP 200",
+    "return_code": 0,
+    "scan_id": "dc1cfb63-a308-4b23-b803-fb779dc1e247",
+    "findings_count": 6
+  },
+  {
+    "url": "http://127.0.0.1:8083/WebGoat/WebGoat/start.mvc",
+    "reachable": true,
+    "preflight_error": "HTTP 200",
+    "return_code": 0,
+    "scan_id": "d16b3f2b-b0a6-4857-b961-7e02b7caa477",
+    "findings_count": 6
+  }
+]

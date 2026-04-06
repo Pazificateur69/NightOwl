@@ -50,6 +50,9 @@
                             <th class="px-4 py-2 text-left text-xs text-slate-500">Severity</th>
                             <th class="px-4 py-2 text-left text-xs text-slate-500">Title</th>
                             <th class="px-4 py-2 text-left text-xs text-slate-500">Target</th>
+                            <th class="px-4 py-2 text-left text-xs text-slate-500">Maturity</th>
+                            <th class="px-4 py-2 text-left text-xs text-slate-500">State</th>
+                            <th class="px-4 py-2 text-left text-xs text-slate-500">Confidence</th>
                             <th class="px-4 py-2 text-left text-xs text-slate-500">CVSS</th>
                         </tr>
                     </thead>
@@ -63,6 +66,9 @@
                             </td>
                             <td class="px-4 py-2 text-sm">{{ f.title }}</td>
                             <td class="px-4 py-2 text-sm text-slate-400">{{ f.target }}</td>
+                            <td class="px-4 py-2 text-sm text-slate-400">{{ f.metadata.module_maturity|default('experimental') }}</td>
+                            <td class="px-4 py-2 text-sm text-slate-400">{{ f.finding_state|default('info')|upper }}</td>
+                            <td class="px-4 py-2 text-sm text-slate-400">{{ '%.2f'|format(f.confidence_score|default(0.5)) }}</td>
                             <td class="px-4 py-2 text-sm">{{ f.cvss_score }}</td>
                         </tr>
                         {% endfor %}

@@ -1,0 +1,14 @@
+## Probe: http://127.0.0.1:8083/WebGoat/
+SSL analysis failed for 127.0.0.1:443: [Errno 61] Connection refused
+
+## Probe: http://127.0.0.1:8083/WebGoat/login
+SSL analysis failed for 127.0.0.1:443: [Errno 61] Connection refused
+
+## Probe: http://127.0.0.1:8083/WebGoat/WebGoat/login
+SSL analysis failed for 127.0.0.1:443: [Errno 61] Connection refused
+
+## Probe: http://127.0.0.1:8083/WebGoat/WebGoat/login?error=1
+SSL analysis failed for 127.0.0.1:443: [Errno 61] Connection refused
+
+## Probe: http://127.0.0.1:8083/WebGoat/WebGoat/start.mvc
+SSL analysis failed for 127.0.0.1:443: [Errno 61] Connection refused

@@ -1,0 +1,24 @@
+{
+  "target_name": "juice-shop",
+  "url": "http://127.0.0.1:8082",
+  "command": [
+    ".venv/bin/nightowl",
+    "scan",
+    "web",
+    "http://127.0.0.1:8082",
+    "--core"
+  ],
+  "commit": "8f61ab4",
+  "started_at": "2026-03-26T15:56:29.061129+00:00",
+  "finished_at": "2026-03-26T15:56:29.083739+00:00",
+  "duration_seconds": 0.02261,
+  "return_code": 2,
+  "findings_count": null,
+  "stdout_path": "benchmarks/runs/20260326-155629-juice-shop-8f61ab4/stdout.txt",
+  "stderr_path": "benchmarks/runs/20260326-155629-juice-shop-8f61ab4/stderr.txt",
+  "raw_session_path": "benchmarks/runs/20260326-155629-juice-shop-8f61ab4/metadata.json",
+  "session_markdown_path": "benchmarks/sessions/2026-03-26-juice-shop-8f61ab4.md",
+  "environment": "python=3.14.3, cwd=/Users/pazent/Desktop/NightOwl, dirty_worktree=True",
+  "reachable": false,
+  "preflight_error": "[Errno 61] Connection refused"
+}

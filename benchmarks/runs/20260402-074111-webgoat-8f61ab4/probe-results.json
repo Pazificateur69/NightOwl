@@ -1,0 +1,58 @@
+[
+  {
+    "url": "http://127.0.0.1:8083/WebGoat/",
+    "reachable": true,
+    "preflight_error": "HTTP 200",
+    "return_code": 0,
+    "scan_id": "92ef9bff-eccc-457c-83b6-a5e6af6bcdee",
+    "findings_count": 7
+  },
+  {
+    "url": "http://127.0.0.1:8083/WebGoat/welcome.mvc",
+    "reachable": true,
+    "preflight_error": "HTTP 200",
+    "return_code": 0,
+    "scan_id": "ea69a25a-692f-49a9-bb96-5e2a6453b1b2",
+    "findings_count": 6
+  },
+  {
+    "url": "http://127.0.0.1:8083/WebGoat/start.mvc?lang=en",
+    "reachable": true,
+    "preflight_error": "HTTP 200",
+    "return_code": 0,
+    "scan_id": "01ffc1e1-87d6-47f7-99dc-746b2f013bf0",
+    "findings_count": 6
+  },
+  {
+    "url": "http://127.0.0.1:8083/WebGoat/service/lessonmenu.mvc",
+    "reachable": true,
+    "preflight_error": "HTTP 200",
+    "return_code": 0,
+    "scan_id": "75a426d3-f646-4d29-ae22-fb8497eaee35",
+    "findings_count": 6
+  },
+  {
+    "url": "http://127.0.0.1:8083/WebGoat/SqlInjection.lesson",
+    "reachable": true,
+    "preflight_error": "HTTP 200",
+    "return_code": 0,
+    "scan_id": "582807ea-1f16-4670-9c2a-799de8eda795",
+    "findings_count": 15
+  },
+  {
+    "url": "http://127.0.0.1:8083/WebGoat/CrossSiteScripting.lesson",
+    "reachable": true,
+    "preflight_error": "HTTP 200",
+    "return_code": 0,
+    "scan_id": "5889bacb-5200-444a-84a3-9a975be98618",
+    "findings_count": 7
+  },
+  {
+    "url": "http://127.0.0.1:8083/WebGoat/CrossSiteScripting/attack5a?QTY1=1&QTY2=1&QTY3=1&QTY4=1&field1=test&field2=111",
+    "reachable": true,
+    "preflight_error": "HTTP 200",
+    "return_code": 0,
+    "scan_id": "b344caea-4b3d-4147-81d5-c454f221b3f5",
+    "findings_count": 7
+  }
+]

@@ -1,0 +1,9 @@
+## Probe: http://127.0.0.1:8085/wildcard-credentials
+
+## Probe: http://127.0.0.1:8085/reflect-credentials
+
+## Probe: http://127.0.0.1:8085/null-origin
+
+## Probe: http://127.0.0.1:8085/dangerous-methods
+
+## Probe: http://127.0.0.1:8085/allowlist

@@ -1,0 +1,208 @@
+[
+  {
+    "id": "5651dbdd-b327-445e-bdfc-2c8588e4db98",
+    "title": "Discovered: /login (200)",
+    "description": "Path /login returned HTTP 200",
+    "severity": "medium",
+    "cvss_score": 0.0,
+    "cvss_vector": "",
+    "category": "dir-bruteforce",
+    "target": "http://127.0.0.1:8083/WebGoat",
+    "port": null,
+    "protocol": "",
+    "evidence": "URL: http://127.0.0.1:8083/WebGoat/login\nStatus: 200\nSize: 1929 bytes",
+    "remediation": "",
+    "references": [],
+    "module_name": "dir-bruteforce",
+    "timestamp": "2026-03-26 16:19:30.017782",
+    "false_positive": false,
+    "finding_state": "suspected",
+    "confidence_score": 0.82,
+    "metadata": {
+      "module_maturity": "recommended",
+      "core_module": true,
+      "finding_state": "suspected",
+      "confidence_score": 0.82
+    }
+  },
+  {
+    "id": "fd693d99-db37-4551-bc56-3303f3990595",
+    "title": "Missing Security Header: X-Content-Type-Options",
+    "description": "X-Content-Type-Options header is missing. Browsers may MIME-sniff the response body, potentially executing untrusted content as an unexpected type.",
+    "severity": "medium",
+    "cvss_score": 4.3,
+    "cvss_vector": "",
+    "category": "security-headers",
+    "target": "http://127.0.0.1:8083/WebGoat",
+    "port": null,
+    "protocol": "",
+    "evidence": "Header 'X-Content-Type-Options' absent in response from http://127.0.0.1:8083/WebGoat",
+    "remediation": "Add 'X-Content-Type-Options: nosniff' to all responses.",
+    "references": [
+      "https://owasp.org/www-project-secure-headers/#x-content-type-options"
+    ],
+    "module_name": "header-analyzer",
+    "timestamp": "2026-03-26 16:19:34.341264",
+    "false_positive": false,
+    "finding_state": "suspected",
+    "confidence_score": 0.9,
+    "metadata": {
+      "url": "http://127.0.0.1:8083/WebGoat",
+      "status_code": 200,
+      "module_maturity": "recommended",
+      "core_module": true,
+      "finding_state": "suspected",
+      "confidence_score": 0.9
+    }
+  },
+  {
+    "id": "a8d1d6ab-996b-45d3-b5a5-3dfdc4cd73e6",
+    "title": "Missing Security Header: X-Frame-Options",
+    "description": "X-Frame-Options header is missing. The page can be embedded in iframes, enabling clickjacking attacks.",
+    "severity": "medium",
+    "cvss_score": 4.3,
+    "cvss_vector": "",
+    "category": "security-headers",
+    "target": "http://127.0.0.1:8083/WebGoat",
+    "port": null,
+    "protocol": "",
+    "evidence": "Header 'X-Frame-Options' absent in response from http://127.0.0.1:8083/WebGoat",
+    "remediation": "Add 'X-Frame-Options: DENY' or 'X-Frame-Options: SAMEORIGIN'. Consider also using CSP frame-ancestors directive.",
+    "references": [
+      "https://cheatsheetseries.owasp.org/cheatsheets/Clickjacking_Defense_Cheat_Sheet.html"
+    ],
+    "module_name": "header-analyzer",
+    "timestamp": "2026-03-26 16:19:34.341313",
+    "false_positive": false,
+    "finding_state": "suspected",
+    "confidence_score": 0.9,
+    "metadata": {
+      "url": "http://127.0.0.1:8083/WebGoat",
+      "status_code": 200,
+      "module_maturity": "recommended",
+      "core_module": true,
+      "finding_state": "suspected",
+      "confidence_score": 0.9
+    }
+  },
+  {
+    "id": "df803f3c-7e67-4f44-a4dc-ce982745ac7f",
+    "title": "Missing Security Header: Content-Security-Policy",
+    "description": "Content-Security-Policy header is missing. Without CSP, the application is more vulnerable to XSS and data injection attacks.",
+    "severity": "medium",
+    "cvss_score": 5.4,
+    "cvss_vector": "",
+    "category": "security-headers",
+    "target": "http://127.0.0.1:8083/WebGoat",
+    "port": null,
+    "protocol": "",
+    "evidence": "Header 'Content-Security-Policy' absent in response from http://127.0.0.1:8083/WebGoat",
+    "remediation": "Implement a Content-Security-Policy header with restrictive directives. Start with 'Content-Security-Policy: default-src 'self'' and refine as needed.",
+    "references": [
+      "https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html"
+    ],
+    "module_name": "header-analyzer",
+    "timestamp": "2026-03-26 16:19:34.341336",
+    "false_positive": false,
+    "finding_state": "suspected",
+    "confidence_score": 0.75,
+    "metadata": {
+      "url": "http://127.0.0.1:8083/WebGoat",
+      "status_code": 200,
+      "module_maturity": "recommended",
+      "core_module": true,
+      "finding_state": "suspected",
+      "confidence_score": 0.75
+    }
+  },
+  {
+    "id": "6162cd45-ca83-49ca-aa05-08c5a68e31a8",
+    "title": "Missing Security Header: X-XSS-Protection",
+    "description": "X-XSS-Protection header is missing. While modern browsers have deprecated this, it provides defense-in-depth for older browsers.",
+    "severity": "low",
+    "cvss_score": 3.1,
+    "cvss_vector": "",
+    "category": "security-headers",
+    "target": "http://127.0.0.1:8083/WebGoat",
+    "port": null,
+    "protocol": "",
+    "evidence": "Header 'X-XSS-Protection' absent in response from http://127.0.0.1:8083/WebGoat",
+    "remediation": "Add 'X-XSS-Protection: 0' if CSP is implemented, or 'X-XSS-Protection: 1; mode=block' for legacy browser support.",
+    "references": [
+      "https://owasp.org/www-project-secure-headers/#x-xss-protection"
+    ],
+    "module_name": "header-analyzer",
+    "timestamp": "2026-03-26 16:19:34.341356",
+    "false_positive": false,
+    "finding_state": "suspected",
+    "confidence_score": 0.9,
+    "metadata": {
+      "url": "http://127.0.0.1:8083/WebGoat",
+      "status_code": 200,
+      "module_maturity": "recommended",
+      "core_module": true,
+      "finding_state": "suspected",
+      "confidence_score": 0.9
+    }
+  },
+  {
+    "id": "4aab2abf-6210-49c7-b272-5d66859cee0e",
+    "title": "Missing Security Header: Referrer-Policy",
+    "description": "Referrer-Policy header is missing. Sensitive information in URLs may leak via the Referer header to third-party sites.",
+    "severity": "low",
+    "cvss_score": 3.1,
+    "cvss_vector": "",
+    "category": "security-headers",
+    "target": "http://127.0.0.1:8083/WebGoat",
+    "port": null,
+    "protocol": "",
+    "evidence": "Header 'Referrer-Policy' absent in response from http://127.0.0.1:8083/WebGoat",
+    "remediation": "Add 'Referrer-Policy: strict-origin-when-cross-origin' or 'Referrer-Policy: no-referrer' depending on requirements.",
+    "references": [
+      "https://owasp.org/www-project-secure-headers/#referrer-policy"
+    ],
+    "module_name": "header-analyzer",
+    "timestamp": "2026-03-26 16:19:34.341375",
+    "false_positive": false,
+    "finding_state": "suspected",
+    "confidence_score": 0.9,
+    "metadata": {
+      "url": "http://127.0.0.1:8083/WebGoat",
+      "status_code": 200,
+      "module_maturity": "recommended",
+      "core_module": true,
+      "finding_state": "suspected",
+      "confidence_score": 0.9
+    }
+  },
+  {
+    "id": "f8a530f8-349f-4393-a2cc-1b40969d6ce3",
+    "title": "Missing Security Header: Permissions-Policy",
+    "description": "Permissions-Policy header is missing. Browser features like camera, microphone, and geolocation are not explicitly restricted.",
+    "severity": "low",
+    "cvss_score": 3.1,
+    "cvss_vector": "",
+    "category": "security-headers",
+    "target": "http://127.0.0.1:8083/WebGoat",
+    "port": null,
+    "protocol": "",
+    "evidence": "Header 'Permissions-Policy' absent in response from http://127.0.0.1:8083/WebGoat",
+    "remediation": "Add a Permissions-Policy header restricting unused browser features, e.g., 'Permissions-Policy: camera=(), microphone=(), geolocation=()'.",
+    "references": [
+      "https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Permissions-Policy"
+    ],
+    "module_name": "header-analyzer",
+    "timestamp": "2026-03-26 16:19:34.341402",
+    "false_positive": false,
+    "finding_state": "suspected",
+    "confidence_score": 0.9,
+    "metadata": {
+      "url": "http://127.0.0.1:8083/WebGoat",
+      "status_code": 200,
+      "module_maturity": "recommended",
+      "core_module": true,
+      "finding_state": "suspected",
+      "confidence_score": 0.9
+    }
+  }
+]

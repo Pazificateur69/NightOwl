@@ -185,7 +185,8 @@ class OpenRedirectPlugin(ScannerPlugin):
                                 findings.append(finding)
                                 confirmed_params.add(param_name)
                                 break
-                        except Exception:
+                        except (OSError, RuntimeError, ValueError, httpx.RequestError) as exc:
+                            logger.debug(f"Suppressed error: {exc}")
                             continue
 
                 # ── Phase 2: Test redirect-related paths ──
@@ -207,7 +208,8 @@ class OpenRedirectPlugin(ScannerPlugin):
                                     findings.append(finding)
                                     confirmed_params.add(f"{path}:{param_name}")
                                     break
-                            except Exception:
+                            except (OSError, RuntimeError, ValueError, httpx.RequestError) as exc:
+                                logger.debug(f"Suppressed error: {exc}")
                                 continue
 
                 # ── Phase 3: Test POST-based redirects ──
@@ -226,7 +228,8 @@ class OpenRedirectPlugin(ScannerPlugin):
                             finding.evidence += "\nMethod: POST"
                             findings.append(finding)
                             confirmed_params.add(f"post:{param_name}")
-                    except Exception:
+                    except (OSError, RuntimeError, ValueError, httpx.RequestError) as exc:
+                        logger.debug(f"Suppressed error: {exc}")
                         continue
 
         except Exception as e:

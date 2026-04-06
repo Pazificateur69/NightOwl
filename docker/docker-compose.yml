@@ -1,10 +1,9 @@
-version: "3.8"
-
 services:
   nightowl:
     build:
       context: ..
       dockerfile: docker/Dockerfile
+    command: ["nightowl", "--help"]
     ports:
       - "8080:8080"
     volumes:
@@ -13,6 +12,11 @@ services:
       - ../wordlists:/app/wordlists
     environment:
       - NIGHTOWL_LOG_LEVEL=INFO
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: "1.0"
 
   # Optional test targets for practice
   dvwa:
@@ -21,6 +25,12 @@ services:
       - "8081:80"
     profiles:
       - targets
+      - benchmarks
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+          cpus: "0.5"
 
   juice-shop:
     image: bkimminich/juice-shop
@@ -28,3 +38,49 @@ services:
       - "8082:3000"
     profiles:
       - targets
+      - benchmarks
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: "1.0"
+
+  webgoat:
+    image: webgoat/webgoat
+    ports:
+      - "8083:8080"
+    profiles:
+      - benchmarks
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: "1.0"
+
+  nightowl-lab:
+    build:
+      context: ..
+      dockerfile: benchmarks/labs/nightowl_lab/Dockerfile
+    ports:
+      - "8084:8080"
+    profiles:
+      - benchmarks
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+          cpus: "0.5"
+
+  cors-lab:
+    build:
+      context: ..
+      dockerfile: benchmarks/labs/cors_lab/Dockerfile
+    ports:
+      - "8085:8080"
+    profiles:
+      - benchmarks
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+          cpus: "0.5"

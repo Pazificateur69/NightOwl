@@ -1,0 +1,17 @@
+[
+  {
+    "module_name": "cors-checker",
+    "title": "CORS: Wildcard with credentials",
+    "metadata": {
+      "benchmark_probe_url": "http://127.0.0.1:8085/wildcard-credentials"
+    }
+  },
+  {
+    "module_name": "header-analyzer",
+    "title": "Missing Security Header: X-Frame-Options"
+  },
+  {
+    "module_name": "ssl-analyzer",
+    "title": "No TLS \u2014 target uses plain HTTP"
+  }
+]

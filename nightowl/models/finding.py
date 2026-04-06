@@ -15,6 +15,12 @@ class Severity(str, Enum):
     INFO = "info"
 
 
+class FindingState(str, Enum):
+    CONFIRMED = "confirmed"
+    SUSPECTED = "suspected"
+    INFO = "info"
+
+
 class Finding(BaseModel):
     """Represents a discovered vulnerability or security finding."""
 
@@ -22,6 +28,8 @@ class Finding(BaseModel):
     title: str
     description: str = ""
     severity: Severity = Severity.INFO
+    finding_state: FindingState = FindingState.INFO
+    confidence_score: float = Field(default=0.5, ge=0.0, le=1.0)
     cvss_score: float = Field(default=0.0, ge=0.0, le=10.0)
     cvss_vector: str = ""
     category: str = ""
@@ -54,6 +62,8 @@ class FindingSummary(BaseModel):
     id: str
     title: str
     severity: Severity
+    finding_state: FindingState
+    confidence_score: float
     cvss_score: float
     target: str
     module_name: str
@@ -65,6 +75,8 @@ class FindingSummary(BaseModel):
             id=finding.id,
             title=finding.title,
             severity=finding.severity,
+            finding_state=finding.finding_state,
+            confidence_score=finding.confidence_score,
             cvss_score=finding.cvss_score,
             target=finding.target,
             module_name=finding.module_name,

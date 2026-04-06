@@ -1,0 +1,17 @@
+{
+  "verdict_counts": {
+    "confirmed_hit": 0,
+    "expected_hit": 2,
+    "likely_false_positive": 0,
+    "missed_expected": 2,
+    "inconclusive": 2
+  },
+  "findings": [],
+  "missed_expected": [
+    {
+      "family": "header-analyzer:missing-header:Content-Security-Policy",
+      "verdict": "missed_expected",
+      "rationale": "This expected finding family was not observed in the benchmark run."
+    }
+  ]
+}

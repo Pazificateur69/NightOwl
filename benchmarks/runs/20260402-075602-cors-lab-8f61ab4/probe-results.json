@@ -1,0 +1,42 @@
+[
+  {
+    "url": "http://127.0.0.1:8085/wildcard-credentials",
+    "reachable": false,
+    "preflight_error": "[Errno 1] Operation not permitted",
+    "return_code": 2,
+    "scan_id": null,
+    "findings_count": 0
+  },
+  {
+    "url": "http://127.0.0.1:8085/reflect-credentials",
+    "reachable": false,
+    "preflight_error": "[Errno 1] Operation not permitted",
+    "return_code": 2,
+    "scan_id": null,
+    "findings_count": 0
+  },
+  {
+    "url": "http://127.0.0.1:8085/null-origin",
+    "reachable": false,
+    "preflight_error": "[Errno 1] Operation not permitted",
+    "return_code": 2,
+    "scan_id": null,
+    "findings_count": 0
+  },
+  {
+    "url": "http://127.0.0.1:8085/dangerous-methods",
+    "reachable": false,
+    "preflight_error": "[Errno 1] Operation not permitted",
+    "return_code": 2,
+    "scan_id": null,
+    "findings_count": 0
+  },
+  {
+    "url": "http://127.0.0.1:8085/allowlist",
+    "reachable": false,
+    "preflight_error": "[Errno 1] Operation not permitted",
+    "return_code": 2,
+    "scan_id": null,
+    "findings_count": 0
+  }
+]

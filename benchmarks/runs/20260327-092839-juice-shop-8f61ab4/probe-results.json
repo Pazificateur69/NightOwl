@@ -1,0 +1,42 @@
+[
+  {
+    "url": "http://127.0.0.1:8082/",
+    "reachable": true,
+    "preflight_error": "HTTP 200",
+    "return_code": 0,
+    "scan_id": "b7e9daa1-24d5-4b6f-8229-174c8b078446",
+    "findings_count": 7
+  },
+  {
+    "url": "http://127.0.0.1:8082/robots.txt",
+    "reachable": true,
+    "preflight_error": "HTTP 200",
+    "return_code": 0,
+    "scan_id": "b879b3de-2342-45f2-800c-d63593ba3281",
+    "findings_count": 4
+  },
+  {
+    "url": "http://127.0.0.1:8082/assets/public/images/uploads/",
+    "reachable": true,
+    "preflight_error": "HTTP 200",
+    "return_code": 0,
+    "scan_id": "e9bdbdaa-78f3-4fc5-b0d6-71a07eebf1ef",
+    "findings_count": 4
+  },
+  {
+    "url": "http://127.0.0.1:8082/rest/products/search?q=apple",
+    "reachable": true,
+    "preflight_error": "HTTP 200",
+    "return_code": 0,
+    "scan_id": "3a079ba9-b9c6-4bbe-8ba4-fc050ee4d6c9",
+    "findings_count": 5
+  },
+  {
+    "url": "http://127.0.0.1:8082/api/Challenges/?page=1",
+    "reachable": true,
+    "preflight_error": "HTTP 200",
+    "return_code": 0,
+    "scan_id": "f073e5ba-8374-4022-9c78-6fa1f790fc02",
+    "findings_count": 4
+  }
+]

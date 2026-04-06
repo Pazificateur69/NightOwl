@@ -147,7 +147,8 @@ class CRLFInjectionPlugin(ScannerPlugin):
                                 findings.append(finding)
                                 confirmed_params.add(param_name)
                                 break
-                        except Exception:
+                        except (OSError, RuntimeError, ValueError, httpx.RequestError) as exc:
+                            logger.debug(f"Suppressed error: {exc}")
                             continue
 
                     # Also test via POST body
@@ -166,7 +167,8 @@ class CRLFInjectionPlugin(ScannerPlugin):
                                 findings.append(finding)
                                 confirmed_params.add(param_name)
                                 break
-                        except Exception:
+                        except (OSError, RuntimeError, ValueError, httpx.RequestError) as exc:
+                            logger.debug(f"Suppressed error: {exc}")
                             continue
 
                 # ── Test path-based CRLF injection ──
@@ -321,7 +323,8 @@ class CRLFInjectionPlugin(ScannerPlugin):
                         )
                     )
                     break
-            except Exception:
+            except (OSError, RuntimeError, ValueError, httpx.RequestError) as exc:
+                logger.debug(f"Suppressed error: {exc}")
                 continue
 
         return findings

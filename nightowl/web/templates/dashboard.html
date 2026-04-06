@@ -47,6 +47,182 @@
             </div>
         </div>
 
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+            <div class="lg:col-span-2 bg-slate-800 rounded-lg border border-slate-700 overflow-hidden">
+                <div class="px-4 py-3 bg-slate-700">
+                    <h3 class="text-sm font-semibold text-slate-300 uppercase">Core Modules</h3>
+                </div>
+                <div class="p-4 flex flex-wrap gap-2">
+                    {% for module in core_modules %}
+                    <span class="px-3 py-1 rounded-full text-xs bg-cyan-900/60 text-cyan-200 border border-cyan-700">
+                        {{ module.name }}
+                    </span>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="bg-slate-800 rounded-lg border border-slate-700 overflow-hidden">
+                <div class="px-4 py-3 bg-slate-700">
+                    <h3 class="text-sm font-semibold text-slate-300 uppercase">Module Maturity</h3>
+                </div>
+                <div class="p-4 space-y-3 text-sm">
+                    <div class="flex items-center justify-between">
+                        <span class="text-green-300">Recommended</span>
+                        <span class="text-slate-300">{{ maturity_counts.recommended }}</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-amber-300">Usable with caution</span>
+                        <span class="text-slate-300">{{ maturity_counts['usable-with-caution'] }}</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-slate-400">Experimental</span>
+                        <span class="text-slate-300">{{ maturity_counts.experimental }}</span>
+                    </div>
+                    <p class="text-xs text-slate-500 pt-2 border-t border-slate-700">
+                        Maturity is policy-driven until benchmark evidence is recorded.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-slate-800 rounded-lg border border-slate-700 overflow-hidden mb-8">
+            <div class="px-4 py-3 bg-slate-700 flex items-center justify-between">
+                <h3 class="text-sm font-semibold text-slate-300 uppercase">Benchmark Evidence</h3>
+                <span class="text-xs text-slate-400">Latest run per target</span>
+            </div>
+            <div class="p-4 space-y-4">
+                {% for run in benchmark_runs %}
+                <div class="rounded-lg border border-slate-700 bg-slate-900/60 p-4">
+                    <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-3">
+                        <div>
+                            <div class="flex items-center gap-3 mb-2">
+                                <h4 class="text-base font-semibold text-cyan-300">{{ run.target_name }}</h4>
+                                <span class="px-2 py-1 rounded text-xs {% if run.reachable %}bg-green-900 text-green-300{% else %}bg-red-900 text-red-300{% endif %}">
+                                    {% if run.reachable %}reachable{% else %}unreachable{% endif %}
+                                </span>
+                            </div>
+                            <p class="text-sm text-slate-400">
+                                findings: <span class="text-slate-200">{{ run.findings_count }}</span>
+                                · return code: <span class="text-slate-200">{{ run.return_code }}</span>
+                                · started: <span class="text-slate-200">{{ run.started_at[:19] or 'N/A' }}</span>
+                            </p>
+                            <p class="text-xs text-slate-500 mt-1 font-mono break-all">{{ run.artifact_path }}</p>
+                            {% if run.focus_artifact_path %}
+                            <p class="text-xs text-emerald-400 mt-1 font-mono break-all">
+                                focus artifact: {{ run.focus_artifact_path }}
+                            </p>
+                            {% endif %}
+                            {% if run.focus_report_path %}
+                            <p class="text-xs text-emerald-500 mt-1 font-mono break-all">
+                                focus report: {{ run.focus_report_path }}
+                            </p>
+                            {% endif %}
+                        </div>
+                        <div class="grid grid-cols-2 lg:grid-cols-7 gap-2 text-xs min-w-[20rem]">
+                            <div class="rounded border border-emerald-800 bg-emerald-950/50 p-2">
+                                <div class="text-emerald-300">confirmed_hit</div>
+                                <div class="text-lg text-white">{{ run.verdict_counts.get('confirmed_hit', 0) }}</div>
+                            </div>
+                            <div class="rounded border border-cyan-800 bg-cyan-950/40 p-2">
+                                <div class="text-cyan-300">expected_hit</div>
+                                <div class="text-lg text-white">{{ run.verdict_counts.get('expected_hit', 0) }}</div>
+                            </div>
+                            <div class="rounded border border-amber-800 bg-amber-950/40 p-2">
+                                <div class="text-amber-300">missed_expected</div>
+                                <div class="text-lg text-white">{{ run.verdict_counts.get('missed_expected', 0) }}</div>
+                            </div>
+                            <div class="rounded border border-lime-800 bg-lime-950/40 p-2">
+                                <div class="text-lime-300">quiet_expected</div>
+                                <div class="text-lg text-white">{{ run.verdict_counts.get('quiet_expected', 0) }}</div>
+                            </div>
+                            <div class="rounded border border-fuchsia-800 bg-fuchsia-950/40 p-2">
+                                <div class="text-fuchsia-300">quiet_violation</div>
+                                <div class="text-lg text-white">{{ run.verdict_counts.get('quiet_violation', 0) }}</div>
+                            </div>
+                            <div class="rounded border border-rose-800 bg-rose-950/40 p-2">
+                                <div class="text-rose-300">likely_fp</div>
+                                <div class="text-lg text-white">{{ run.verdict_counts.get('likely_false_positive', 0) }}</div>
+                            </div>
+                            <div class="rounded border border-slate-700 bg-slate-800 p-2">
+                                <div class="text-slate-300">inconclusive</div>
+                                <div class="text-lg text-white">{{ run.verdict_counts.get('inconclusive', 0) }}</div>
+                            </div>
+                        </div>
+                    </div>
+                    {% if run.top_modules %}
+                    <div class="mt-3 flex flex-wrap gap-2">
+                        {% for module in run.top_modules %}
+                        <span class="px-3 py-1 rounded-full text-xs bg-slate-800 text-slate-200 border border-slate-700">
+                            {{ module.name }}: {{ module.count }}
+                        </span>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    {% if run.focus_modules %}
+                    <div class="mt-3">
+                        <div class="text-xs uppercase tracking-wide text-emerald-300 mb-2">Focus Modules</div>
+                        <div class="text-xs text-emerald-500 mb-2">Focused benchmark view for dedicated labs.</div>
+                        <div class="flex flex-wrap gap-2">
+                            {% for module in run.focus_modules %}
+                            <span class="px-3 py-1 rounded-full text-xs bg-emerald-950/40 text-emerald-200 border border-emerald-800">
+                                {{ module.name }}: {{ module.count }}
+                            </span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if run.background_modules %}
+                    <div class="mt-3">
+                        <div class="text-xs uppercase tracking-wide text-slate-400 mb-2">Background Modules</div>
+                        <div class="flex flex-wrap gap-2">
+                            {% for module in run.background_modules %}
+                            <span class="px-3 py-1 rounded-full text-xs bg-slate-800 text-slate-300 border border-slate-700">
+                                {{ module.name }}: {{ module.count }}
+                            </span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+                    <div class="mt-3 rounded-lg border border-slate-800 bg-slate-950/50 p-3">
+                        <div class="text-xs uppercase tracking-wide text-slate-400 mb-2">Delta From Previous Run</div>
+                        {% if run.delta.findings is not none %}
+                        <div class="flex flex-wrap gap-2 text-xs mb-2">
+                            <span class="px-2 py-1 rounded border border-slate-700 bg-slate-900 text-slate-200">
+                                findings {% if run.delta.findings > 0 %}+{% endif %}{{ run.delta.findings }}
+                            </span>
+                            <span class="px-2 py-1 rounded border border-slate-700 bg-slate-900 text-slate-200">
+                                confirmed_hit {% if run.delta.confirmed_hit > 0 %}+{% endif %}{{ run.delta.confirmed_hit }}
+                            </span>
+                            <span class="px-2 py-1 rounded border border-slate-700 bg-slate-900 text-slate-200">
+                                quiet_violation {% if run.delta.quiet_violation > 0 %}+{% endif %}{{ run.delta.quiet_violation }}
+                            </span>
+                            <span class="px-2 py-1 rounded border border-slate-700 bg-slate-900 text-slate-200">
+                                likely_fp {% if run.delta.likely_false_positive > 0 %}+{% endif %}{{ run.delta.likely_false_positive }}
+                            </span>
+                        </div>
+                        {% if run.delta.changed_modules %}
+                        <div class="flex flex-wrap gap-2">
+                            {% for module in run.delta.changed_modules %}
+                            <span class="px-3 py-1 rounded-full text-xs bg-slate-800 text-slate-200 border border-slate-700">
+                                {{ module.name }}: {{ module.previous }}→{{ module.current }}
+                            </span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        <div class="text-xs text-slate-500">No module-signal change from the previous run.</div>
+                        {% endif %}
+                        {% else %}
+                        <div class="text-xs text-slate-500">No previous benchmark run available yet.</div>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+                {% if not benchmark_runs %}
+                <div class="text-sm text-slate-500">No benchmark artifacts found.</div>
+                {% endif %}
+            </div>
+        </div>
+
         <!-- Recent Scans -->
         <h3 class="text-lg font-semibold mb-4">Recent Scans</h3>
         <div class="bg-slate-800 rounded-lg border border-slate-700 overflow-hidden">

@@ -1,0 +1,200 @@
+[
+  {
+    "id": "2bc44ae3-af4c-49d9-9588-86edf189d1db",
+    "title": "Discovered: /robots.txt (200)",
+    "description": "Path /robots.txt returned HTTP 200",
+    "severity": "medium",
+    "cvss_score": 0.0,
+    "cvss_vector": "",
+    "category": "dir-bruteforce",
+    "target": "http://127.0.0.1:8082",
+    "port": null,
+    "protocol": "",
+    "evidence": "URL: http://127.0.0.1:8082/robots.txt\nStatus: 200\nSize: 28 bytes",
+    "remediation": "",
+    "references": [],
+    "module_name": "dir-bruteforce",
+    "timestamp": "2026-03-26 16:19:32.021324",
+    "false_positive": false,
+    "finding_state": "suspected",
+    "confidence_score": 0.82,
+    "metadata": {
+      "module_maturity": "recommended",
+      "core_module": true,
+      "finding_state": "suspected",
+      "confidence_score": 0.82
+    }
+  },
+  {
+    "id": "e4d11da8-3242-4850-b8cc-96de83411381",
+    "title": "Discovered: /media (301)",
+    "description": "Path /media returned HTTP 301",
+    "severity": "info",
+    "cvss_score": 0.0,
+    "cvss_vector": "",
+    "category": "dir-bruteforce",
+    "target": "http://127.0.0.1:8082",
+    "port": null,
+    "protocol": "",
+    "evidence": "URL: http://127.0.0.1:8082/media\nStatus: 301\nSize: 155 bytes",
+    "remediation": "",
+    "references": [],
+    "module_name": "dir-bruteforce",
+    "timestamp": "2026-03-26 16:19:33.068132",
+    "false_positive": false,
+    "finding_state": "info",
+    "confidence_score": 0.65,
+    "metadata": {
+      "module_maturity": "recommended",
+      "core_module": true,
+      "finding_state": "info",
+      "confidence_score": 0.65
+    }
+  },
+  {
+    "id": "d6d3be48-fbbf-45cf-b162-5b8074d00147",
+    "title": "Discovered: /assets (301)",
+    "description": "Path /assets returned HTTP 301",
+    "severity": "info",
+    "cvss_score": 0.0,
+    "cvss_vector": "",
+    "category": "dir-bruteforce",
+    "target": "http://127.0.0.1:8082",
+    "port": null,
+    "protocol": "",
+    "evidence": "URL: http://127.0.0.1:8082/assets\nStatus: 301\nSize: 156 bytes",
+    "remediation": "",
+    "references": [],
+    "module_name": "dir-bruteforce",
+    "timestamp": "2026-03-26 16:19:33.293891",
+    "false_positive": false,
+    "finding_state": "info",
+    "confidence_score": 0.65,
+    "metadata": {
+      "module_maturity": "recommended",
+      "core_module": true,
+      "finding_state": "info",
+      "confidence_score": 0.65
+    }
+  },
+  {
+    "id": "a67c7624-3443-4ec3-b0cc-cc1302cf8624",
+    "title": "Missing Security Header: Content-Security-Policy",
+    "description": "Content-Security-Policy header is missing. Without CSP, the application is more vulnerable to XSS and data injection attacks.",
+    "severity": "medium",
+    "cvss_score": 5.4,
+    "cvss_vector": "",
+    "category": "security-headers",
+    "target": "http://127.0.0.1:8082",
+    "port": null,
+    "protocol": "",
+    "evidence": "Header 'Content-Security-Policy' absent in response from http://127.0.0.1:8082",
+    "remediation": "Implement a Content-Security-Policy header with restrictive directives. Start with 'Content-Security-Policy: default-src 'self'' and refine as needed.",
+    "references": [
+      "https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html"
+    ],
+    "module_name": "header-analyzer",
+    "timestamp": "2026-03-26 16:19:34.458679",
+    "false_positive": false,
+    "finding_state": "suspected",
+    "confidence_score": 0.75,
+    "metadata": {
+      "url": "http://127.0.0.1:8082",
+      "status_code": 200,
+      "module_maturity": "recommended",
+      "core_module": true,
+      "finding_state": "suspected",
+      "confidence_score": 0.75
+    }
+  },
+  {
+    "id": "bc238a53-9258-4cb8-b2be-ce5408276ef1",
+    "title": "Missing Security Header: X-XSS-Protection",
+    "description": "X-XSS-Protection header is missing. While modern browsers have deprecated this, it provides defense-in-depth for older browsers.",
+    "severity": "low",
+    "cvss_score": 3.1,
+    "cvss_vector": "",
+    "category": "security-headers",
+    "target": "http://127.0.0.1:8082",
+    "port": null,
+    "protocol": "",
+    "evidence": "Header 'X-XSS-Protection' absent in response from http://127.0.0.1:8082",
+    "remediation": "Add 'X-XSS-Protection: 0' if CSP is implemented, or 'X-XSS-Protection: 1; mode=block' for legacy browser support.",
+    "references": [
+      "https://owasp.org/www-project-secure-headers/#x-xss-protection"
+    ],
+    "module_name": "header-analyzer",
+    "timestamp": "2026-03-26 16:19:34.458696",
+    "false_positive": false,
+    "finding_state": "suspected",
+    "confidence_score": 0.9,
+    "metadata": {
+      "url": "http://127.0.0.1:8082",
+      "status_code": 200,
+      "module_maturity": "recommended",
+      "core_module": true,
+      "finding_state": "suspected",
+      "confidence_score": 0.9
+    }
+  },
+  {
+    "id": "2ed0e787-69b3-486f-b857-4ddec9765161",
+    "title": "Missing Security Header: Referrer-Policy",
+    "description": "Referrer-Policy header is missing. Sensitive information in URLs may leak via the Referer header to third-party sites.",
+    "severity": "low",
+    "cvss_score": 3.1,
+    "cvss_vector": "",
+    "category": "security-headers",
+    "target": "http://127.0.0.1:8082",
+    "port": null,
+    "protocol": "",
+    "evidence": "Header 'Referrer-Policy' absent in response from http://127.0.0.1:8082",
+    "remediation": "Add 'Referrer-Policy: strict-origin-when-cross-origin' or 'Referrer-Policy: no-referrer' depending on requirements.",
+    "references": [
+      "https://owasp.org/www-project-secure-headers/#referrer-policy"
+    ],
+    "module_name": "header-analyzer",
+    "timestamp": "2026-03-26 16:19:34.458703",
+    "false_positive": false,
+    "finding_state": "suspected",
+    "confidence_score": 0.9,
+    "metadata": {
+      "url": "http://127.0.0.1:8082",
+      "status_code": 200,
+      "module_maturity": "recommended",
+      "core_module": true,
+      "finding_state": "suspected",
+      "confidence_score": 0.9
+    }
+  },
+  {
+    "id": "af330e62-5dad-4210-9b97-af4598b86dfa",
+    "title": "Missing Security Header: Permissions-Policy",
+    "description": "Permissions-Policy header is missing. Browser features like camera, microphone, and geolocation are not explicitly restricted.",
+    "severity": "low",
+    "cvss_score": 3.1,
+    "cvss_vector": "",
+    "category": "security-headers",
+    "target": "http://127.0.0.1:8082",
+    "port": null,
+    "protocol": "",
+    "evidence": "Header 'Permissions-Policy' absent in response from http://127.0.0.1:8082",
+    "remediation": "Add a Permissions-Policy header restricting unused browser features, e.g., 'Permissions-Policy: camera=(), microphone=(), geolocation=()'.",
+    "references": [
+      "https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Permissions-Policy"
+    ],
+    "module_name": "header-analyzer",
+    "timestamp": "2026-03-26 16:19:34.458709",
+    "false_positive": false,
+    "finding_state": "suspected",
+    "confidence_score": 0.9,
+    "metadata": {
+      "url": "http://127.0.0.1:8082",
+      "status_code": 200,
+      "module_maturity": "recommended",
+      "core_module": true,
+      "finding_state": "suspected",
+      "confidence_score": 0.9
+    }
+  }
+]

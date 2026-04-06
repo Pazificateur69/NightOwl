@@ -72,7 +72,8 @@ class PathTraversalPlugin(ScannerPlugin):
                                     ))
                                     found = True
                                     break
-                        except Exception:
+                        except (OSError, RuntimeError, ValueError, httpx.RequestError) as exc:
+                            logger.debug(f"Suppressed error: {exc}")
                             continue
 
         except Exception as e:

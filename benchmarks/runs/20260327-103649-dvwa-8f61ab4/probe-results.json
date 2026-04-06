@@ -1,0 +1,42 @@
+[
+  {
+    "url": "http://127.0.0.1:8081/",
+    "reachable": true,
+    "preflight_error": "HTTP 200",
+    "return_code": 0,
+    "scan_id": "f8ea5a86-cc20-447e-b305-374b907e83e2",
+    "findings_count": 11
+  },
+  {
+    "url": "http://127.0.0.1:8081/instructions.php",
+    "reachable": true,
+    "preflight_error": "HTTP 200",
+    "return_code": 0,
+    "scan_id": "82d8702f-7dcb-401f-b168-2b2e9a06f544",
+    "findings_count": 7
+  },
+  {
+    "url": "http://127.0.0.1:8081/vulnerabilities/xss_r/?name=test",
+    "reachable": true,
+    "preflight_error": "HTTP 200",
+    "return_code": 0,
+    "scan_id": "c0912e24-2eaa-4ce6-b60e-95265dae8ca5",
+    "findings_count": 8
+  },
+  {
+    "url": "http://127.0.0.1:8081/vulnerabilities/sqli/?id=1&Submit=Submit",
+    "reachable": true,
+    "preflight_error": "HTTP 200",
+    "return_code": 0,
+    "scan_id": "a200bf1a-ecb9-48f1-a0a3-5bb0ebaf66d2",
+    "findings_count": 8
+  },
+  {
+    "url": "http://127.0.0.1:8081/robots.txt",
+    "reachable": true,
+    "preflight_error": "HTTP 200",
+    "return_code": 0,
+    "scan_id": "18c3f442-73d5-412b-b952-0bad78dbd20f",
+    "findings_count": 7
+  }
+]

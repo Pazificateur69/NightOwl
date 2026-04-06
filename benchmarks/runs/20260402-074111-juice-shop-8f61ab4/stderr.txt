@@ -1,0 +1,9 @@
+## Probe: http://127.0.0.1:8082/
+
+## Probe: http://127.0.0.1:8082/robots.txt
+
+## Probe: http://127.0.0.1:8082/assets/public/images/uploads/
+
+## Probe: http://127.0.0.1:8082/rest/products/search?q=apple
+
+## Probe: http://127.0.0.1:8082/api/Challenges/?page=1

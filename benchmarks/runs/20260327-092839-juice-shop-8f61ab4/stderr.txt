@@ -1,0 +1,14 @@
+## Probe: http://127.0.0.1:8082/
+SSL analysis failed for 127.0.0.1:443: [Errno 61] Connection refused
+
+## Probe: http://127.0.0.1:8082/robots.txt
+SSL analysis failed for 127.0.0.1:443: [Errno 61] Connection refused
+
+## Probe: http://127.0.0.1:8082/assets/public/images/uploads/
+SSL analysis failed for 127.0.0.1:443: [Errno 61] Connection refused
+
+## Probe: http://127.0.0.1:8082/rest/products/search?q=apple
+SSL analysis failed for 127.0.0.1:443: [Errno 61] Connection refused
+
+## Probe: http://127.0.0.1:8082/api/Challenges/?page=1
+SSL analysis failed for 127.0.0.1:443: [Errno 61] Connection refused

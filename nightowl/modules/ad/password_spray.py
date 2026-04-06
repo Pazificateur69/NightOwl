@@ -2,6 +2,7 @@
 
 import asyncio
 import logging
+import httpx
 
 from nightowl.core.plugin_base import ScannerPlugin
 from nightowl.models.finding import Finding, Severity
@@ -57,8 +58,8 @@ class PasswordSprayPlugin(ScannerPlugin):
                         category="password-spray",
                     ))
                     conn.unbind()
-                except Exception:
-                    pass
+                except (OSError, RuntimeError, ValueError, httpx.RequestError) as exc:
+                    logger.debug(f"Suppressed error: {exc}")
 
                 await asyncio.sleep(delay)
 

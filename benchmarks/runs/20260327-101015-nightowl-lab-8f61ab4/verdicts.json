@@ -1,0 +1,1853 @@
+{
+  "verdict_counts": {
+    "confirmed_hit": 3,
+    "expected_hit": 1,
+    "likely_false_positive": 33,
+    "missed_expected": 0,
+    "inconclusive": 226
+  },
+  "findings": [
+    {
+      "family": "dir-bruteforce:discovered-path:/robots.txt",
+      "verdict": "expected_hit",
+      "rationale": "This finding family is declared as expected signal for the benchmark profile.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /robots.txt (200)"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-Content-Type-Options",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-Content-Type-Options"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-Frame-Options",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-Frame-Options"
+    },
+    {
+      "family": "header-analyzer:missing-header:Content-Security-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Content-Security-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-XSS-Protection",
+      "verdict": "likely_false_positive",
+      "rationale": "X-XSS-Protection is deprecated in modern browsers, so treating its absence as a meaningful security weakness is often misleading.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-XSS-Protection"
+    },
+    {
+      "family": "header-analyzer:missing-header:Referrer-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Referrer-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:Permissions-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Permissions-Policy"
+    },
+    {
+      "family": "header-analyzer:Information Disclosure: Server",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Information Disclosure: Server"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-Content-Type-Options",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-Content-Type-Options"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-Frame-Options",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-Frame-Options"
+    },
+    {
+      "family": "header-analyzer:missing-header:Content-Security-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Content-Security-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-XSS-Protection",
+      "verdict": "likely_false_positive",
+      "rationale": "X-XSS-Protection is deprecated in modern browsers, so treating its absence as a meaningful security weakness is often misleading.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-XSS-Protection"
+    },
+    {
+      "family": "header-analyzer:missing-header:Referrer-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Referrer-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:Permissions-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Permissions-Policy"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/admin",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /admin (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/login",
+      "verdict": "likely_false_positive",
+      "rationale": "The discovered path `/login` is a common public route or static location, so surfacing it as a security finding is likely noisy.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /login (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/wp-admin",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /wp-admin (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/api",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /api (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/v1",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /v1 (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/v2",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /v2 (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/graphql",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /graphql (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/swagger",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /swagger (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/docs",
+      "verdict": "likely_false_positive",
+      "rationale": "The discovered path `/docs` is a common public route or static location, so surfacing it as a security finding is likely noisy.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /docs (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/backup",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /backup (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/backups",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /backups (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/db",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /db (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/database",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /database (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/dump",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /dump (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/.git",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /.git (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/.env",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /.env (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/config",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /config (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/conf",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /conf (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/settings",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /settings (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/setup",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /setup (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/install",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /install (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/uploads",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /uploads (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/files",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /files (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/media",
+      "verdict": "likely_false_positive",
+      "rationale": "The discovered path `/media` is a common public route or static location, so surfacing it as a security finding is likely noisy.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /media (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/images",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /images (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/assets",
+      "verdict": "likely_false_positive",
+      "rationale": "The discovered path `/assets` is a common public route or static location, so surfacing it as a security finding is likely noisy.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /assets (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/test",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /test (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/debug",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /debug (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/status",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /status (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/health",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /health (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/info",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /info (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/adminer",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /adminer (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/console",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /console (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/shell",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /shell (200)"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-Content-Type-Options",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-Content-Type-Options"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-Frame-Options",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-Frame-Options"
+    },
+    {
+      "family": "header-analyzer:missing-header:Content-Security-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Content-Security-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-XSS-Protection",
+      "verdict": "likely_false_positive",
+      "rationale": "X-XSS-Protection is deprecated in modern browsers, so treating its absence as a meaningful security weakness is often misleading.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-XSS-Protection"
+    },
+    {
+      "family": "header-analyzer:missing-header:Referrer-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Referrer-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:Permissions-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Permissions-Policy"
+    },
+    {
+      "family": "xss-scanner:Reflected XSS in parameter 'q'",
+      "verdict": "confirmed_hit",
+      "rationale": "This finding family is explicitly reviewed and confirmed for the target profile.",
+      "module_name": "xss-scanner",
+      "title": "Reflected XSS in parameter 'q'"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/admin",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /admin (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/login",
+      "verdict": "likely_false_positive",
+      "rationale": "The discovered path `/login` is a common public route or static location, so surfacing it as a security finding is likely noisy.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /login (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/wp-admin",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /wp-admin (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/api",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /api (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/v1",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /v1 (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/v2",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /v2 (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/graphql",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /graphql (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/swagger",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /swagger (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/docs",
+      "verdict": "likely_false_positive",
+      "rationale": "The discovered path `/docs` is a common public route or static location, so surfacing it as a security finding is likely noisy.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /docs (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/backup",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /backup (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/backups",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /backups (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/db",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /db (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/database",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /database (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/dump",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /dump (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/.git",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /.git (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/.env",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /.env (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/config",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /config (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/conf",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /conf (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/settings",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /settings (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/setup",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /setup (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/install",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /install (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/uploads",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /uploads (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/files",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /files (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/media",
+      "verdict": "likely_false_positive",
+      "rationale": "The discovered path `/media` is a common public route or static location, so surfacing it as a security finding is likely noisy.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /media (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/images",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /images (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/assets",
+      "verdict": "likely_false_positive",
+      "rationale": "The discovered path `/assets` is a common public route or static location, so surfacing it as a security finding is likely noisy.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /assets (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/test",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /test (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/debug",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /debug (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/status",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /status (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/health",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /health (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/info",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /info (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/adminer",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /adminer (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/console",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /console (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/shell",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /shell (200)"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-Content-Type-Options",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-Content-Type-Options"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-Frame-Options",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-Frame-Options"
+    },
+    {
+      "family": "header-analyzer:missing-header:Content-Security-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Content-Security-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-XSS-Protection",
+      "verdict": "likely_false_positive",
+      "rationale": "X-XSS-Protection is deprecated in modern browsers, so treating its absence as a meaningful security weakness is often misleading.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-XSS-Protection"
+    },
+    {
+      "family": "header-analyzer:missing-header:Referrer-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Referrer-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:Permissions-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Permissions-Policy"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/admin",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /admin (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/login",
+      "verdict": "likely_false_positive",
+      "rationale": "The discovered path `/login` is a common public route or static location, so surfacing it as a security finding is likely noisy.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /login (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/wp-admin",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /wp-admin (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/api",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /api (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/v1",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /v1 (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/v2",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /v2 (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/graphql",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /graphql (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/swagger",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /swagger (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/docs",
+      "verdict": "likely_false_positive",
+      "rationale": "The discovered path `/docs` is a common public route or static location, so surfacing it as a security finding is likely noisy.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /docs (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/backup",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /backup (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/backups",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /backups (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/db",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /db (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/database",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /database (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/dump",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /dump (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/.git",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /.git (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/.env",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /.env (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/config",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /config (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/conf",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /conf (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/settings",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /settings (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/setup",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /setup (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/install",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /install (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/uploads",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /uploads (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/files",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /files (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/media",
+      "verdict": "likely_false_positive",
+      "rationale": "The discovered path `/media` is a common public route or static location, so surfacing it as a security finding is likely noisy.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /media (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/images",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /images (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/assets",
+      "verdict": "likely_false_positive",
+      "rationale": "The discovered path `/assets` is a common public route or static location, so surfacing it as a security finding is likely noisy.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /assets (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/test",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /test (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/debug",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /debug (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/status",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /status (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/health",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /health (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/info",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /info (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/adminer",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /adminer (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/console",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /console (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/shell",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /shell (200)"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-Content-Type-Options",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-Content-Type-Options"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-Frame-Options",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-Frame-Options"
+    },
+    {
+      "family": "header-analyzer:missing-header:Content-Security-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Content-Security-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-XSS-Protection",
+      "verdict": "likely_false_positive",
+      "rationale": "X-XSS-Protection is deprecated in modern browsers, so treating its absence as a meaningful security weakness is often misleading.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-XSS-Protection"
+    },
+    {
+      "family": "header-analyzer:missing-header:Referrer-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Referrer-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:Permissions-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Permissions-Policy"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/admin",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /admin (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/login",
+      "verdict": "likely_false_positive",
+      "rationale": "The discovered path `/login` is a common public route or static location, so surfacing it as a security finding is likely noisy.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /login (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/wp-admin",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /wp-admin (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/api",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /api (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/v1",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /v1 (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/v2",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /v2 (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/graphql",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /graphql (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/swagger",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /swagger (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/docs",
+      "verdict": "likely_false_positive",
+      "rationale": "The discovered path `/docs` is a common public route or static location, so surfacing it as a security finding is likely noisy.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /docs (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/backup",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /backup (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/backups",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /backups (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/db",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /db (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/database",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /database (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/dump",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /dump (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/.git",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /.git (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/.env",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /.env (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/config",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /config (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/conf",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /conf (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/settings",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /settings (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/setup",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /setup (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/install",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /install (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/uploads",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /uploads (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/files",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /files (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/media",
+      "verdict": "likely_false_positive",
+      "rationale": "The discovered path `/media` is a common public route or static location, so surfacing it as a security finding is likely noisy.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /media (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/images",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /images (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/assets",
+      "verdict": "likely_false_positive",
+      "rationale": "The discovered path `/assets` is a common public route or static location, so surfacing it as a security finding is likely noisy.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /assets (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/test",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /test (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/debug",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /debug (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/status",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /status (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/health",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /health (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/info",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /info (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/adminer",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /adminer (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/console",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /console (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/shell",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /shell (200)"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-Content-Type-Options",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-Content-Type-Options"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-Frame-Options",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-Frame-Options"
+    },
+    {
+      "family": "header-analyzer:missing-header:Content-Security-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Content-Security-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-XSS-Protection",
+      "verdict": "likely_false_positive",
+      "rationale": "X-XSS-Protection is deprecated in modern browsers, so treating its absence as a meaningful security weakness is often misleading.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-XSS-Protection"
+    },
+    {
+      "family": "header-analyzer:missing-header:Referrer-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Referrer-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:Permissions-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Permissions-Policy"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/admin",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /admin (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/login",
+      "verdict": "likely_false_positive",
+      "rationale": "The discovered path `/login` is a common public route or static location, so surfacing it as a security finding is likely noisy.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /login (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/wp-admin",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /wp-admin (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/api",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /api (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/v1",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /v1 (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/v2",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /v2 (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/graphql",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /graphql (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/swagger",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /swagger (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/docs",
+      "verdict": "likely_false_positive",
+      "rationale": "The discovered path `/docs` is a common public route or static location, so surfacing it as a security finding is likely noisy.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /docs (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/backup",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /backup (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/backups",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /backups (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/db",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /db (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/database",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /database (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/dump",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /dump (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/.git",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /.git (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/.env",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /.env (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/config",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /config (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/conf",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /conf (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/settings",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /settings (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/setup",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /setup (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/install",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /install (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/uploads",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /uploads (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/files",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /files (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/media",
+      "verdict": "likely_false_positive",
+      "rationale": "The discovered path `/media` is a common public route or static location, so surfacing it as a security finding is likely noisy.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /media (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/images",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /images (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/assets",
+      "verdict": "likely_false_positive",
+      "rationale": "The discovered path `/assets` is a common public route or static location, so surfacing it as a security finding is likely noisy.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /assets (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/test",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /test (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/debug",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /debug (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/status",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /status (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/health",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /health (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/info",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /info (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/adminer",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /adminer (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/console",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /console (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/shell",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /shell (200)"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-Content-Type-Options",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-Content-Type-Options"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-Frame-Options",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-Frame-Options"
+    },
+    {
+      "family": "header-analyzer:missing-header:Content-Security-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Content-Security-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-XSS-Protection",
+      "verdict": "likely_false_positive",
+      "rationale": "X-XSS-Protection is deprecated in modern browsers, so treating its absence as a meaningful security weakness is often misleading.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-XSS-Protection"
+    },
+    {
+      "family": "header-analyzer:missing-header:Referrer-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Referrer-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:Permissions-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Permissions-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-Content-Type-Options",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-Content-Type-Options"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-Frame-Options",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-Frame-Options"
+    },
+    {
+      "family": "header-analyzer:missing-header:Content-Security-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Content-Security-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-XSS-Protection",
+      "verdict": "likely_false_positive",
+      "rationale": "X-XSS-Protection is deprecated in modern browsers, so treating its absence as a meaningful security weakness is often misleading.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-XSS-Protection"
+    },
+    {
+      "family": "header-analyzer:missing-header:Referrer-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Referrer-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:Permissions-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Permissions-Policy"
+    },
+    {
+      "family": "sqli-scanner:SQL Injection (Error-Based) in 'q'",
+      "verdict": "confirmed_hit",
+      "rationale": "This finding family is explicitly reviewed and confirmed for the target profile.",
+      "module_name": "sqli-scanner",
+      "title": "SQL Injection (Error-Based) in 'q'"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/admin",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /admin (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/login",
+      "verdict": "likely_false_positive",
+      "rationale": "The discovered path `/login` is a common public route or static location, so surfacing it as a security finding is likely noisy.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /login (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/wp-admin",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /wp-admin (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/api",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /api (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/v1",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /v1 (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/v2",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /v2 (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/graphql",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /graphql (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/swagger",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /swagger (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/docs",
+      "verdict": "likely_false_positive",
+      "rationale": "The discovered path `/docs` is a common public route or static location, so surfacing it as a security finding is likely noisy.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /docs (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/backup",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /backup (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/backups",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /backups (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/db",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /db (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/database",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /database (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/dump",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /dump (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/.git",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /.git (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/.env",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /.env (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/config",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /config (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/conf",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /conf (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/settings",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /settings (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/setup",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /setup (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/install",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /install (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/uploads",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /uploads (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/files",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /files (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/media",
+      "verdict": "likely_false_positive",
+      "rationale": "The discovered path `/media` is a common public route or static location, so surfacing it as a security finding is likely noisy.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /media (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/images",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /images (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/assets",
+      "verdict": "likely_false_positive",
+      "rationale": "The discovered path `/assets` is a common public route or static location, so surfacing it as a security finding is likely noisy.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /assets (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/test",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /test (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/debug",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /debug (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/status",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /status (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/health",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /health (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/info",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /info (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/adminer",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /adminer (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/console",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /console (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/shell",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /shell (200)"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-Content-Type-Options",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-Content-Type-Options"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-Frame-Options",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-Frame-Options"
+    },
+    {
+      "family": "header-analyzer:missing-header:Content-Security-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Content-Security-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-XSS-Protection",
+      "verdict": "likely_false_positive",
+      "rationale": "X-XSS-Protection is deprecated in modern browsers, so treating its absence as a meaningful security weakness is often misleading.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-XSS-Protection"
+    },
+    {
+      "family": "header-analyzer:missing-header:Referrer-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Referrer-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:Permissions-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Permissions-Policy"
+    },
+    {
+      "family": "sqli-scanner:SQL Injection (Time-Based Blind) in 'q'",
+      "verdict": "confirmed_hit",
+      "rationale": "This finding family is explicitly reviewed and confirmed for the target profile.",
+      "module_name": "sqli-scanner",
+      "title": "SQL Injection (Time-Based Blind) in 'q'"
+    }
+  ],
+  "missed_expected": []
+}

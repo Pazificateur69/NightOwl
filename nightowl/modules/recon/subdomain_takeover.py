@@ -67,7 +67,8 @@ class SubdomainTakeoverPlugin(ScannerPlugin):
             answers = dns.resolver.resolve(subdomain, "CNAME")
             for rdata in answers:
                 cname = str(rdata.target).rstrip(".")
-        except Exception:
+        except (OSError, RuntimeError, ValueError, Exception) as exc:
+            logger.debug(f"Error: {exc}")
             return
 
         if not cname:
@@ -94,5 +95,5 @@ class SubdomainTakeoverPlugin(ScannerPlugin):
                                 metadata={"cname": cname, "service": info["service"]},
                             ))
                             return
-                except Exception:
-                    pass
+                except (OSError, RuntimeError, ValueError, httpx.RequestError) as exc:
+                    logger.debug(f"Suppressed error: {exc}")

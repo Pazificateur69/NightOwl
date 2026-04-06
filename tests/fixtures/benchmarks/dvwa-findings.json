@@ -1,0 +1,22 @@
+[
+  {
+    "module_name": "header-analyzer",
+    "title": "Missing Security Header: X-Frame-Options",
+    "evidence": "Header 'X-Frame-Options' absent in response from http://127.0.0.1:8081/"
+  },
+  {
+    "module_name": "header-analyzer",
+    "title": "Missing Security Header: X-Frame-Options",
+    "evidence": "Header 'X-Frame-Options' absent in response from http://127.0.0.1:8081/login.php"
+  },
+  {
+    "module_name": "dir-bruteforce",
+    "title": "Discovered: /robots.txt (200)",
+    "evidence": "URL: http://127.0.0.1:8081/robots.txt\nStatus: 200"
+  },
+  {
+    "module_name": "dir-bruteforce",
+    "title": "Discovered: /robots.txt (403)",
+    "evidence": "URL: http://127.0.0.1:8081/robots.txt\nStatus: 403"
+  }
+]

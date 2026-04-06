@@ -1,0 +1,48 @@
+{
+  "target_name": "cors-lab",
+  "profile_description": "Dedicated local benchmark lab for CORS misconfiguration checks.",
+  "expected_modules": [
+    "cors-checker"
+  ],
+  "probe_urls": [
+    "http://127.0.0.1:8085/wildcard-credentials",
+    "http://127.0.0.1:8085/reflect-credentials",
+    "http://127.0.0.1:8085/null-origin",
+    "http://127.0.0.1:8085/dangerous-methods",
+    "http://127.0.0.1:8085/allowlist"
+  ],
+  "url": "http://127.0.0.1:8085",
+  "command": [
+    ".venv/bin/python",
+    "-m",
+    "nightowl.cli.main",
+    "--config",
+    "benchmarks/runs/20260402-075817-cors-lab-8f61ab4/probe-01/benchmark-config.yaml",
+    "scan",
+    "web",
+    "http://127.0.0.1:8085/wildcard-credentials",
+    "--core"
+  ],
+  "commit": "8f61ab4",
+  "started_at": "2026-04-02T07:58:17.682608+00:00",
+  "finished_at": "2026-04-02T07:58:48.694115+00:00",
+  "duration_seconds": 31.011507,
+  "return_code": 0,
+  "findings_count": 19,
+  "scan_id": "63d3f32a-2313-4776-bb85-7d4deffc8475",
+  "stdout_path": "benchmarks/runs/20260402-075817-cors-lab-8f61ab4/stdout.txt",
+  "stderr_path": "benchmarks/runs/20260402-075817-cors-lab-8f61ab4/stderr.txt",
+  "raw_session_path": "benchmarks/runs/20260402-075817-cors-lab-8f61ab4/metadata.json",
+  "session_markdown_path": "benchmarks/sessions/2026-04-02-cors-lab-8f61ab4.md",
+  "findings_json_path": "benchmarks/runs/20260402-075817-cors-lab-8f61ab4/findings.json",
+  "stats_json_path": "benchmarks/runs/20260402-075817-cors-lab-8f61ab4/stats.json",
+  "verdicts_json_path": "benchmarks/runs/20260402-075817-cors-lab-8f61ab4/verdicts.json",
+  "report_markdown_path": "benchmarks/runs/20260402-075817-cors-lab-8f61ab4/reports/nightowl-63d3f32a-20260402-075848.md",
+  "report_html_path": "benchmarks/runs/20260402-075817-cors-lab-8f61ab4/reports/nightowl-63d3f32a-20260402-075848.html",
+  "probe_results_path": "benchmarks/runs/20260402-075817-cors-lab-8f61ab4/probe-results.json",
+  "environment": "python=3.14.3, cwd=/Users/pazent/Desktop/NightOwl, dirty_worktree=True",
+  "reachable": true,
+  "preflight_error": null,
+  "auth_mode": null,
+  "auth_notes": []
+}

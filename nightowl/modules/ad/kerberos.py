@@ -1,6 +1,7 @@
 """Kerberos attack scanner (AS-REP Roasting, Kerberoasting)."""
 
 import logging
+import httpx
 
 from nightowl.core.plugin_base import ScannerPlugin
 from nightowl.models.finding import Finding, Severity
@@ -61,7 +62,8 @@ class KerberosPlugin(ScannerPlugin):
                             remediation="Enable Kerberos pre-authentication for all accounts.",
                             category="kerberos",
                         ))
-                except Exception:
+                except (OSError, RuntimeError, ValueError, httpx.RequestError) as exc:
+                    logger.debug(f"Suppressed error: {exc}")
                     continue
 
         except Exception as e:

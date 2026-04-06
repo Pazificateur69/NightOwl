@@ -31,7 +31,8 @@ class SMBEnumPlugin(ScannerPlugin):
         try:
             sock = socket.create_connection((host, port), timeout=5)
             sock.close()
-        except Exception:
+        except (OSError, RuntimeError, ValueError, Exception) as exc:
+            logger.debug(f"Error: {exc}")
             return findings
 
         if not HAS_IMPACKET:
@@ -75,7 +76,8 @@ class SMBEnumPlugin(ScannerPlugin):
                 except Exception as e:
                     logger.debug(f"Share enumeration failed: {e}")
 
-            except Exception:
+            except (OSError, RuntimeError, ValueError, Exception) as exc:
+                logger.debug(f"Error: {exc}")
                 findings.append(Finding(
                     title=f"SMB requires authentication on {host}",
                     severity=Severity.INFO,

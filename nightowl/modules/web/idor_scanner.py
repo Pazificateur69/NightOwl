@@ -2,12 +2,12 @@
 
 import logging
 import re
-
-import httpx
+from urllib.parse import urljoin
 
 from nightowl.core.plugin_base import ScannerPlugin
 from nightowl.models.finding import Finding, Severity
 from nightowl.models.target import Target
+from nightowl.utils.web_discovery import discover_web_attack_surface
 
 logger = logging.getLogger("nightowl")
 
@@ -34,47 +34,77 @@ class IDORScannerPlugin(ScannerPlugin):
     description = "Detect Insecure Direct Object Reference by testing ID manipulation"
     version = "1.0.0"
     stage = "scan"
+    config_schema = {
+        "discovery_depth": (int, 1),
+        "discovery_max_pages": (int, 6),
+        "discovery_max_urls": (int, 10),
+    }
+
+    @staticmethod
+    def _default_form_value(_param_name: str) -> str:
+        return "1"
 
     async def run(self, target: Target, **kwargs) -> list[Finding]:
         findings = []
         url = target.url or f"https://{target.host}"
 
         try:
-            async with httpx.AsyncClient(verify=False, follow_redirects=True, timeout=10) as client:
-                # Get initial response
-                resp = await client.get(url)
+            async with self.create_http_client() as client:
+                await self.bootstrap_auth(client)
+                resp = await client.get(url, headers=self.get_request_headers())
+                discovery = await discover_web_attack_surface(
+                    client,
+                    str(resp.url),
+                    default_value_fn=self._default_form_value,
+                    max_depth=self.config.get("discovery_depth", 1),
+                    max_pages=self.config.get("discovery_max_pages", 6),
+                    max_urls_with_params=self.config.get("discovery_max_urls", 10),
+                    request_headers=self.get_request_headers(),
+                    wait_hook=self.wait_request_delay,
+                )
 
-                # Check URL for numeric IDs
-                for pattern, id_type in IDOR_PATTERNS:
-                    match = re.search(pattern, url)
-                    if match:
+                candidate_urls = [str(resp.url)]
+                for discovered_url in discovery.visited_pages + discovery.urls_with_params:
+                    if discovered_url not in candidate_urls:
+                        candidate_urls.append(discovered_url)
+
+                tested_urls: set[str] = set()
+                for candidate_url in candidate_urls:
+                    for pattern, id_type in IDOR_PATTERNS:
+                        match = re.search(pattern, candidate_url)
+                        if not match:
+                            continue
+                        if candidate_url in tested_urls:
+                            break
                         original_id = match.group(1)
-                        await self._test_idor(client, url, original_id, pattern, id_type, findings)
+                        await self._test_idor(client, candidate_url, original_id, id_type, findings)
+                        tested_urls.add(candidate_url)
+                        break
 
-                # Also scan links in the page for IDOR-susceptible URLs
-                for pattern, id_type in IDOR_PATTERNS:
-                    matches = re.findall(pattern, resp.text)
-                    for original_id in set(matches[:5]):
-                        # Construct test URLs from page links
-                        link_pattern = re.search(r'href=["\']([^"\']*' + re.escape(original_id) + r'[^"\']*)["\']', resp.text)
-                        if link_pattern:
-                            test_url = link_pattern.group(1)
-                            if not test_url.startswith("http"):
-                                test_url = url.rstrip("/") + "/" + test_url.lstrip("/")
-                            await self._test_idor(client, test_url, original_id, pattern, id_type, findings)
+                for href_match in re.finditer(r'href=["\']([^"\']+)["\']', resp.text):
+                    absolute_url = urljoin(str(resp.url), href_match.group(1))
+                    if absolute_url in tested_urls:
+                        continue
+                    for pattern, id_type in IDOR_PATTERNS:
+                        match = re.search(pattern, absolute_url)
+                        if not match:
+                            continue
+                        original_id = match.group(1)
+                        await self._test_idor(client, absolute_url, original_id, id_type, findings)
+                        tested_urls.add(absolute_url)
+                        break
 
         except Exception as e:
             logger.warning(f"IDOR scan failed: {e}")
 
         return findings
 
-    async def _test_idor(self, client, url, original_id, pattern, id_type, findings):
+    async def _test_idor(self, client, url, original_id, id_type, findings):
         try:
-            original_resp = await client.get(url)
+            original_resp = await client.get(url, headers=self.get_request_headers())
             if original_resp.status_code != 200:
                 return
 
-            # Test with adjacent IDs
             test_ids = [str(int(original_id) + i) for i in [1, -1, 2, 100]]
 
             for test_id in test_ids:
@@ -83,9 +113,7 @@ class IDORScannerPlugin(ScannerPlugin):
                     continue
 
                 try:
-                    test_resp = await client.get(modified_url)
-
-                    # If we get 200 with different content, potential IDOR
+                    test_resp = await client.get(modified_url, headers=self.get_request_headers())
                     if (
                         test_resp.status_code == 200
                         and len(test_resp.content) > 100
@@ -101,8 +129,11 @@ class IDORScannerPlugin(ScannerPlugin):
                             category="idor",
                             references=["https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/05-Authorization_Testing/04-Testing_for_Insecure_Direct_Object_References"],
                         ))
-                        return  # One finding per URL pattern
-                except Exception:
+                        return
+                except Exception as exc:
+                    logger.debug(f"Suppressed error: {exc}")
                     continue
-        except Exception:
-            pass
+                finally:
+                    await self.wait_request_delay()
+        except Exception as exc:
+            logger.debug(f"Suppressed error: {exc}")

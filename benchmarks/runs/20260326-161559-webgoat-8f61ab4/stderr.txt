@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/Users/pazent/Desktop/NightOwl/.venv/bin/nightowl", line 3, in <module>
+    from nightowl.cli.main import cli
+ModuleNotFoundError: No module named 'nightowl'

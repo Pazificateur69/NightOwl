@@ -166,7 +166,8 @@ class XXEPlugin(ScannerPlugin):
                                 findings.append(finding)
                                 break  # one finding per endpoint is enough
 
-                        except Exception:
+                        except (OSError, RuntimeError, ValueError, httpx.RequestError) as exc:
+                            logger.debug(f"Suppressed error: {exc}")
                             continue
 
                     # ── Phase 3: Test entity expansion (DoS) ──
@@ -198,8 +199,8 @@ class XXEPlugin(ScannerPlugin):
                                         category="xxe",
                                     )
                                 )
-                    except Exception:
-                        pass
+                    except (OSError, RuntimeError, ValueError, httpx.RequestError) as exc:
+                        logger.debug(f"Suppressed error: {exc}")
 
                 # ── Phase 4: Test SVG upload XXE ──
                 svg_findings = await self._test_svg_xxe(client, base_url)
@@ -236,7 +237,8 @@ class XXEPlugin(ScannerPlugin):
                 if any(xml_ct in ct for xml_ct in XML_CONTENT_TYPES):
                     found.append(endpoint)
 
-            except Exception:
+            except (OSError, RuntimeError, ValueError, httpx.RequestError) as exc:
+                logger.debug(f"Suppressed error: {exc}")
                 continue
 
         # Check if the target URL itself accepts XML
@@ -248,8 +250,8 @@ class XXEPlugin(ScannerPlugin):
             )
             if resp.status_code not in (404, 405) and target_url not in found:
                 found.append(target_url)
-        except Exception:
-            pass
+        except (OSError, RuntimeError, ValueError, httpx.RequestError) as exc:
+            logger.debug(f"Suppressed error: {exc}")
 
         return found
 
@@ -266,7 +268,8 @@ class XXEPlugin(ScannerPlugin):
                 )
                 if resp.status_code != 405:
                     return resp
-            except Exception:
+            except (OSError, RuntimeError, ValueError, httpx.RequestError) as exc:
+                logger.debug(f"Suppressed error: {exc}")
                 continue
         return None
 
@@ -430,7 +433,8 @@ class XXEPlugin(ScannerPlugin):
                             category="xxe",
                         )
                     )
-            except Exception:
+            except (OSError, RuntimeError, ValueError, httpx.RequestError) as exc:
+                logger.debug(f"Suppressed error: {exc}")
                 continue
 
         return findings

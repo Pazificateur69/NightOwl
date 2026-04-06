@@ -138,7 +138,8 @@ class WAFDetectPlugin(ScannerPlugin):
 
                     except httpx.HTTPStatusError:
                         continue
-                    except Exception:
+                    except (OSError, RuntimeError, ValueError, httpx.RequestError) as exc:
+                        logger.debug(f"Suppressed error: {exc}")
                         continue
 
                 # ── Phase 3: Check common WAF-specific paths ──
@@ -155,7 +156,8 @@ class WAFDetectPlugin(ScannerPlugin):
                                 detected_wafs.setdefault("Cloudflare", []).append(
                                     f"CDN trace endpoint accessible at {probe_url}"
                                 )
-                    except Exception:
+                    except (OSError, RuntimeError, ValueError, httpx.RequestError) as exc:
+                        logger.debug(f"Suppressed error: {exc}")
                         continue
 
         except Exception as e:

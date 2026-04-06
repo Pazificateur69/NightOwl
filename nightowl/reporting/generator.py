@@ -25,9 +25,14 @@ class ReportGenerator:
         stats: dict,
         fmt: str = "html",
         title: str = "NightOwl Pentest Report",
+        extra_context: dict | None = None,
+        filename_suffix: str | None = None,
     ) -> str:
         timestamp = datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S")
-        filename = f"nightowl-report-{timestamp}"
+        short_id = scan_id[:8] if scan_id else "unknown"
+        filename = f"nightowl-{short_id}-{timestamp}"
+        if filename_suffix:
+            filename = f"{filename}-{filename_suffix}"
 
         context = {
             "scan_id": scan_id,
@@ -38,6 +43,8 @@ class ReportGenerator:
             "total_findings": len(findings),
             "severity_counts": stats,
         }
+        if extra_context:
+            context.update(extra_context)
 
         if fmt == "html":
             path = self.output_dir / f"{filename}.html"

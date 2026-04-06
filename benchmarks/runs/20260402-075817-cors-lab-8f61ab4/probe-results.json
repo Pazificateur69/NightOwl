@@ -1,0 +1,42 @@
+[
+  {
+    "url": "http://127.0.0.1:8085/wildcard-credentials",
+    "reachable": true,
+    "preflight_error": "HTTP 200",
+    "return_code": 0,
+    "scan_id": "63d3f32a-2313-4776-bb85-7d4deffc8475",
+    "findings_count": 9
+  },
+  {
+    "url": "http://127.0.0.1:8085/reflect-credentials",
+    "reachable": true,
+    "preflight_error": "HTTP 200",
+    "return_code": 0,
+    "scan_id": "8c3472df-1a9b-4204-a036-270019b20dbc",
+    "findings_count": 9
+  },
+  {
+    "url": "http://127.0.0.1:8085/null-origin",
+    "reachable": true,
+    "preflight_error": "HTTP 200",
+    "return_code": 0,
+    "scan_id": "1409c7f6-d229-40e2-9dc7-949ad4aa09bf",
+    "findings_count": 8
+  },
+  {
+    "url": "http://127.0.0.1:8085/dangerous-methods",
+    "reachable": true,
+    "preflight_error": "HTTP 200",
+    "return_code": 0,
+    "scan_id": "099f074b-f202-42f0-88cc-c7de20adc672",
+    "findings_count": 10
+  },
+  {
+    "url": "http://127.0.0.1:8085/allowlist",
+    "reachable": true,
+    "preflight_error": "HTTP 200",
+    "return_code": 0,
+    "scan_id": "a5ad0bb8-00f2-48e5-92c9-8a8fd499523a",
+    "findings_count": 7
+  }
+]

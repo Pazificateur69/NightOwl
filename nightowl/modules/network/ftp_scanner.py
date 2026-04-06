@@ -2,6 +2,7 @@
 
 import ftplib
 import logging
+import httpx
 
 from nightowl.core.plugin_base import ScannerPlugin
 from nightowl.models.finding import Finding, Severity
@@ -57,8 +58,8 @@ class FTPScannerPlugin(ScannerPlugin):
                             evidence=f"Directory listing:\n{listing}",
                             category="ftp",
                         ))
-                except Exception:
-                    pass
+                except (OSError, RuntimeError, ValueError, httpx.RequestError) as exc:
+                    logger.debug(f"Suppressed error: {exc}")
 
             except ftplib.error_perm:
                 findings.append(Finding(

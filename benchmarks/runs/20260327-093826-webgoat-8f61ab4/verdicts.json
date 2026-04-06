@@ -1,0 +1,235 @@
+{
+  "verdict_counts": {
+    "confirmed_hit": 0,
+    "expected_hit": 10,
+    "likely_false_positive": 6,
+    "missed_expected": 1,
+    "inconclusive": 15
+  },
+  "findings": [
+    {
+      "family": "dir-bruteforce:discovered-path:/login",
+      "verdict": "likely_false_positive",
+      "rationale": "The discovered path `/login` is a common public route or static location, so surfacing it as a security finding is likely noisy.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /login (200)"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-Content-Type-Options",
+      "verdict": "expected_hit",
+      "rationale": "This finding family is declared as expected signal for the benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-Content-Type-Options"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-Frame-Options",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-Frame-Options"
+    },
+    {
+      "family": "header-analyzer:missing-header:Content-Security-Policy",
+      "verdict": "expected_hit",
+      "rationale": "This finding family is declared as expected signal for the benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Content-Security-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-XSS-Protection",
+      "verdict": "likely_false_positive",
+      "rationale": "X-XSS-Protection is deprecated in modern browsers, so treating its absence as a meaningful security weakness is often misleading.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-XSS-Protection"
+    },
+    {
+      "family": "header-analyzer:missing-header:Referrer-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Referrer-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:Permissions-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Permissions-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-Content-Type-Options",
+      "verdict": "expected_hit",
+      "rationale": "This finding family is declared as expected signal for the benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-Content-Type-Options"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-Frame-Options",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-Frame-Options"
+    },
+    {
+      "family": "header-analyzer:missing-header:Content-Security-Policy",
+      "verdict": "expected_hit",
+      "rationale": "This finding family is declared as expected signal for the benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Content-Security-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-XSS-Protection",
+      "verdict": "likely_false_positive",
+      "rationale": "X-XSS-Protection is deprecated in modern browsers, so treating its absence as a meaningful security weakness is often misleading.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-XSS-Protection"
+    },
+    {
+      "family": "header-analyzer:missing-header:Referrer-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Referrer-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:Permissions-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Permissions-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-Content-Type-Options",
+      "verdict": "expected_hit",
+      "rationale": "This finding family is declared as expected signal for the benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-Content-Type-Options"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-Frame-Options",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-Frame-Options"
+    },
+    {
+      "family": "header-analyzer:missing-header:Content-Security-Policy",
+      "verdict": "expected_hit",
+      "rationale": "This finding family is declared as expected signal for the benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Content-Security-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-XSS-Protection",
+      "verdict": "likely_false_positive",
+      "rationale": "X-XSS-Protection is deprecated in modern browsers, so treating its absence as a meaningful security weakness is often misleading.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-XSS-Protection"
+    },
+    {
+      "family": "header-analyzer:missing-header:Referrer-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Referrer-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:Permissions-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Permissions-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-Content-Type-Options",
+      "verdict": "expected_hit",
+      "rationale": "This finding family is declared as expected signal for the benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-Content-Type-Options"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-Frame-Options",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-Frame-Options"
+    },
+    {
+      "family": "header-analyzer:missing-header:Content-Security-Policy",
+      "verdict": "expected_hit",
+      "rationale": "This finding family is declared as expected signal for the benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Content-Security-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-XSS-Protection",
+      "verdict": "likely_false_positive",
+      "rationale": "X-XSS-Protection is deprecated in modern browsers, so treating its absence as a meaningful security weakness is often misleading.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-XSS-Protection"
+    },
+    {
+      "family": "header-analyzer:missing-header:Referrer-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Referrer-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:Permissions-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Permissions-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-Content-Type-Options",
+      "verdict": "expected_hit",
+      "rationale": "This finding family is declared as expected signal for the benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-Content-Type-Options"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-Frame-Options",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-Frame-Options"
+    },
+    {
+      "family": "header-analyzer:missing-header:Content-Security-Policy",
+      "verdict": "expected_hit",
+      "rationale": "This finding family is declared as expected signal for the benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Content-Security-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-XSS-Protection",
+      "verdict": "likely_false_positive",
+      "rationale": "X-XSS-Protection is deprecated in modern browsers, so treating its absence as a meaningful security weakness is often misleading.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-XSS-Protection"
+    },
+    {
+      "family": "header-analyzer:missing-header:Referrer-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Referrer-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:Permissions-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Permissions-Policy"
+    }
+  ],
+  "missed_expected": [
+    {
+      "family": "dir-bruteforce:discovered-path:/robots.txt",
+      "verdict": "missed_expected",
+      "rationale": "This expected finding family was not observed in the benchmark run."
+    }
+  ]
+}

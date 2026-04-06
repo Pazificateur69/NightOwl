@@ -1,0 +1,33 @@
+{
+  "target_name": "webgoat",
+  "url": "http://127.0.0.1:8083/WebGoat",
+  "command": [
+    ".venv/bin/python",
+    "-m",
+    "nightowl.cli.main",
+    "--config",
+    "benchmarks/runs/20260326-161928-webgoat-8f61ab4/benchmark-config.yaml",
+    "scan",
+    "web",
+    "http://127.0.0.1:8083/WebGoat",
+    "--core"
+  ],
+  "commit": "8f61ab4",
+  "started_at": "2026-03-26T16:19:28.722783+00:00",
+  "finished_at": "2026-03-26T16:19:34.532443+00:00",
+  "duration_seconds": 5.80966,
+  "return_code": 0,
+  "findings_count": 7,
+  "scan_id": "b0a1ef0f-0619-4964-ae8d-b52ec5314068",
+  "stdout_path": "benchmarks/runs/20260326-161928-webgoat-8f61ab4/stdout.txt",
+  "stderr_path": "benchmarks/runs/20260326-161928-webgoat-8f61ab4/stderr.txt",
+  "raw_session_path": "benchmarks/runs/20260326-161928-webgoat-8f61ab4/metadata.json",
+  "session_markdown_path": "benchmarks/sessions/2026-03-26-webgoat-8f61ab4.md",
+  "findings_json_path": "benchmarks/runs/20260326-161928-webgoat-8f61ab4/findings.json",
+  "stats_json_path": "benchmarks/runs/20260326-161928-webgoat-8f61ab4/stats.json",
+  "report_markdown_path": "benchmarks/runs/20260326-161928-webgoat-8f61ab4/reports/nightowl-b0a1ef0f-20260326-161934.md",
+  "report_html_path": "benchmarks/runs/20260326-161928-webgoat-8f61ab4/reports/nightowl-b0a1ef0f-20260326-161934.html",
+  "environment": "python=3.14.3, cwd=/Users/pazent/Desktop/NightOwl, dirty_worktree=True",
+  "reachable": true,
+  "preflight_error": null
+}

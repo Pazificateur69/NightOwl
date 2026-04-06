@@ -1,0 +1,46 @@
+{
+  "target_name": "webgoat",
+  "profile_description": "Multi-probe benchmark for WebGoat unauthenticated login routes.",
+  "expected_modules": [
+    "header-analyzer",
+    "dir-bruteforce"
+  ],
+  "probe_urls": [
+    "http://127.0.0.1:8083/WebGoat/",
+    "http://127.0.0.1:8083/WebGoat/login",
+    "http://127.0.0.1:8083/WebGoat/WebGoat/login",
+    "http://127.0.0.1:8083/WebGoat/WebGoat/login?error=1",
+    "http://127.0.0.1:8083/WebGoat/WebGoat/start.mvc"
+  ],
+  "url": "http://127.0.0.1:8083/WebGoat",
+  "command": [
+    ".venv/bin/python",
+    "-m",
+    "nightowl.cli.main",
+    "--config",
+    "benchmarks/runs/20260326-165309-webgoat-8f61ab4/probe-01/benchmark-config.yaml",
+    "scan",
+    "web",
+    "http://127.0.0.1:8083/WebGoat/",
+    "--core"
+  ],
+  "commit": "8f61ab4",
+  "started_at": "2026-03-26T16:53:09.565354+00:00",
+  "finished_at": "2026-03-26T16:53:40.627876+00:00",
+  "duration_seconds": 31.062522,
+  "return_code": 0,
+  "findings_count": 31,
+  "scan_id": "caa6fcb5-0594-49a6-82aa-599b846058ff",
+  "stdout_path": "benchmarks/runs/20260326-165309-webgoat-8f61ab4/stdout.txt",
+  "stderr_path": "benchmarks/runs/20260326-165309-webgoat-8f61ab4/stderr.txt",
+  "raw_session_path": "benchmarks/runs/20260326-165309-webgoat-8f61ab4/metadata.json",
+  "session_markdown_path": "benchmarks/sessions/2026-03-26-webgoat-8f61ab4.md",
+  "findings_json_path": "benchmarks/runs/20260326-165309-webgoat-8f61ab4/findings.json",
+  "stats_json_path": "benchmarks/runs/20260326-165309-webgoat-8f61ab4/stats.json",
+  "report_markdown_path": "benchmarks/runs/20260326-165309-webgoat-8f61ab4/reports/nightowl-caa6fcb5-20260326-165340.md",
+  "report_html_path": "benchmarks/runs/20260326-165309-webgoat-8f61ab4/reports/nightowl-caa6fcb5-20260326-165340.html",
+  "probe_results_path": "benchmarks/runs/20260326-165309-webgoat-8f61ab4/probe-results.json",
+  "environment": "python=3.14.3, cwd=/Users/pazent/Desktop/NightOwl, dirty_worktree=True",
+  "reachable": true,
+  "preflight_error": null
+}

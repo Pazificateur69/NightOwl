@@ -1,0 +1,74 @@
+[
+  {
+    "url": "http://127.0.0.1:8084/",
+    "reachable": true,
+    "preflight_error": "HTTP 200",
+    "return_code": 0,
+    "scan_id": "8e422501-07fc-4104-b5fa-9a5d2eb611ad",
+    "findings_count": 8
+  },
+  {
+    "url": "http://127.0.0.1:8084/robots.txt",
+    "reachable": true,
+    "preflight_error": "HTTP 200",
+    "return_code": 0,
+    "scan_id": "d122bd4a-1da4-43fb-af7a-5a9f9de89ffd",
+    "findings_count": 7
+  },
+  {
+    "url": "http://127.0.0.1:8084/xss/reflected?q=hello",
+    "reachable": true,
+    "preflight_error": "HTTP 200",
+    "return_code": 0,
+    "scan_id": "87bb2d94-e08c-4ff4-b79a-dcfccb0f4069",
+    "findings_count": 8
+  },
+  {
+    "url": "http://127.0.0.1:8084/xss/escaped?q=hello",
+    "reachable": true,
+    "preflight_error": "HTTP 200",
+    "return_code": 0,
+    "scan_id": "05c73e9a-dfc4-4dac-a0a7-b58288689d54",
+    "findings_count": 7
+  },
+  {
+    "url": "http://127.0.0.1:8084/xss/json?q=hello",
+    "reachable": true,
+    "preflight_error": "HTTP 200",
+    "return_code": 0,
+    "scan_id": "0f12f2a2-678b-435e-8551-1c05d887e2d7",
+    "findings_count": 7
+  },
+  {
+    "url": "http://127.0.0.1:8084/xss/comment?q=hello",
+    "reachable": true,
+    "preflight_error": "HTTP 200",
+    "return_code": 0,
+    "scan_id": "560e194a-cb99-4198-8a85-fd0625b48808",
+    "findings_count": 7
+  },
+  {
+    "url": "http://127.0.0.1:8084/xss/attr?q=hello",
+    "reachable": true,
+    "preflight_error": "HTTP 200",
+    "return_code": 0,
+    "scan_id": "3902f180-69d0-4f1b-8c40-90860edfa3d5",
+    "findings_count": 7
+  },
+  {
+    "url": "http://127.0.0.1:8084/sql/error?q=apple",
+    "reachable": true,
+    "preflight_error": "HTTP 200",
+    "return_code": 0,
+    "scan_id": "64a53bb1-f691-48c6-acfb-7a74ec830b9f",
+    "findings_count": 8
+  },
+  {
+    "url": "http://127.0.0.1:8084/sql/time?q=apple",
+    "reachable": true,
+    "preflight_error": "HTTP 200",
+    "return_code": 0,
+    "scan_id": "b0697999-9ea6-463d-a9c7-ee13d66f7494",
+    "findings_count": 8
+  }
+]

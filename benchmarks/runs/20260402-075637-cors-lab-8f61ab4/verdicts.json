@@ -1,0 +1,104 @@
+{
+  "verdict_counts": {
+    "confirmed_hit": 2,
+    "expected_hit": 0,
+    "quiet_expected": 0,
+    "quiet_violation": 0,
+    "likely_false_positive": 0,
+    "missed_expected": 2,
+    "inconclusive": 9
+  },
+  "findings": [
+    {
+      "family": "cors-checker:wildcard-credentials:/wildcard-credentials",
+      "verdict": "confirmed_hit",
+      "rationale": "This finding family is explicitly reviewed and confirmed for the target profile.",
+      "module_name": "cors-checker",
+      "title": "CORS: Wildcard with credentials"
+    },
+    {
+      "family": "cors-checker:dangerous-methods:/wildcard-credentials",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "cors-checker",
+      "title": "CORS allows dangerous methods: DELETE, PATCH, PUT"
+    },
+    {
+      "family": "ssl-analyzer:No TLS \u2014 target uses plain HTTP",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "ssl-analyzer",
+      "title": "No TLS \u2014 target uses plain HTTP"
+    },
+    {
+      "family": "cors-checker:reflects-arbitrary-origins:/reflect-credentials",
+      "verdict": "confirmed_hit",
+      "rationale": "This finding family is explicitly reviewed and confirmed for the target profile.",
+      "module_name": "cors-checker",
+      "title": "CORS reflects arbitrary origins"
+    },
+    {
+      "family": "cors-checker:null-origin:/reflect-credentials",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "cors-checker",
+      "title": "CORS allows null origin"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-Content-Type-Options",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-Content-Type-Options"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-Frame-Options",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-Frame-Options"
+    },
+    {
+      "family": "header-analyzer:missing-header:Content-Security-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Content-Security-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:Referrer-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Referrer-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:Permissions-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Permissions-Policy"
+    },
+    {
+      "family": "header-analyzer:Information Disclosure: Server",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Information Disclosure: Server"
+    }
+  ],
+  "missed_expected": [
+    {
+      "family": "cors-checker:null-origin:/null-origin",
+      "verdict": "missed_expected",
+      "rationale": "This expected finding family was not observed in the benchmark run."
+    },
+    {
+      "family": "cors-checker:dangerous-methods:/dangerous-methods",
+      "verdict": "missed_expected",
+      "rationale": "This expected finding family was not observed in the benchmark run."
+    }
+  ],
+  "quiet_expected": [],
+  "quiet_violations": []
+}

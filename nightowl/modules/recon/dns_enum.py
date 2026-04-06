@@ -139,7 +139,8 @@ class DNSEnumPlugin(ScannerPlugin):
                 resolver.lifetime = self._timeout
                 answer = await resolver.resolve(domain, "NS")
                 nameservers = [rdata.to_text().rstrip(".") for rdata in answer]
-            except Exception:
+            except (OSError, RuntimeError, ValueError, Exception) as exc:
+                logger.debug(f"Error: {exc}")
                 return findings
 
         for ns in nameservers:
@@ -191,7 +192,8 @@ class DNSEnumPlugin(ScannerPlugin):
                     for rdata in rdataset:
                         records.append(f"{name} {rdataset.ttl} {rdataset.rdclass.name} {rdataset.rdtype.name} {rdata.to_text()}")
             return records
-        except Exception:
+        except (OSError, RuntimeError, ValueError, Exception) as exc:
+            logger.debug(f"Error: {exc}")
             return []
 
     # ------------------------------------------------------------------

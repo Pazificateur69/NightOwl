@@ -71,5 +71,6 @@ class NetworkMapPlugin(ScannerPlugin):
             )
             await asyncio.wait_for(proc.wait(), timeout=3)
             return proc.returncode == 0
-        except Exception:
+        except (OSError, RuntimeError, ValueError, Exception) as exc:
+            logger.debug(f"Error: {exc}")
             return False

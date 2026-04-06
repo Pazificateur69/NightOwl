@@ -1,0 +1,21 @@
+mode: semi
+threads: 10
+timeout: 30
+log_level: INFO
+output_dir: benchmarks/runs/20260327-103649-webgoat-8f61ab4/probe-02/reports
+db_path: benchmarks/runs/20260327-103649-webgoat-8f61ab4/probe-02/benchmark.db
+user_agent: Mozilla/5.0 (NightOwl Security Scanner)
+wordlist_dir: ./wordlists
+rate_limit:
+  requests_per_second: 10
+  burst: 20
+  delay_between_requests: 0.1
+scope:
+  allowed_hosts:
+  - http://127.0.0.1:8083/WebGoat/welcome.mvc
+  allowed_ips: []
+  allowed_networks: []
+  excluded_hosts: []
+modules: []
+cookies:
+  JSESSIONID: FA2BBB039F6A3F53D1BD93738B53FD57

@@ -4,7 +4,7 @@ import asyncio
 import logging
 
 from nightowl.core.plugin_base import ScannerPlugin
-from nightowl.models.finding import Finding, Severity
+from nightowl.models.finding import Finding, FindingState, Severity
 from nightowl.models.target import Target
 
 logger = logging.getLogger("nightowl")
@@ -23,6 +23,28 @@ class DeepPortScanPlugin(ScannerPlugin):
         self.scan_arguments: str = self.config.get("scan_arguments", "-sV -sC -T4")
         self.timeout: int = self.config.get("timeout", 600)
 
+    @staticmethod
+    def _classify_open_service(service_name: str, script_output: dict) -> tuple[Severity, FindingState, float]:
+        severity = Severity.INFO
+        finding_state = FindingState.CONFIRMED
+        confidence_score = 0.99
+
+        risky_services = {
+            "telnet", "ftp", "rsh", "rlogin", "rexec",
+            "vnc", "rdp", "mysql", "mssql", "postgresql",
+            "mongodb", "redis", "memcached", "elasticsearch",
+        }
+        if service_name.lower() in risky_services:
+            severity = Severity.MEDIUM
+            confidence_score = 0.95
+
+        for output in script_output.values():
+            lower_output = output.lower()
+            if any(word in lower_output for word in ["vulnerable", "exploit", "cve-", "critical"]):
+                return Severity.HIGH, FindingState.SUSPECTED, 0.9
+
+        return severity, finding_state, confidence_score
+
     async def run(self, target: Target, **kwargs) -> list[Finding]:
         findings: list[Finding] = []
 
@@ -35,6 +57,8 @@ class DeepPortScanPlugin(ScannerPlugin):
                     title="Deep Port Scan Unavailable",
                     description="python-nmap library is not installed.",
                     severity=Severity.INFO,
+                    finding_state=FindingState.INFO,
+                    confidence_score=1.0,
                     category="configuration",
                 )
             ]
@@ -45,7 +69,7 @@ class DeepPortScanPlugin(ScannerPlugin):
 
             logger.info(f"[deep-port-scan] Scanning {host} ports {self.port_range}")
 
-            loop = asyncio.get_event_loop()
+            loop = asyncio.get_running_loop()
             await loop.run_in_executor(
                 None,
                 lambda: scanner.scan(
@@ -80,16 +104,6 @@ class DeepPortScanPlugin(ScannerPlugin):
                                 service_str += f" {version}"
                             service_str += ")"
 
-                        # Determine severity based on service type
-                        severity = Severity.INFO
-                        risky_services = {
-                            "telnet", "ftp", "rsh", "rlogin", "rexec",
-                            "vnc", "rdp", "mysql", "mssql", "postgresql",
-                            "mongodb", "redis", "memcached", "elasticsearch",
-                        }
-                        if service_name.lower() in risky_services:
-                            severity = Severity.MEDIUM
-
                         # Check for script output (NSE results)
                         script_output = port_info.get("script", {})
                         nse_details = ""
@@ -97,14 +111,12 @@ class DeepPortScanPlugin(ScannerPlugin):
                             nse_lines = []
                             for script_name, output in script_output.items():
                                 nse_lines.append(f"  {script_name}: {output}")
-                                # Elevate severity if scripts found vulns
-                                lower_output = output.lower()
-                                if any(
-                                    w in lower_output
-                                    for w in ["vulnerable", "exploit", "cve-", "critical"]
-                                ):
-                                    severity = Severity.HIGH
                             nse_details = "\n".join(nse_lines)
+
+                        severity, finding_state, confidence_score = self._classify_open_service(
+                            service_name,
+                            script_output,
+                        )
 
                         description = (
                             f"Port {port}/{proto} is open running {service_str}.\n"
@@ -120,6 +132,8 @@ class DeepPortScanPlugin(ScannerPlugin):
                                 title=f"Open Port {port}/{proto} - {service_str}",
                                 description=description,
                                 severity=severity,
+                                finding_state=finding_state,
+                                confidence_score=confidence_score,
                                 category="network",
                                 port=port,
                                 protocol=proto,
@@ -149,6 +163,8 @@ class DeepPortScanPlugin(ScannerPlugin):
                         title=f"No open ports found on {host}",
                         description=f"Deep port scan of {host} found no open ports in range {self.port_range}.",
                         severity=Severity.INFO,
+                        finding_state=FindingState.INFO,
+                        confidence_score=0.98,
                         category="network",
                     )
                 )
@@ -160,6 +176,8 @@ class DeepPortScanPlugin(ScannerPlugin):
                     title="Deep Port Scan Error",
                     description=f"Nmap scan failed: {e}. Ensure nmap is installed on the system.",
                     severity=Severity.INFO,
+                    finding_state=FindingState.INFO,
+                    confidence_score=1.0,
                     category="error",
                 )
             )
@@ -170,6 +188,8 @@ class DeepPortScanPlugin(ScannerPlugin):
                     title="Deep Port Scan Error",
                     description=f"Unexpected error during scan: {e}",
                     severity=Severity.INFO,
+                    finding_state=FindingState.INFO,
+                    confidence_score=0.95,
                     category="error",
                 )
             )

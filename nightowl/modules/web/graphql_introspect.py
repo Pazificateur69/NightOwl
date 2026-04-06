@@ -261,8 +261,8 @@ class GraphQLIntrospectPlugin(ScannerPlugin):
                         if "data" in data or "errors" in data:
                             found.append(endpoint)
                             continue
-                    except Exception:
-                        pass
+                    except (OSError, RuntimeError, ValueError, httpx.RequestError) as exc:
+                        logger.debug(f"Suppressed error: {exc}")
 
                 # Try GET
                 resp = await client.get(
@@ -273,10 +273,11 @@ class GraphQLIntrospectPlugin(ScannerPlugin):
                         data = resp.json()
                         if "data" in data or "errors" in data:
                             found.append(endpoint)
-                    except Exception:
-                        pass
+                    except (OSError, RuntimeError, ValueError, httpx.RequestError) as exc:
+                        logger.debug(f"Suppressed error: {exc}")
 
-            except Exception:
+            except (OSError, RuntimeError, ValueError, httpx.RequestError) as exc:
+                logger.debug(f"Suppressed error: {exc}")
                 continue
 
         return found
@@ -298,7 +299,8 @@ class GraphQLIntrospectPlugin(ScannerPlugin):
                     schema = (data.get("data") or {}).get("__schema")
                     if schema and schema.get("types"):
                         return schema
-            except Exception:
+            except (OSError, RuntimeError, ValueError, httpx.RequestError) as exc:
+                logger.debug(f"Suppressed error: {exc}")
                 continue
 
         return None
@@ -477,7 +479,8 @@ class GraphQLIntrospectPlugin(ScannerPlugin):
                             )
                         )
                         break  # one finding is enough
-                except Exception:
+                except (OSError, RuntimeError, ValueError, httpx.RequestError) as exc:
+                    logger.debug(f"Suppressed error: {exc}")
                     continue
 
         return findings

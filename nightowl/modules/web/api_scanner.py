@@ -74,7 +74,8 @@ class APIScannerPlugin(ScannerPlugin):
                                 category="api",
                             ))
 
-                    except Exception:
+                    except (OSError, RuntimeError, ValueError, httpx.RequestError) as exc:
+                        logger.debug(f"Suppressed error: {exc}")
                         continue
                     await asyncio.sleep(0.1)
 

@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NightOwl Pentest Report</title>
+<style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0f172a; color: #e2e8f0; line-height: 1.6; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 2rem; }
+    header { background: linear-gradient(135deg, #1e293b, #0f172a); padding: 2rem; border-radius: 12px; margin-bottom: 2rem; border: 1px solid #334155; }
+    header h1 { font-size: 2rem; color: #38bdf8; }
+    header p { color: #94a3b8; }
+    .stats { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; margin-bottom: 2rem; }
+    .stat { background: #1e293b; padding: 1.5rem; border-radius: 8px; text-align: center; border: 1px solid #334155; }
+    .stat .num { font-size: 2rem; font-weight: bold; }
+    .stat .label { color: #94a3b8; font-size: 0.85rem; text-transform: uppercase; }
+    .chart-container { background: #1e293b; border-radius: 8px; padding: 2rem; margin-bottom: 2rem; border: 1px solid #334155; display: flex; justify-content: center; }
+    .benchmark-panel { background: #1e293b; border-radius: 8px; padding: 1.5rem; margin-bottom: 2rem; border: 1px solid #334155; }
+    .benchmark-panel h2 { color: #38bdf8; margin-bottom: 0.75rem; }
+    .benchmark-panel h3 { color: #94a3b8; margin: 1rem 0 0.5rem; font-size: 1rem; }
+    .mini-stats { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.75rem; margin: 1rem 0; }
+    .mini-stat { background: #0f172a; border: 1px solid #334155; border-radius: 8px; padding: 0.75rem; }
+    .mini-label { color: #94a3b8; font-size: 0.75rem; text-transform: uppercase; }
+    .mini-num { color: #e2e8f0; font-size: 1.5rem; font-weight: bold; }
+    table { width: 100%; border-collapse: collapse; background: #1e293b; border-radius: 8px; overflow: hidden; margin-bottom: 2rem; }
+    th { background: #334155; padding: 12px; text-align: left; font-size: 0.85rem; text-transform: uppercase; color: #94a3b8; }
+    td { padding: 12px; border-bottom: 1px solid #1e293b; }
+    tr:hover { background: #334155; }
+    .badge { padding: 4px 10px; border-radius: 4px; color: white; font-size: 0.75rem; font-weight: bold; }
+    .finding-detail { background: #1e293b; border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; border: 1px solid #334155; }
+    .finding-detail h3 { color: #38bdf8; margin-bottom: 0.5rem; }
+    .finding-detail h4 { color: #94a3b8; margin-top: 1rem; margin-bottom: 0.5rem; }
+    pre { background: #0f172a; padding: 1rem; border-radius: 4px; overflow-x: auto; font-size: 0.85rem; }
+    .owl-logo { font-size: 2.5rem; }
+</style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <span class="owl-logo">&#x1F989;</span>
+        <h1>NightOwl Pentest Report</h1>
+        <p>Scan ID: 8e422501-07fc-4104-b5fa-9a5d2eb611ad | Generated: 20260327-101316</p>
+    </header>
+
+    <div class="stats">
+        <div class="stat"><div class="num" style="color:#dc2626">1</div><div class="label">Critical</div></div>
+        <div class="stat"><div class="num" style="color:#ea580c">2</div><div class="label">High</div></div>
+        <div class="stat"><div class="num" style="color:#ca8a04">27</div><div class="label">Medium</div></div>
+        <div class="stat"><div class="num" style="color:#2563eb">28</div><div class="label">Low</div></div>
+        <div class="stat"><div class="num" style="color:#6b7280">1</div><div class="label">Info</div></div>
+    </div>
+
+    <div class="chart-container">
+        <svg viewBox="0 0 360 200" width="360" height="200" xmlns="http://www.w3.org/2000/svg">
+<circle cx="100" cy="100" r="70" fill="none" stroke="#dc2626" stroke-width="30" stroke-dasharray="7.5 432.4" stroke-dashoffset="0.0" transform="rotate(-90 100 100)"/>
+<circle cx="100" cy="100" r="70" fill="none" stroke="#ea580c" stroke-width="30" stroke-dasharray="14.9 424.9" stroke-dashoffset="-7.5" transform="rotate(-90 100 100)"/>
+<circle cx="100" cy="100" r="70" fill="none" stroke="#ca8a04" stroke-width="30" stroke-dasharray="201.3 238.5" stroke-dashoffset="-22.4" transform="rotate(-90 100 100)"/>
+<circle cx="100" cy="100" r="70" fill="none" stroke="#2563eb" stroke-width="30" stroke-dasharray="208.7 231.1" stroke-dashoffset="-223.6" transform="rotate(-90 100 100)"/>
+<circle cx="100" cy="100" r="70" fill="none" stroke="#6b7280" stroke-width="30" stroke-dasharray="7.5 432.4" stroke-dashoffset="-432.4" transform="rotate(-90 100 100)"/>
+<text x="100" y="105" text-anchor="middle" fill="#e2e8f0" font-size="22" font-weight="bold">59</text>
+<text x="100" y="122" text-anchor="middle" fill="#94a3b8" font-size="11">findings</text>
+<rect x="220" y="10" width="12" height="12" fill="#dc2626" rx="2"/><text x="238" y="21" fill="#e2e8f0" font-size="12">Critical: 1</text>
+<rect x="220" y="32" width="12" height="12" fill="#ea580c" rx="2"/><text x="238" y="43" fill="#e2e8f0" font-size="12">High: 2</text>
+<rect x="220" y="54" width="12" height="12" fill="#ca8a04" rx="2"/><text x="238" y="65" fill="#e2e8f0" font-size="12">Medium: 27</text>
+<rect x="220" y="76" width="12" height="12" fill="#2563eb" rx="2"/><text x="238" y="87" fill="#e2e8f0" font-size="12">Low: 28</text>
+<rect x="220" y="98" width="12" height="12" fill="#6b7280" rx="2"/><text x="238" y="109" fill="#e2e8f0" font-size="12">Info: 1</text>
+</svg>
+    </div>
+
+    
+        <section class="benchmark-panel">
+            <h2>Benchmark Context</h2>
+            <p><strong>Target:</strong> nightowl-lab</p>
+            <p><strong>Profile:</strong> Dedicated local benchmark lab for reflected XSS and SQL injection routes.</p>
+            <div class="mini-stats">
+            <div class="mini-stat">
+                <div class="mini-label">confirmed_hit</div>
+                <div class="mini-num">3</div>
+            </div>
+            
+            <div class="mini-stat">
+                <div class="mini-label">expected_hit</div>
+                <div class="mini-num">1</div>
+            </div>
+            
+            <div class="mini-stat">
+                <div class="mini-label">missed_expected</div>
+                <div class="mini-num"></div>
+            </div>
+            
+            <div class="mini-stat">
+                <div class="mini-label">likely_false_positive</div>
+                <div class="mini-num">9</div>
+            </div>
+            
+            <div class="mini-stat">
+                <div class="mini-label">inconclusive</div>
+                <div class="mini-num">46</div>
+            </div>
+            </div>
+            <h3>Strongest Module Signal</h3><ul><li><code>header-analyzer</code>: 55</li><li><code>sqli-scanner</code>: 2</li><li><code>dir-bruteforce</code>: 1</li></ul>
+            <h3>Probe URLs</h3><ul><li><code>http://127.0.0.1:8084/</code></li><li><code>http://127.0.0.1:8084/robots.txt</code></li><li><code>http://127.0.0.1:8084/xss/reflected?q=hello</code></li><li><code>http://127.0.0.1:8084/xss/escaped?q=hello</code></li><li><code>http://127.0.0.1:8084/xss/json?q=hello</code></li><li><code>http://127.0.0.1:8084/xss/comment?q=hello</code></li><li><code>http://127.0.0.1:8084/xss/attr?q=hello</code></li><li><code>http://127.0.0.1:8084/sql/error?q=apple</code></li><li><code>http://127.0.0.1:8084/sql/time?q=apple</code></li></ul>
+        </section>
+        
+
+    <h2 style="margin-bottom:1rem; color:#38bdf8;">Findings Summary</h2>
+    <table>
+        <thead><tr><th>Severity</th><th>Title</th><th>Target</th><th>State</th><th>Confidence</th><th>CVSS</th><th>Module</th></tr></thead>
+        <tbody>
+        <tr>
+            <td><span class="badge" style="background:#2563eb">LOW</span></td>
+            <td>Discovered: /robots.txt (200)</td>
+            <td>http://127.0.0.1:8084/</td>
+            <td>SUSPECTED</td>
+            <td>0.72</td>
+            <td></td>
+            <td>dir-bruteforce</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#ca8a04">MEDIUM</span></td>
+            <td>Missing Security Header: X-Content-Type-Options</td>
+            <td>http://127.0.0.1:8084/</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>4.3</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#ca8a04">MEDIUM</span></td>
+            <td>Missing Security Header: X-Frame-Options</td>
+            <td>http://127.0.0.1:8084/</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>4.3</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#ca8a04">MEDIUM</span></td>
+            <td>Missing Security Header: Content-Security-Policy</td>
+            <td>http://127.0.0.1:8084/</td>
+            <td>SUSPECTED</td>
+            <td>0.75</td>
+            <td>5.4</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#2563eb">LOW</span></td>
+            <td>Missing Security Header: X-XSS-Protection</td>
+            <td>http://127.0.0.1:8084/</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>3.1</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#2563eb">LOW</span></td>
+            <td>Missing Security Header: Referrer-Policy</td>
+            <td>http://127.0.0.1:8084/</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>3.1</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#2563eb">LOW</span></td>
+            <td>Missing Security Header: Permissions-Policy</td>
+            <td>http://127.0.0.1:8084/</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>3.1</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#6b7280">INFO</span></td>
+            <td>Information Disclosure: Server</td>
+            <td>http://127.0.0.1:8084/</td>
+            <td>INFO</td>
+            <td>0.98</td>
+            <td></td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#ca8a04">MEDIUM</span></td>
+            <td>Missing Security Header: X-Content-Type-Options</td>
+            <td>http://127.0.0.1:8084/robots.txt</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>4.3</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#ca8a04">MEDIUM</span></td>
+            <td>Missing Security Header: X-Frame-Options</td>
+            <td>http://127.0.0.1:8084/robots.txt</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>4.3</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#ca8a04">MEDIUM</span></td>
+            <td>Missing Security Header: Content-Security-Policy</td>
+            <td>http://127.0.0.1:8084/robots.txt</td>
+            <td>SUSPECTED</td>
+            <td>0.75</td>
+            <td>5.4</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#2563eb">LOW</span></td>
+            <td>Missing Security Header: X-XSS-Protection</td>
+            <td>http://127.0.0.1:8084/robots.txt</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>3.1</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#2563eb">LOW</span></td>
+            <td>Missing Security Header: Referrer-Policy</td>
+            <td>http://127.0.0.1:8084/robots.txt</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>3.1</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#2563eb">LOW</span></td>
+            <td>Missing Security Header: Permissions-Policy</td>
+            <td>http://127.0.0.1:8084/robots.txt</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>3.1</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#ca8a04">MEDIUM</span></td>
+            <td>Missing Security Header: X-Content-Type-Options</td>
+            <td>http://127.0.0.1:8084/xss/reflected?q=hello</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>4.3</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#ca8a04">MEDIUM</span></td>
+            <td>Missing Security Header: X-Frame-Options</td>
+            <td>http://127.0.0.1:8084/xss/reflected?q=hello</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>4.3</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#ca8a04">MEDIUM</span></td>
+            <td>Missing Security Header: Content-Security-Policy</td>
+            <td>http://127.0.0.1:8084/xss/reflected?q=hello</td>
+            <td>SUSPECTED</td>
+            <td>0.75</td>
+            <td>5.4</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#2563eb">LOW</span></td>
+            <td>Missing Security Header: X-XSS-Protection</td>
+            <td>http://127.0.0.1:8084/xss/reflected?q=hello</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>3.1</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#2563eb">LOW</span></td>
+            <td>Missing Security Header: Referrer-Policy</td>
+            <td>http://127.0.0.1:8084/xss/reflected?q=hello</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>3.1</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#2563eb">LOW</span></td>
+            <td>Missing Security Header: Permissions-Policy</td>
+            <td>http://127.0.0.1:8084/xss/reflected?q=hello</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>3.1</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#ea580c">HIGH</span></td>
+            <td>Reflected XSS in parameter &#x27;q&#x27;</td>
+            <td>http://127.0.0.1:8084/xss/reflected?q=hello</td>
+            <td>CONFIRMED</td>
+            <td>0.96</td>
+            <td>6.1</td>
+            <td>xss-scanner</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#ca8a04">MEDIUM</span></td>
+            <td>Missing Security Header: X-Content-Type-Options</td>
+            <td>http://127.0.0.1:8084/xss/escaped?q=hello</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>4.3</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#ca8a04">MEDIUM</span></td>
+            <td>Missing Security Header: X-Frame-Options</td>
+            <td>http://127.0.0.1:8084/xss/escaped?q=hello</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>4.3</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#ca8a04">MEDIUM</span></td>
+            <td>Missing Security Header: Content-Security-Policy</td>
+            <td>http://127.0.0.1:8084/xss/escaped?q=hello</td>
+            <td>SUSPECTED</td>
+            <td>0.75</td>
+            <td>5.4</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#2563eb">LOW</span></td>
+            <td>Missing Security Header: X-XSS-Protection</td>
+            <td>http://127.0.0.1:8084/xss/escaped?q=hello</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>3.1</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#2563eb">LOW</span></td>
+            <td>Missing Security Header: Referrer-Policy</td>
+            <td>http://127.0.0.1:8084/xss/escaped?q=hello</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>3.1</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#2563eb">LOW</span></td>
+            <td>Missing Security Header: Permissions-Policy</td>
+            <td>http://127.0.0.1:8084/xss/escaped?q=hello</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>3.1</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#ca8a04">MEDIUM</span></td>
+            <td>Missing Security Header: X-Content-Type-Options</td>
+            <td>http://127.0.0.1:8084/xss/json?q=hello</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>4.3</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#ca8a04">MEDIUM</span></td>
+            <td>Missing Security Header: X-Frame-Options</td>
+            <td>http://127.0.0.1:8084/xss/json?q=hello</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>4.3</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#ca8a04">MEDIUM</span></td>
+            <td>Missing Security Header: Content-Security-Policy</td>
+            <td>http://127.0.0.1:8084/xss/json?q=hello</td>
+            <td>SUSPECTED</td>
+            <td>0.75</td>
+            <td>5.4</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#2563eb">LOW</span></td>
+            <td>Missing Security Header: X-XSS-Protection</td>
+            <td>http://127.0.0.1:8084/xss/json?q=hello</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>3.1</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#2563eb">LOW</span></td>
+            <td>Missing Security Header: Referrer-Policy</td>
+            <td>http://127.0.0.1:8084/xss/json?q=hello</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>3.1</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#2563eb">LOW</span></td>
+            <td>Missing Security Header: Permissions-Policy</td>
+            <td>http://127.0.0.1:8084/xss/json?q=hello</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>3.1</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#ca8a04">MEDIUM</span></td>
+            <td>Missing Security Header: X-Content-Type-Options</td>
+            <td>http://127.0.0.1:8084/xss/comment?q=hello</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>4.3</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#ca8a04">MEDIUM</span></td>
+            <td>Missing Security Header: X-Frame-Options</td>
+            <td>http://127.0.0.1:8084/xss/comment?q=hello</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>4.3</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#ca8a04">MEDIUM</span></td>
+            <td>Missing Security Header: Content-Security-Policy</td>
+            <td>http://127.0.0.1:8084/xss/comment?q=hello</td>
+            <td>SUSPECTED</td>
+            <td>0.75</td>
+            <td>5.4</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#2563eb">LOW</span></td>
+            <td>Missing Security Header: X-XSS-Protection</td>
+            <td>http://127.0.0.1:8084/xss/comment?q=hello</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>3.1</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#2563eb">LOW</span></td>
+            <td>Missing Security Header: Referrer-Policy</td>
+            <td>http://127.0.0.1:8084/xss/comment?q=hello</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>3.1</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#2563eb">LOW</span></td>
+            <td>Missing Security Header: Permissions-Policy</td>
+            <td>http://127.0.0.1:8084/xss/comment?q=hello</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>3.1</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#ca8a04">MEDIUM</span></td>
+            <td>Missing Security Header: X-Content-Type-Options</td>
+            <td>http://127.0.0.1:8084/xss/attr?q=hello</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>4.3</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#ca8a04">MEDIUM</span></td>
+            <td>Missing Security Header: X-Frame-Options</td>
+            <td>http://127.0.0.1:8084/xss/attr?q=hello</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>4.3</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#ca8a04">MEDIUM</span></td>
+            <td>Missing Security Header: Content-Security-Policy</td>
+            <td>http://127.0.0.1:8084/xss/attr?q=hello</td>
+            <td>SUSPECTED</td>
+            <td>0.75</td>
+            <td>5.4</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#2563eb">LOW</span></td>
+            <td>Missing Security Header: X-XSS-Protection</td>
+            <td>http://127.0.0.1:8084/xss/attr?q=hello</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>3.1</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#2563eb">LOW</span></td>
+            <td>Missing Security Header: Referrer-Policy</td>
+            <td>http://127.0.0.1:8084/xss/attr?q=hello</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>3.1</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#2563eb">LOW</span></td>
+            <td>Missing Security Header: Permissions-Policy</td>
+            <td>http://127.0.0.1:8084/xss/attr?q=hello</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>3.1</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#ca8a04">MEDIUM</span></td>
+            <td>Missing Security Header: X-Content-Type-Options</td>
+            <td>http://127.0.0.1:8084/sql/error?q=apple</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>4.3</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#ca8a04">MEDIUM</span></td>
+            <td>Missing Security Header: X-Frame-Options</td>
+            <td>http://127.0.0.1:8084/sql/error?q=apple</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>4.3</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#ca8a04">MEDIUM</span></td>
+            <td>Missing Security Header: Content-Security-Policy</td>
+            <td>http://127.0.0.1:8084/sql/error?q=apple</td>
+            <td>SUSPECTED</td>
+            <td>0.75</td>
+            <td>5.4</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#2563eb">LOW</span></td>
+            <td>Missing Security Header: X-XSS-Protection</td>
+            <td>http://127.0.0.1:8084/sql/error?q=apple</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>3.1</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#2563eb">LOW</span></td>
+            <td>Missing Security Header: Referrer-Policy</td>
+            <td>http://127.0.0.1:8084/sql/error?q=apple</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>3.1</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#2563eb">LOW</span></td>
+            <td>Missing Security Header: Permissions-Policy</td>
+            <td>http://127.0.0.1:8084/sql/error?q=apple</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>3.1</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#ea580c">HIGH</span></td>
+            <td>SQL Injection (Error-Based) in &#x27;q&#x27;</td>
+            <td>http://127.0.0.1:8084/sql/error?q=apple</td>
+            <td>CONFIRMED</td>
+            <td>0.97</td>
+            <td>8.6</td>
+            <td>sqli-scanner</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#ca8a04">MEDIUM</span></td>
+            <td>Missing Security Header: X-Content-Type-Options</td>
+            <td>http://127.0.0.1:8084/sql/time?q=apple</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>4.3</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#ca8a04">MEDIUM</span></td>
+            <td>Missing Security Header: X-Frame-Options</td>
+            <td>http://127.0.0.1:8084/sql/time?q=apple</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>4.3</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#ca8a04">MEDIUM</span></td>
+            <td>Missing Security Header: Content-Security-Policy</td>
+            <td>http://127.0.0.1:8084/sql/time?q=apple</td>
+            <td>SUSPECTED</td>
+            <td>0.75</td>
+            <td>5.4</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#2563eb">LOW</span></td>
+            <td>Missing Security Header: X-XSS-Protection</td>
+            <td>http://127.0.0.1:8084/sql/time?q=apple</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>3.1</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#2563eb">LOW</span></td>
+            <td>Missing Security Header: Referrer-Policy</td>
+            <td>http://127.0.0.1:8084/sql/time?q=apple</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>3.1</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#2563eb">LOW</span></td>
+            <td>Missing Security Header: Permissions-Policy</td>
+            <td>http://127.0.0.1:8084/sql/time?q=apple</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>3.1</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#dc2626">CRITICAL</span></td>
+            <td>SQL Injection (Time-Based Blind) in &#x27;q&#x27;</td>
+            <td>http://127.0.0.1:8084/sql/time?q=apple</td>
+            <td>SUSPECTED</td>
+            <td>0.82</td>
+            <td>9.8</td>
+            <td>sqli-scanner</td>
+        </tr></tbody>
+    </table>
+
+    <h2 style="margin-bottom:1rem; color:#38bdf8;">Detailed Findings</h2>
+    
+        <div class="finding-detail" id="finding-1">
+            <h3>1. Discovered: /robots.txt (200)</h3>
+            <p><strong>Severity:</strong> LOW | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.72 | <strong>CVSS:</strong>  | <strong>Module:</strong> dir-bruteforce</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8084/</p>
+            <h4>Evidence</h4><pre>URL: http://127.0.0.1:8084//robots.txt
+Status: 200
+Size: 31 bytes
+Content-Type: text/plain; charset=utf-8
+Location: n/a</pre>
+            <h4>Remediation</h4><p></p>
+        </div>
+        <div class="finding-detail" id="finding-2">
+            <h3>2. Missing Security Header: X-Content-Type-Options</h3>
+            <p><strong>Severity:</strong> MEDIUM | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 4.3 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8084/</p>
+            <h4>Evidence</h4><pre>Header &#x27;X-Content-Type-Options&#x27; absent in response from http://127.0.0.1:8084/</pre>
+            <h4>Remediation</h4><p>Add &#x27;X-Content-Type-Options: nosniff&#x27; to all responses.</p>
+        </div>
+        <div class="finding-detail" id="finding-3">
+            <h3>3. Missing Security Header: X-Frame-Options</h3>
+            <p><strong>Severity:</strong> MEDIUM | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 4.3 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8084/</p>
+            <h4>Evidence</h4><pre>Header &#x27;X-Frame-Options&#x27; absent in response from http://127.0.0.1:8084/</pre>
+            <h4>Remediation</h4><p>Add &#x27;X-Frame-Options: DENY&#x27; or &#x27;X-Frame-Options: SAMEORIGIN&#x27;. Consider also using CSP frame-ancestors directive.</p>
+        </div>
+        <div class="finding-detail" id="finding-4">
+            <h3>4. Missing Security Header: Content-Security-Policy</h3>
+            <p><strong>Severity:</strong> MEDIUM | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.75 | <strong>CVSS:</strong> 5.4 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8084/</p>
+            <h4>Evidence</h4><pre>Header &#x27;Content-Security-Policy&#x27; absent in response from http://127.0.0.1:8084/</pre>
+            <h4>Remediation</h4><p>Implement a Content-Security-Policy header with restrictive directives. Start with &#x27;Content-Security-Policy: default-src &#x27;self&#x27;&#x27; and refine as needed.</p>
+        </div>
+        <div class="finding-detail" id="finding-5">
+            <h3>5. Missing Security Header: X-XSS-Protection</h3>
+            <p><strong>Severity:</strong> LOW | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 3.1 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8084/</p>
+            <h4>Evidence</h4><pre>Header &#x27;X-XSS-Protection&#x27; absent in response from http://127.0.0.1:8084/</pre>
+            <h4>Remediation</h4><p>Add &#x27;X-XSS-Protection: 0&#x27; if CSP is implemented, or &#x27;X-XSS-Protection: 1; mode=block&#x27; for legacy browser support.</p>
+        </div>
+        <div class="finding-detail" id="finding-6">
+            <h3>6. Missing Security Header: Referrer-Policy</h3>
+            <p><strong>Severity:</strong> LOW | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 3.1 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8084/</p>
+            <h4>Evidence</h4><pre>Header &#x27;Referrer-Policy&#x27; absent in response from http://127.0.0.1:8084/</pre>
+            <h4>Remediation</h4><p>Add &#x27;Referrer-Policy: strict-origin-when-cross-origin&#x27; or &#x27;Referrer-Policy: no-referrer&#x27; depending on requirements.</p>
+        </div>
+        <div class="finding-detail" id="finding-7">
+            <h3>7. Missing Security Header: Permissions-Policy</h3>
+            <p><strong>Severity:</strong> LOW | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 3.1 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8084/</p>
+            <h4>Evidence</h4><pre>Header &#x27;Permissions-Policy&#x27; absent in response from http://127.0.0.1:8084/</pre>
+            <h4>Remediation</h4><p>Add a Permissions-Policy header restricting unused browser features, e.g., &#x27;Permissions-Policy: camera=(), microphone=(), geolocation=()&#x27;.</p>
+        </div>
+        <div class="finding-detail" id="finding-8">
+            <h3>8. Information Disclosure: Server</h3>
+            <p><strong>Severity:</strong> INFO | <strong>State:</strong> INFO | <strong>Confidence:</strong> 0.98 | <strong>CVSS:</strong>  | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8084/</p>
+            <h4>Evidence</h4><pre>Server: NightOwlLab/1.0 Python/3.12.13</pre>
+            <h4>Remediation</h4><p>Remove or genericize the Server header in your web server configuration.</p>
+        </div>
+        <div class="finding-detail" id="finding-9">
+            <h3>9. Missing Security Header: X-Content-Type-Options</h3>
+            <p><strong>Severity:</strong> MEDIUM | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 4.3 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8084/robots.txt</p>
+            <h4>Evidence</h4><pre>Header &#x27;X-Content-Type-Options&#x27; absent in response from http://127.0.0.1:8084/robots.txt</pre>
+            <h4>Remediation</h4><p>Add &#x27;X-Content-Type-Options: nosniff&#x27; to all responses.</p>
+        </div>
+        <div class="finding-detail" id="finding-10">
+            <h3>10. Missing Security Header: X-Frame-Options</h3>
+            <p><strong>Severity:</strong> MEDIUM | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 4.3 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8084/robots.txt</p>
+            <h4>Evidence</h4><pre>Header &#x27;X-Frame-Options&#x27; absent in response from http://127.0.0.1:8084/robots.txt</pre>
+            <h4>Remediation</h4><p>Add &#x27;X-Frame-Options: DENY&#x27; or &#x27;X-Frame-Options: SAMEORIGIN&#x27;. Consider also using CSP frame-ancestors directive.</p>
+        </div>
+        <div class="finding-detail" id="finding-11">
+            <h3>11. Missing Security Header: Content-Security-Policy</h3>
+            <p><strong>Severity:</strong> MEDIUM | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.75 | <strong>CVSS:</strong> 5.4 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8084/robots.txt</p>
+            <h4>Evidence</h4><pre>Header &#x27;Content-Security-Policy&#x27; absent in response from http://127.0.0.1:8084/robots.txt</pre>
+            <h4>Remediation</h4><p>Implement a Content-Security-Policy header with restrictive directives. Start with &#x27;Content-Security-Policy: default-src &#x27;self&#x27;&#x27; and refine as needed.</p>
+        </div>
+        <div class="finding-detail" id="finding-12">
+            <h3>12. Missing Security Header: X-XSS-Protection</h3>
+            <p><strong>Severity:</strong> LOW | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 3.1 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8084/robots.txt</p>
+            <h4>Evidence</h4><pre>Header &#x27;X-XSS-Protection&#x27; absent in response from http://127.0.0.1:8084/robots.txt</pre>
+            <h4>Remediation</h4><p>Add &#x27;X-XSS-Protection: 0&#x27; if CSP is implemented, or &#x27;X-XSS-Protection: 1; mode=block&#x27; for legacy browser support.</p>
+        </div>
+        <div class="finding-detail" id="finding-13">
+            <h3>13. Missing Security Header: Referrer-Policy</h3>
+            <p><strong>Severity:</strong> LOW | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 3.1 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8084/robots.txt</p>
+            <h4>Evidence</h4><pre>Header &#x27;Referrer-Policy&#x27; absent in response from http://127.0.0.1:8084/robots.txt</pre>
+            <h4>Remediation</h4><p>Add &#x27;Referrer-Policy: strict-origin-when-cross-origin&#x27; or &#x27;Referrer-Policy: no-referrer&#x27; depending on requirements.</p>
+        </div>
+        <div class="finding-detail" id="finding-14">
+            <h3>14. Missing Security Header: Permissions-Policy</h3>
+            <p><strong>Severity:</strong> LOW | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 3.1 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8084/robots.txt</p>
+            <h4>Evidence</h4><pre>Header &#x27;Permissions-Policy&#x27; absent in response from http://127.0.0.1:8084/robots.txt</pre>
+            <h4>Remediation</h4><p>Add a Permissions-Policy header restricting unused browser features, e.g., &#x27;Permissions-Policy: camera=(), microphone=(), geolocation=()&#x27;.</p>
+        </div>
+        <div class="finding-detail" id="finding-15">
+            <h3>15. Missing Security Header: X-Content-Type-Options</h3>
+            <p><strong>Severity:</strong> MEDIUM | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 4.3 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8084/xss/reflected?q=hello</p>
+            <h4>Evidence</h4><pre>Header &#x27;X-Content-Type-Options&#x27; absent in response from http://127.0.0.1:8084/xss/reflected?q=hello</pre>
+            <h4>Remediation</h4><p>Add &#x27;X-Content-Type-Options: nosniff&#x27; to all responses.</p>
+        </div>
+        <div class="finding-detail" id="finding-16">
+            <h3>16. Missing Security Header: X-Frame-Options</h3>
+            <p><strong>Severity:</strong> MEDIUM | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 4.3 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8084/xss/reflected?q=hello</p>
+            <h4>Evidence</h4><pre>Header &#x27;X-Frame-Options&#x27; absent in response from http://127.0.0.1:8084/xss/reflected?q=hello</pre>
+            <h4>Remediation</h4><p>Add &#x27;X-Frame-Options: DENY&#x27; or &#x27;X-Frame-Options: SAMEORIGIN&#x27;. Consider also using CSP frame-ancestors directive.</p>
+        </div>
+        <div class="finding-detail" id="finding-17">
+            <h3>17. Missing Security Header: Content-Security-Policy</h3>
+            <p><strong>Severity:</strong> MEDIUM | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.75 | <strong>CVSS:</strong> 5.4 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8084/xss/reflected?q=hello</p>
+            <h4>Evidence</h4><pre>Header &#x27;Content-Security-Policy&#x27; absent in response from http://127.0.0.1:8084/xss/reflected?q=hello</pre>
+            <h4>Remediation</h4><p>Implement a Content-Security-Policy header with restrictive directives. Start with &#x27;Content-Security-Policy: default-src &#x27;self&#x27;&#x27; and refine as needed.</p>
+        </div>
+        <div class="finding-detail" id="finding-18">
+            <h3>18. Missing Security Header: X-XSS-Protection</h3>
+            <p><strong>Severity:</strong> LOW | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 3.1 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8084/xss/reflected?q=hello</p>
+            <h4>Evidence</h4><pre>Header &#x27;X-XSS-Protection&#x27; absent in response from http://127.0.0.1:8084/xss/reflected?q=hello</pre>
+            <h4>Remediation</h4><p>Add &#x27;X-XSS-Protection: 0&#x27; if CSP is implemented, or &#x27;X-XSS-Protection: 1; mode=block&#x27; for legacy browser support.</p>
+        </div>
+        <div class="finding-detail" id="finding-19">
+            <h3>19. Missing Security Header: Referrer-Policy</h3>
+            <p><strong>Severity:</strong> LOW | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 3.1 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8084/xss/reflected?q=hello</p>
+            <h4>Evidence</h4><pre>Header &#x27;Referrer-Policy&#x27; absent in response from http://127.0.0.1:8084/xss/reflected?q=hello</pre>
+            <h4>Remediation</h4><p>Add &#x27;Referrer-Policy: strict-origin-when-cross-origin&#x27; or &#x27;Referrer-Policy: no-referrer&#x27; depending on requirements.</p>
+        </div>
+        <div class="finding-detail" id="finding-20">
+            <h3>20. Missing Security Header: Permissions-Policy</h3>
+            <p><strong>Severity:</strong> LOW | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 3.1 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8084/xss/reflected?q=hello</p>
+            <h4>Evidence</h4><pre>Header &#x27;Permissions-Policy&#x27; absent in response from http://127.0.0.1:8084/xss/reflected?q=hello</pre>
+            <h4>Remediation</h4><p>Add a Permissions-Policy header restricting unused browser features, e.g., &#x27;Permissions-Policy: camera=(), microphone=(), geolocation=()&#x27;.</p>
+        </div>
+        <div class="finding-detail" id="finding-21">
+            <h3>21. Reflected XSS in parameter &#x27;q&#x27;</h3>
+            <p><strong>Severity:</strong> HIGH | <strong>State:</strong> CONFIRMED | <strong>Confidence:</strong> 0.96 | <strong>CVSS:</strong> 6.1 | <strong>Module:</strong> xss-scanner</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8084/xss/reflected?q=hello</p>
+            <h4>Evidence</h4><pre>URL: http://127.0.0.1:8084/xss/reflected?q=%3Cscript%3Ealert%28%22n1GhT0wL%22%29%3C%2Fscript%3E
+Payload: &lt;script&gt;alert(&quot;n1GhT0wL&quot;)&lt;/script&gt;
+Payload reflected unescaped in executable HTML context.</pre>
+            <h4>Remediation</h4><p>Implement output encoding (HTML entity escaping) on all user-controlled values. Deploy a strict Content-Security-Policy.</p>
+        </div>
+        <div class="finding-detail" id="finding-22">
+            <h3>22. Missing Security Header: X-Content-Type-Options</h3>
+            <p><strong>Severity:</strong> MEDIUM | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 4.3 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8084/xss/escaped?q=hello</p>
+            <h4>Evidence</h4><pre>Header &#x27;X-Content-Type-Options&#x27; absent in response from http://127.0.0.1:8084/xss/escaped?q=hello</pre>
+            <h4>Remediation</h4><p>Add &#x27;X-Content-Type-Options: nosniff&#x27; to all responses.</p>
+        </div>
+        <div class="finding-detail" id="finding-23">
+            <h3>23. Missing Security Header: X-Frame-Options</h3>
+            <p><strong>Severity:</strong> MEDIUM | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 4.3 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8084/xss/escaped?q=hello</p>
+            <h4>Evidence</h4><pre>Header &#x27;X-Frame-Options&#x27; absent in response from http://127.0.0.1:8084/xss/escaped?q=hello</pre>
+            <h4>Remediation</h4><p>Add &#x27;X-Frame-Options: DENY&#x27; or &#x27;X-Frame-Options: SAMEORIGIN&#x27;. Consider also using CSP frame-ancestors directive.</p>
+        </div>
+        <div class="finding-detail" id="finding-24">
+            <h3>24. Missing Security Header: Content-Security-Policy</h3>
+            <p><strong>Severity:</strong> MEDIUM | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.75 | <strong>CVSS:</strong> 5.4 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8084/xss/escaped?q=hello</p>
+            <h4>Evidence</h4><pre>Header &#x27;Content-Security-Policy&#x27; absent in response from http://127.0.0.1:8084/xss/escaped?q=hello</pre>
+            <h4>Remediation</h4><p>Implement a Content-Security-Policy header with restrictive directives. Start with &#x27;Content-Security-Policy: default-src &#x27;self&#x27;&#x27; and refine as needed.</p>
+        </div>
+        <div class="finding-detail" id="finding-25">
+            <h3>25. Missing Security Header: X-XSS-Protection</h3>
+            <p><strong>Severity:</strong> LOW | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 3.1 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8084/xss/escaped?q=hello</p>
+            <h4>Evidence</h4><pre>Header &#x27;X-XSS-Protection&#x27; absent in response from http://127.0.0.1:8084/xss/escaped?q=hello</pre>
+            <h4>Remediation</h4><p>Add &#x27;X-XSS-Protection: 0&#x27; if CSP is implemented, or &#x27;X-XSS-Protection: 1; mode=block&#x27; for legacy browser support.</p>
+        </div>
+        <div class="finding-detail" id="finding-26">
+            <h3>26. Missing Security Header: Referrer-Policy</h3>
+            <p><strong>Severity:</strong> LOW | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 3.1 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8084/xss/escaped?q=hello</p>
+            <h4>Evidence</h4><pre>Header &#x27;Referrer-Policy&#x27; absent in response from http://127.0.0.1:8084/xss/escaped?q=hello</pre>
+            <h4>Remediation</h4><p>Add &#x27;Referrer-Policy: strict-origin-when-cross-origin&#x27; or &#x27;Referrer-Policy: no-referrer&#x27; depending on requirements.</p>
+        </div>
+        <div class="finding-detail" id="finding-27">
+            <h3>27. Missing Security Header: Permissions-Policy</h3>
+            <p><strong>Severity:</strong> LOW | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 3.1 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8084/xss/escaped?q=hello</p>
+            <h4>Evidence</h4><pre>Header &#x27;Permissions-Policy&#x27; absent in response from http://127.0.0.1:8084/xss/escaped?q=hello</pre>
+            <h4>Remediation</h4><p>Add a Permissions-Policy header restricting unused browser features, e.g., &#x27;Permissions-Policy: camera=(), microphone=(), geolocation=()&#x27;.</p>
+        </div>
+        <div class="finding-detail" id="finding-28">
+            <h3>28. Missing Security Header: X-Content-Type-Options</h3>
+            <p><strong>Severity:</strong> MEDIUM | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 4.3 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8084/xss/json?q=hello</p>
+            <h4>Evidence</h4><pre>Header &#x27;X-Content-Type-Options&#x27; absent in response from http://127.0.0.1:8084/xss/json?q=hello</pre>
+            <h4>Remediation</h4><p>Add &#x27;X-Content-Type-Options: nosniff&#x27; to all responses.</p>
+        </div>
+        <div class="finding-detail" id="finding-29">
+            <h3>29. Missing Security Header: X-Frame-Options</h3>
+            <p><strong>Severity:</strong> MEDIUM | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 4.3 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8084/xss/json?q=hello</p>
+            <h4>Evidence</h4><pre>Header &#x27;X-Frame-Options&#x27; absent in response from http://127.0.0.1:8084/xss/json?q=hello</pre>
+            <h4>Remediation</h4><p>Add &#x27;X-Frame-Options: DENY&#x27; or &#x27;X-Frame-Options: SAMEORIGIN&#x27;. Consider also using CSP frame-ancestors directive.</p>
+        </div>
+        <div class="finding-detail" id="finding-30">
+            <h3>30. Missing Security Header: Content-Security-Policy</h3>
+            <p><strong>Severity:</strong> MEDIUM | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.75 | <strong>CVSS:</strong> 5.4 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8084/xss/json?q=hello</p>
+            <h4>Evidence</h4><pre>Header &#x27;Content-Security-Policy&#x27; absent in response from http://127.0.0.1:8084/xss/json?q=hello</pre>
+            <h4>Remediation</h4><p>Implement a Content-Security-Policy header with restrictive directives. Start with &#x27;Content-Security-Policy: default-src &#x27;self&#x27;&#x27; and refine as needed.</p>
+        </div>
+        <div class="finding-detail" id="finding-31">
+            <h3>31. Missing Security Header: X-XSS-Protection</h3>
+            <p><strong>Severity:</strong> LOW | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 3.1 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8084/xss/json?q=hello</p>
+            <h4>Evidence</h4><pre>Header &#x27;X-XSS-Protection&#x27; absent in response from http://127.0.0.1:8084/xss/json?q=hello</pre>
+            <h4>Remediation</h4><p>Add &#x27;X-XSS-Protection: 0&#x27; if CSP is implemented, or &#x27;X-XSS-Protection: 1; mode=block&#x27; for legacy browser support.</p>
+        </div>
+        <div class="finding-detail" id="finding-32">
+            <h3>32. Missing Security Header: Referrer-Policy</h3>
+            <p><strong>Severity:</strong> LOW | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 3.1 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8084/xss/json?q=hello</p>
+            <h4>Evidence</h4><pre>Header &#x27;Referrer-Policy&#x27; absent in response from http://127.0.0.1:8084/xss/json?q=hello</pre>
+            <h4>Remediation</h4><p>Add &#x27;Referrer-Policy: strict-origin-when-cross-origin&#x27; or &#x27;Referrer-Policy: no-referrer&#x27; depending on requirements.</p>
+        </div>
+        <div class="finding-detail" id="finding-33">
+            <h3>33. Missing Security Header: Permissions-Policy</h3>
+            <p><strong>Severity:</strong> LOW | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 3.1 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8084/xss/json?q=hello</p>
+            <h4>Evidence</h4><pre>Header &#x27;Permissions-Policy&#x27; absent in response from http://127.0.0.1:8084/xss/json?q=hello</pre>
+            <h4>Remediation</h4><p>Add a Permissions-Policy header restricting unused browser features, e.g., &#x27;Permissions-Policy: camera=(), microphone=(), geolocation=()&#x27;.</p>
+        </div>
+        <div class="finding-detail" id="finding-34">
+            <h3>34. Missing Security Header: X-Content-Type-Options</h3>
+            <p><strong>Severity:</strong> MEDIUM | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 4.3 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8084/xss/comment?q=hello</p>
+            <h4>Evidence</h4><pre>Header &#x27;X-Content-Type-Options&#x27; absent in response from http://127.0.0.1:8084/xss/comment?q=hello</pre>
+            <h4>Remediation</h4><p>Add &#x27;X-Content-Type-Options: nosniff&#x27; to all responses.</p>
+        </div>
+        <div class="finding-detail" id="finding-35">
+            <h3>35. Missing Security Header: X-Frame-Options</h3>
+            <p><strong>Severity:</strong> MEDIUM | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 4.3 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8084/xss/comment?q=hello</p>
+            <h4>Evidence</h4><pre>Header &#x27;X-Frame-Options&#x27; absent in response from http://127.0.0.1:8084/xss/comment?q=hello</pre>
+            <h4>Remediation</h4><p>Add &#x27;X-Frame-Options: DENY&#x27; or &#x27;X-Frame-Options: SAMEORIGIN&#x27;. Consider also using CSP frame-ancestors directive.</p>
+        </div>
+        <div class="finding-detail" id="finding-36">
+            <h3>36. Missing Security Header: Content-Security-Policy</h3>
+            <p><strong>Severity:</strong> MEDIUM | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.75 | <strong>CVSS:</strong> 5.4 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8084/xss/comment?q=hello</p>
+            <h4>Evidence</h4><pre>Header &#x27;Content-Security-Policy&#x27; absent in response from http://127.0.0.1:8084/xss/comment?q=hello</pre>
+            <h4>Remediation</h4><p>Implement a Content-Security-Policy header with restrictive directives. Start with &#x27;Content-Security-Policy: default-src &#x27;self&#x27;&#x27; and refine as needed.</p>
+        </div>
+        <div class="finding-detail" id="finding-37">
+            <h3>37. Missing Security Header: X-XSS-Protection</h3>
+            <p><strong>Severity:</strong> LOW | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 3.1 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8084/xss/comment?q=hello</p>
+            <h4>Evidence</h4><pre>Header &#x27;X-XSS-Protection&#x27; absent in response from http://127.0.0.1:8084/xss/comment?q=hello</pre>
+            <h4>Remediation</h4><p>Add &#x27;X-XSS-Protection: 0&#x27; if CSP is implemented, or &#x27;X-XSS-Protection: 1; mode=block&#x27; for legacy browser support.</p>
+        </div>
+        <div class="finding-detail" id="finding-38">
+            <h3>38. Missing Security Header: Referrer-Policy</h3>
+            <p><strong>Severity:</strong> LOW | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 3.1 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8084/xss/comment?q=hello</p>
+            <h4>Evidence</h4><pre>Header &#x27;Referrer-Policy&#x27; absent in response from http://127.0.0.1:8084/xss/comment?q=hello</pre>
+            <h4>Remediation</h4><p>Add &#x27;Referrer-Policy: strict-origin-when-cross-origin&#x27; or &#x27;Referrer-Policy: no-referrer&#x27; depending on requirements.</p>
+        </div>
+        <div class="finding-detail" id="finding-39">
+            <h3>39. Missing Security Header: Permissions-Policy</h3>
+            <p><strong>Severity:</strong> LOW | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 3.1 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8084/xss/comment?q=hello</p>
+            <h4>Evidence</h4><pre>Header &#x27;Permissions-Policy&#x27; absent in response from http://127.0.0.1:8084/xss/comment?q=hello</pre>
+            <h4>Remediation</h4><p>Add a Permissions-Policy header restricting unused browser features, e.g., &#x27;Permissions-Policy: camera=(), microphone=(), geolocation=()&#x27;.</p>
+        </div>
+        <div class="finding-detail" id="finding-40">
+            <h3>40. Missing Security Header: X-Content-Type-Options</h3>
+            <p><strong>Severity:</strong> MEDIUM | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 4.3 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8084/xss/attr?q=hello</p>
+            <h4>Evidence</h4><pre>Header &#x27;X-Content-Type-Options&#x27; absent in response from http://127.0.0.1:8084/xss/attr?q=hello</pre>
+            <h4>Remediation</h4><p>Add &#x27;X-Content-Type-Options: nosniff&#x27; to all responses.</p>
+        </div>
+        <div class="finding-detail" id="finding-41">
+            <h3>41. Missing Security Header: X-Frame-Options</h3>
+            <p><strong>Severity:</strong> MEDIUM | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 4.3 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8084/xss/attr?q=hello</p>
+            <h4>Evidence</h4><pre>Header &#x27;X-Frame-Options&#x27; absent in response from http://127.0.0.1:8084/xss/attr?q=hello</pre>
+            <h4>Remediation</h4><p>Add &#x27;X-Frame-Options: DENY&#x27; or &#x27;X-Frame-Options: SAMEORIGIN&#x27;. Consider also using CSP frame-ancestors directive.</p>
+        </div>
+        <div class="finding-detail" id="finding-42">
+            <h3>42. Missing Security Header: Content-Security-Policy</h3>
+            <p><strong>Severity:</strong> MEDIUM | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.75 | <strong>CVSS:</strong> 5.4 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8084/xss/attr?q=hello</p>
+            <h4>Evidence</h4><pre>Header &#x27;Content-Security-Policy&#x27; absent in response from http://127.0.0.1:8084/xss/attr?q=hello</pre>
+            <h4>Remediation</h4><p>Implement a Content-Security-Policy header with restrictive directives. Start with &#x27;Content-Security-Policy: default-src &#x27;self&#x27;&#x27; and refine as needed.</p>
+        </div>
+        <div class="finding-detail" id="finding-43">
+            <h3>43. Missing Security Header: X-XSS-Protection</h3>
+            <p><strong>Severity:</strong> LOW | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 3.1 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8084/xss/attr?q=hello</p>
+            <h4>Evidence</h4><pre>Header &#x27;X-XSS-Protection&#x27; absent in response from http://127.0.0.1:8084/xss/attr?q=hello</pre>
+            <h4>Remediation</h4><p>Add &#x27;X-XSS-Protection: 0&#x27; if CSP is implemented, or &#x27;X-XSS-Protection: 1; mode=block&#x27; for legacy browser support.</p>
+        </div>
+        <div class="finding-detail" id="finding-44">
+            <h3>44. Missing Security Header: Referrer-Policy</h3>
+            <p><strong>Severity:</strong> LOW | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 3.1 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8084/xss/attr?q=hello</p>
+            <h4>Evidence</h4><pre>Header &#x27;Referrer-Policy&#x27; absent in response from http://127.0.0.1:8084/xss/attr?q=hello</pre>
+            <h4>Remediation</h4><p>Add &#x27;Referrer-Policy: strict-origin-when-cross-origin&#x27; or &#x27;Referrer-Policy: no-referrer&#x27; depending on requirements.</p>
+        </div>
+        <div class="finding-detail" id="finding-45">
+            <h3>45. Missing Security Header: Permissions-Policy</h3>
+            <p><strong>Severity:</strong> LOW | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 3.1 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8084/xss/attr?q=hello</p>
+            <h4>Evidence</h4><pre>Header &#x27;Permissions-Policy&#x27; absent in response from http://127.0.0.1:8084/xss/attr?q=hello</pre>
+            <h4>Remediation</h4><p>Add a Permissions-Policy header restricting unused browser features, e.g., &#x27;Permissions-Policy: camera=(), microphone=(), geolocation=()&#x27;.</p>
+        </div>
+        <div class="finding-detail" id="finding-46">
+            <h3>46. Missing Security Header: X-Content-Type-Options</h3>
+            <p><strong>Severity:</strong> MEDIUM | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 4.3 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8084/sql/error?q=apple</p>
+            <h4>Evidence</h4><pre>Header &#x27;X-Content-Type-Options&#x27; absent in response from http://127.0.0.1:8084/sql/error?q=apple</pre>
+            <h4>Remediation</h4><p>Add &#x27;X-Content-Type-Options: nosniff&#x27; to all responses.</p>
+        </div>
+        <div class="finding-detail" id="finding-47">
+            <h3>47. Missing Security Header: X-Frame-Options</h3>
+            <p><strong>Severity:</strong> MEDIUM | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 4.3 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8084/sql/error?q=apple</p>
+            <h4>Evidence</h4><pre>Header &#x27;X-Frame-Options&#x27; absent in response from http://127.0.0.1:8084/sql/error?q=apple</pre>
+            <h4>Remediation</h4><p>Add &#x27;X-Frame-Options: DENY&#x27; or &#x27;X-Frame-Options: SAMEORIGIN&#x27;. Consider also using CSP frame-ancestors directive.</p>
+        </div>
+        <div class="finding-detail" id="finding-48">
+            <h3>48. Missing Security Header: Content-Security-Policy</h3>
+            <p><strong>Severity:</strong> MEDIUM | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.75 | <strong>CVSS:</strong> 5.4 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8084/sql/error?q=apple</p>
+            <h4>Evidence</h4><pre>Header &#x27;Content-Security-Policy&#x27; absent in response from http://127.0.0.1:8084/sql/error?q=apple</pre>
+            <h4>Remediation</h4><p>Implement a Content-Security-Policy header with restrictive directives. Start with &#x27;Content-Security-Policy: default-src &#x27;self&#x27;&#x27; and refine as needed.</p>
+        </div>
+        <div class="finding-detail" id="finding-49">
+            <h3>49. Missing Security Header: X-XSS-Protection</h3>
+            <p><strong>Severity:</strong> LOW | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 3.1 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8084/sql/error?q=apple</p>
+            <h4>Evidence</h4><pre>Header &#x27;X-XSS-Protection&#x27; absent in response from http://127.0.0.1:8084/sql/error?q=apple</pre>
+            <h4>Remediation</h4><p>Add &#x27;X-XSS-Protection: 0&#x27; if CSP is implemented, or &#x27;X-XSS-Protection: 1; mode=block&#x27; for legacy browser support.</p>
+        </div>
+        <div class="finding-detail" id="finding-50">
+            <h3>50. Missing Security Header: Referrer-Policy</h3>
+            <p><strong>Severity:</strong> LOW | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 3.1 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8084/sql/error?q=apple</p>
+            <h4>Evidence</h4><pre>Header &#x27;Referrer-Policy&#x27; absent in response from http://127.0.0.1:8084/sql/error?q=apple</pre>
+            <h4>Remediation</h4><p>Add &#x27;Referrer-Policy: strict-origin-when-cross-origin&#x27; or &#x27;Referrer-Policy: no-referrer&#x27; depending on requirements.</p>
+        </div>
+        <div class="finding-detail" id="finding-51">
+            <h3>51. Missing Security Header: Permissions-Policy</h3>
+            <p><strong>Severity:</strong> LOW | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 3.1 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8084/sql/error?q=apple</p>
+            <h4>Evidence</h4><pre>Header &#x27;Permissions-Policy&#x27; absent in response from http://127.0.0.1:8084/sql/error?q=apple</pre>
+            <h4>Remediation</h4><p>Add a Permissions-Policy header restricting unused browser features, e.g., &#x27;Permissions-Policy: camera=(), microphone=(), geolocation=()&#x27;.</p>
+        </div>
+        <div class="finding-detail" id="finding-52">
+            <h3>52. SQL Injection (Error-Based) in &#x27;q&#x27;</h3>
+            <p><strong>Severity:</strong> HIGH | <strong>State:</strong> CONFIRMED | <strong>Confidence:</strong> 0.97 | <strong>CVSS:</strong> 8.6 | <strong>Module:</strong> sqli-scanner</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8084/sql/error?q=apple</p>
+            <h4>Evidence</h4><pre>URL: http://127.0.0.1:8084/sql/error?q=%27
+Payload: &#x27;
+DBMS: SQLite
+Error pattern: sqlite_error
+Status: 500</pre>
+            <h4>Remediation</h4><p>Use parameterized queries (prepared statements) for all database interactions. Never concatenate user input into SQL strings. Apply input validation and use an ORM where possible.</p>
+        </div>
+        <div class="finding-detail" id="finding-53">
+            <h3>53. Missing Security Header: X-Content-Type-Options</h3>
+            <p><strong>Severity:</strong> MEDIUM | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 4.3 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8084/sql/time?q=apple</p>
+            <h4>Evidence</h4><pre>Header &#x27;X-Content-Type-Options&#x27; absent in response from http://127.0.0.1:8084/sql/time?q=apple</pre>
+            <h4>Remediation</h4><p>Add &#x27;X-Content-Type-Options: nosniff&#x27; to all responses.</p>
+        </div>
+        <div class="finding-detail" id="finding-54">
+            <h3>54. Missing Security Header: X-Frame-Options</h3>
+            <p><strong>Severity:</strong> MEDIUM | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 4.3 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8084/sql/time?q=apple</p>
+            <h4>Evidence</h4><pre>Header &#x27;X-Frame-Options&#x27; absent in response from http://127.0.0.1:8084/sql/time?q=apple</pre>
+            <h4>Remediation</h4><p>Add &#x27;X-Frame-Options: DENY&#x27; or &#x27;X-Frame-Options: SAMEORIGIN&#x27;. Consider also using CSP frame-ancestors directive.</p>
+        </div>
+        <div class="finding-detail" id="finding-55">
+            <h3>55. Missing Security Header: Content-Security-Policy</h3>
+            <p><strong>Severity:</strong> MEDIUM | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.75 | <strong>CVSS:</strong> 5.4 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8084/sql/time?q=apple</p>
+            <h4>Evidence</h4><pre>Header &#x27;Content-Security-Policy&#x27; absent in response from http://127.0.0.1:8084/sql/time?q=apple</pre>
+            <h4>Remediation</h4><p>Implement a Content-Security-Policy header with restrictive directives. Start with &#x27;Content-Security-Policy: default-src &#x27;self&#x27;&#x27; and refine as needed.</p>
+        </div>
+        <div class="finding-detail" id="finding-56">
+            <h3>56. Missing Security Header: X-XSS-Protection</h3>
+            <p><strong>Severity:</strong> LOW | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 3.1 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8084/sql/time?q=apple</p>
+            <h4>Evidence</h4><pre>Header &#x27;X-XSS-Protection&#x27; absent in response from http://127.0.0.1:8084/sql/time?q=apple</pre>
+            <h4>Remediation</h4><p>Add &#x27;X-XSS-Protection: 0&#x27; if CSP is implemented, or &#x27;X-XSS-Protection: 1; mode=block&#x27; for legacy browser support.</p>
+        </div>
+        <div class="finding-detail" id="finding-57">
+            <h3>57. Missing Security Header: Referrer-Policy</h3>
+            <p><strong>Severity:</strong> LOW | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 3.1 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8084/sql/time?q=apple</p>
+            <h4>Evidence</h4><pre>Header &#x27;Referrer-Policy&#x27; absent in response from http://127.0.0.1:8084/sql/time?q=apple</pre>
+            <h4>Remediation</h4><p>Add &#x27;Referrer-Policy: strict-origin-when-cross-origin&#x27; or &#x27;Referrer-Policy: no-referrer&#x27; depending on requirements.</p>
+        </div>
+        <div class="finding-detail" id="finding-58">
+            <h3>58. Missing Security Header: Permissions-Policy</h3>
+            <p><strong>Severity:</strong> LOW | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 3.1 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8084/sql/time?q=apple</p>
+            <h4>Evidence</h4><pre>Header &#x27;Permissions-Policy&#x27; absent in response from http://127.0.0.1:8084/sql/time?q=apple</pre>
+            <h4>Remediation</h4><p>Add a Permissions-Policy header restricting unused browser features, e.g., &#x27;Permissions-Policy: camera=(), microphone=(), geolocation=()&#x27;.</p>
+        </div>
+        <div class="finding-detail" id="finding-59">
+            <h3>59. SQL Injection (Time-Based Blind) in &#x27;q&#x27;</h3>
+            <p><strong>Severity:</strong> CRITICAL | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.82 | <strong>CVSS:</strong> 9.8 | <strong>Module:</strong> sqli-scanner</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8084/sql/time?q=apple</p>
+            <h4>Evidence</h4><pre>URL: http://127.0.0.1:8084/sql/time?q=%27+OR+SLEEP%285%29--+
+Payload: &#x27; OR SLEEP(5)-- 
+DBMS: MySQL
+Baseline time: 0.01s
+Injected time: 5.02s
+Expected delay: 5s
+Status: 200</pre>
+            <h4>Remediation</h4><p>Use parameterized queries (prepared statements) for all database interactions. Never concatenate user input into SQL strings. Apply input validation and use an ORM where possible.</p>
+        </div>
+
+    <footer style="text-align:center; color:#475569; margin-top:3rem; padding:2rem;">
+        Generated by NightOwl v1.0.0
+    </footer>
+</div>
+</body></html>

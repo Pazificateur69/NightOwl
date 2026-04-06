@@ -1,0 +1,152 @@
+## Probe: http://127.0.0.1:8084/
+
+
+    _   _ _       _     _    ___           _
+   | \ | (_) __ _| |__ | |_ / _ \__      _| |
+   |  \| | |/ _` | '_ \| __| | | \ \ /\ / / |
+   | |\  | | (_| | | | | |_| |_| |\ V  V /| |
+   |_| \_|_|\__, |_| |_|\__|\___/  \_/\_/ |_|
+            |___/
+
+Advanced Penetration Testing Framework v1.0.0
+
+[*] Target: http://127.0.0.1:8084/
+[*] Modules: cors-checker, dir-bruteforce, header-analyzer, sqli-scanner, 
+ssl-analyzer, xss-scanner
+[+] Scan complete: 8 findings
+
+## Probe: http://127.0.0.1:8084/robots.txt
+
+
+    _   _ _       _     _    ___           _
+   | \ | (_) __ _| |__ | |_ / _ \__      _| |
+   |  \| | |/ _` | '_ \| __| | | \ \ /\ / / |
+   | |\  | | (_| | | | | |_| |_| |\ V  V /| |
+   |_| \_|_|\__, |_| |_|\__|\___/  \_/\_/ |_|
+            |___/
+
+Advanced Penetration Testing Framework v1.0.0
+
+[*] Target: http://127.0.0.1:8084/robots.txt
+[*] Modules: cors-checker, dir-bruteforce, header-analyzer, sqli-scanner, 
+ssl-analyzer, xss-scanner
+[+] Scan complete: 7 findings
+
+## Probe: http://127.0.0.1:8084/xss/reflected?q=hello
+
+
+    _   _ _       _     _    ___           _
+   | \ | (_) __ _| |__ | |_ / _ \__      _| |
+   |  \| | |/ _` | '_ \| __| | | \ \ /\ / / |
+   | |\  | | (_| | | | | |_| |_| |\ V  V /| |
+   |_| \_|_|\__, |_| |_|\__|\___/  \_/\_/ |_|
+            |___/
+
+Advanced Penetration Testing Framework v1.0.0
+
+[*] Target: http://127.0.0.1:8084/xss/reflected?q=hello
+[*] Modules: cors-checker, dir-bruteforce, header-analyzer, sqli-scanner, 
+ssl-analyzer, xss-scanner
+[+] Scan complete: 8 findings
+
+## Probe: http://127.0.0.1:8084/xss/escaped?q=hello
+
+
+    _   _ _       _     _    ___           _
+   | \ | (_) __ _| |__ | |_ / _ \__      _| |
+   |  \| | |/ _` | '_ \| __| | | \ \ /\ / / |
+   | |\  | | (_| | | | | |_| |_| |\ V  V /| |
+   |_| \_|_|\__, |_| |_|\__|\___/  \_/\_/ |_|
+            |___/
+
+Advanced Penetration Testing Framework v1.0.0
+
+[*] Target: http://127.0.0.1:8084/xss/escaped?q=hello
+[*] Modules: cors-checker, dir-bruteforce, header-analyzer, sqli-scanner, 
+ssl-analyzer, xss-scanner
+[+] Scan complete: 7 findings
+
+## Probe: http://127.0.0.1:8084/xss/json?q=hello
+
+
+    _   _ _       _     _    ___           _
+   | \ | (_) __ _| |__ | |_ / _ \__      _| |
+   |  \| | |/ _` | '_ \| __| | | \ \ /\ / / |
+   | |\  | | (_| | | | | |_| |_| |\ V  V /| |
+   |_| \_|_|\__, |_| |_|\__|\___/  \_/\_/ |_|
+            |___/
+
+Advanced Penetration Testing Framework v1.0.0
+
+[*] Target: http://127.0.0.1:8084/xss/json?q=hello
+[*] Modules: cors-checker, dir-bruteforce, header-analyzer, sqli-scanner, 
+ssl-analyzer, xss-scanner
+[+] Scan complete: 7 findings
+
+## Probe: http://127.0.0.1:8084/xss/comment?q=hello
+
+
+    _   _ _       _     _    ___           _
+   | \ | (_) __ _| |__ | |_ / _ \__      _| |
+   |  \| | |/ _` | '_ \| __| | | \ \ /\ / / |
+   | |\  | | (_| | | | | |_| |_| |\ V  V /| |
+   |_| \_|_|\__, |_| |_|\__|\___/  \_/\_/ |_|
+            |___/
+
+Advanced Penetration Testing Framework v1.0.0
+
+[*] Target: http://127.0.0.1:8084/xss/comment?q=hello
+[*] Modules: cors-checker, dir-bruteforce, header-analyzer, sqli-scanner, 
+ssl-analyzer, xss-scanner
+[+] Scan complete: 7 findings
+
+## Probe: http://127.0.0.1:8084/xss/attr?q=hello
+
+
+    _   _ _       _     _    ___           _
+   | \ | (_) __ _| |__ | |_ / _ \__      _| |
+   |  \| | |/ _` | '_ \| __| | | \ \ /\ / / |
+   | |\  | | (_| | | | | |_| |_| |\ V  V /| |
+   |_| \_|_|\__, |_| |_|\__|\___/  \_/\_/ |_|
+            |___/
+
+Advanced Penetration Testing Framework v1.0.0
+
+[*] Target: http://127.0.0.1:8084/xss/attr?q=hello
+[*] Modules: cors-checker, dir-bruteforce, header-analyzer, sqli-scanner, 
+ssl-analyzer, xss-scanner
+[+] Scan complete: 7 findings
+
+## Probe: http://127.0.0.1:8084/sql/error?q=apple
+
+
+    _   _ _       _     _    ___           _
+   | \ | (_) __ _| |__ | |_ / _ \__      _| |
+   |  \| | |/ _` | '_ \| __| | | \ \ /\ / / |
+   | |\  | | (_| | | | | |_| |_| |\ V  V /| |
+   |_| \_|_|\__, |_| |_|\__|\___/  \_/\_/ |_|
+            |___/
+
+Advanced Penetration Testing Framework v1.0.0
+
+[*] Target: http://127.0.0.1:8084/sql/error?q=apple
+[*] Modules: cors-checker, dir-bruteforce, header-analyzer, sqli-scanner, 
+ssl-analyzer, xss-scanner
+[+] Scan complete: 8 findings
+
+## Probe: http://127.0.0.1:8084/sql/time?q=apple
+
+
+    _   _ _       _     _    ___           _
+   | \ | (_) __ _| |__ | |_ / _ \__      _| |
+   |  \| | |/ _` | '_ \| __| | | \ \ /\ / / |
+   | |\  | | (_| | | | | |_| |_| |\ V  V /| |
+   |_| \_|_|\__, |_| |_|\__|\___/  \_/\_/ |_|
+            |___/
+
+Advanced Penetration Testing Framework v1.0.0
+
+[*] Target: http://127.0.0.1:8084/sql/time?q=apple
+[*] Modules: cors-checker, dir-bruteforce, header-analyzer, sqli-scanner, 
+ssl-analyzer, xss-scanner
+[+] Scan complete: 8 findings

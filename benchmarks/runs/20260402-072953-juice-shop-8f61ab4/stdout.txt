@@ -1,0 +1,84 @@
+## Probe: http://127.0.0.1:8082/
+
+
+    _   _ _       _     _    ___           _
+   | \ | (_) __ _| |__ | |_ / _ \__      _| |
+   |  \| | |/ _` | '_ \| __| | | \ \ /\ / / |
+   | |\  | | (_| | | | | |_| |_| |\ V  V /| |
+   |_| \_|_|\__, |_| |_|\__|\___/  \_/\_/ |_|
+            |___/
+
+Advanced Penetration Testing Framework v1.0.0
+
+[*] Target: http://127.0.0.1:8082/
+[*] Modules: cors-checker, dir-bruteforce, header-analyzer, sqli-scanner, 
+ssl-analyzer, xss-scanner
+[+] Scan complete: 7 findings
+
+## Probe: http://127.0.0.1:8082/robots.txt
+
+
+    _   _ _       _     _    ___           _
+   | \ | (_) __ _| |__ | |_ / _ \__      _| |
+   |  \| | |/ _` | '_ \| __| | | \ \ /\ / / |
+   | |\  | | (_| | | | | |_| |_| |\ V  V /| |
+   |_| \_|_|\__, |_| |_|\__|\___/  \_/\_/ |_|
+            |___/
+
+Advanced Penetration Testing Framework v1.0.0
+
+[*] Target: http://127.0.0.1:8082/robots.txt
+[*] Modules: cors-checker, dir-bruteforce, header-analyzer, sqli-scanner, 
+ssl-analyzer, xss-scanner
+[+] Scan complete: 4 findings
+
+## Probe: http://127.0.0.1:8082/assets/public/images/uploads/
+
+
+    _   _ _       _     _    ___           _
+   | \ | (_) __ _| |__ | |_ / _ \__      _| |
+   |  \| | |/ _` | '_ \| __| | | \ \ /\ / / |
+   | |\  | | (_| | | | | |_| |_| |\ V  V /| |
+   |_| \_|_|\__, |_| |_|\__|\___/  \_/\_/ |_|
+            |___/
+
+Advanced Penetration Testing Framework v1.0.0
+
+[*] Target: http://127.0.0.1:8082/assets/public/images/uploads/
+[*] Modules: cors-checker, dir-bruteforce, header-analyzer, sqli-scanner, 
+ssl-analyzer, xss-scanner
+[+] Scan complete: 4 findings
+
+## Probe: http://127.0.0.1:8082/rest/products/search?q=apple
+
+
+    _   _ _       _     _    ___           _
+   | \ | (_) __ _| |__ | |_ / _ \__      _| |
+   |  \| | |/ _` | '_ \| __| | | \ \ /\ / / |
+   | |\  | | (_| | | | | |_| |_| |\ V  V /| |
+   |_| \_|_|\__, |_| |_|\__|\___/  \_/\_/ |_|
+            |___/
+
+Advanced Penetration Testing Framework v1.0.0
+
+[*] Target: http://127.0.0.1:8082/rest/products/search?q=apple
+[*] Modules: cors-checker, dir-bruteforce, header-analyzer, sqli-scanner, 
+ssl-analyzer, xss-scanner
+[+] Scan complete: 5 findings
+
+## Probe: http://127.0.0.1:8082/api/Challenges/?page=1
+
+
+    _   _ _       _     _    ___           _
+   | \ | (_) __ _| |__ | |_ / _ \__      _| |
+   |  \| | |/ _` | '_ \| __| | | \ \ /\ / / |
+   | |\  | | (_| | | | | |_| |_| |\ V  V /| |
+   |_| \_|_|\__, |_| |_|\__|\___/  \_/\_/ |_|
+            |___/
+
+Advanced Penetration Testing Framework v1.0.0
+
+[*] Target: http://127.0.0.1:8082/api/Challenges/?page=1
+[*] Modules: cors-checker, dir-bruteforce, header-analyzer, sqli-scanner, 
+ssl-analyzer, xss-scanner
+[+] Scan complete: 4 findings

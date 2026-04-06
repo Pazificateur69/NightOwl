@@ -1,0 +1,15 @@
+
+
+    _   _ _       _     _    ___           _
+   | \ | (_) __ _| |__ | |_ / _ \__      _| |
+   |  \| | |/ _` | '_ \| __| | | \ \ /\ / / |
+   | |\  | | (_| | | | | |_| |_| |\ V  V /| |
+   |_| \_|_|\__, |_| |_|\__|\___/  \_/\_/ |_|
+            |___/
+
+Advanced Penetration Testing Framework v1.0.0
+
+[*] Target: http://127.0.0.1:8082
+[*] Modules: cors-checker, dir-bruteforce, header-analyzer, sqli-scanner, 
+ssl-analyzer, xss-scanner
+[+] Scan complete: 7 findings

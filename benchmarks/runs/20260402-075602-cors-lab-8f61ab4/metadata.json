@@ -1,0 +1,48 @@
+{
+  "target_name": "cors-lab",
+  "profile_description": "Dedicated local benchmark lab for CORS misconfiguration checks.",
+  "expected_modules": [
+    "cors-checker"
+  ],
+  "probe_urls": [
+    "http://127.0.0.1:8085/wildcard-credentials",
+    "http://127.0.0.1:8085/reflect-credentials",
+    "http://127.0.0.1:8085/null-origin",
+    "http://127.0.0.1:8085/dangerous-methods",
+    "http://127.0.0.1:8085/allowlist"
+  ],
+  "url": "http://127.0.0.1:8085",
+  "command": [
+    ".venv/bin/python",
+    "-m",
+    "nightowl.cli.main",
+    "--config",
+    "benchmarks/runs/20260402-075602-cors-lab-8f61ab4/probe-01/benchmark-config.yaml",
+    "scan",
+    "web",
+    "http://127.0.0.1:8085/wildcard-credentials",
+    "--core"
+  ],
+  "commit": "8f61ab4",
+  "started_at": "2026-04-02T07:56:02.226804+00:00",
+  "finished_at": "2026-04-02T07:56:02.260490+00:00",
+  "duration_seconds": 0.033686,
+  "return_code": 2,
+  "findings_count": 0,
+  "scan_id": null,
+  "stdout_path": "benchmarks/runs/20260402-075602-cors-lab-8f61ab4/stdout.txt",
+  "stderr_path": "benchmarks/runs/20260402-075602-cors-lab-8f61ab4/stderr.txt",
+  "raw_session_path": "benchmarks/runs/20260402-075602-cors-lab-8f61ab4/metadata.json",
+  "session_markdown_path": "benchmarks/sessions/2026-04-02-cors-lab-8f61ab4.md",
+  "findings_json_path": null,
+  "stats_json_path": "benchmarks/runs/20260402-075602-cors-lab-8f61ab4/stats.json",
+  "verdicts_json_path": null,
+  "report_markdown_path": null,
+  "report_html_path": null,
+  "probe_results_path": "benchmarks/runs/20260402-075602-cors-lab-8f61ab4/probe-results.json",
+  "environment": "python=3.14.3, cwd=/Users/pazent/Desktop/NightOwl, dirty_worktree=True",
+  "reachable": false,
+  "preflight_error": "[Errno 1] Operation not permitted",
+  "auth_mode": null,
+  "auth_notes": []
+}

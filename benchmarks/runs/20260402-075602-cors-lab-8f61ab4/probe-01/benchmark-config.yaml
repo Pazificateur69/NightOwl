@@ -1,0 +1,20 @@
+mode: semi
+threads: 10
+timeout: 30
+log_level: INFO
+output_dir: benchmarks/runs/20260402-075602-cors-lab-8f61ab4/probe-01/reports
+db_path: benchmarks/runs/20260402-075602-cors-lab-8f61ab4/probe-01/benchmark.db
+user_agent: Mozilla/5.0 (NightOwl Security Scanner)
+wordlist_dir: ./wordlists
+rate_limit:
+  requests_per_second: 10
+  burst: 20
+  delay_between_requests: 0.1
+scope:
+  allowed_hosts:
+  - 127.0.0.1
+  allowed_ips:
+  - 127.0.0.1
+  allowed_networks: []
+  excluded_hosts: []
+modules: []

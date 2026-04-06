@@ -1,0 +1,47 @@
+{
+  "target_name": "webgoat",
+  "profile_description": "Multi-probe benchmark for WebGoat unauthenticated login routes.",
+  "expected_modules": [
+    "header-analyzer",
+    "dir-bruteforce"
+  ],
+  "probe_urls": [
+    "http://127.0.0.1:8083/WebGoat/",
+    "http://127.0.0.1:8083/WebGoat/login",
+    "http://127.0.0.1:8083/WebGoat/WebGoat/login",
+    "http://127.0.0.1:8083/WebGoat/WebGoat/login?error=1",
+    "http://127.0.0.1:8083/WebGoat/WebGoat/start.mvc"
+  ],
+  "url": "http://127.0.0.1:8083/WebGoat",
+  "command": [
+    ".venv/bin/python",
+    "-m",
+    "nightowl.cli.main",
+    "--config",
+    "benchmarks/runs/20260327-094144-webgoat-8f61ab4/probe-01/benchmark-config.yaml",
+    "scan",
+    "web",
+    "http://127.0.0.1:8083/WebGoat/",
+    "--core"
+  ],
+  "commit": "8f61ab4",
+  "started_at": "2026-03-27T09:41:44.758211+00:00",
+  "finished_at": "2026-03-27T09:42:15.248848+00:00",
+  "duration_seconds": 30.490637,
+  "return_code": 0,
+  "findings_count": 31,
+  "scan_id": "fe0418fb-5531-4010-b1e5-5d3913d504af",
+  "stdout_path": "benchmarks/runs/20260327-094144-webgoat-8f61ab4/stdout.txt",
+  "stderr_path": "benchmarks/runs/20260327-094144-webgoat-8f61ab4/stderr.txt",
+  "raw_session_path": "benchmarks/runs/20260327-094144-webgoat-8f61ab4/metadata.json",
+  "session_markdown_path": "benchmarks/sessions/2026-03-27-webgoat-8f61ab4.md",
+  "findings_json_path": "benchmarks/runs/20260327-094144-webgoat-8f61ab4/findings.json",
+  "stats_json_path": "benchmarks/runs/20260327-094144-webgoat-8f61ab4/stats.json",
+  "verdicts_json_path": "benchmarks/runs/20260327-094144-webgoat-8f61ab4/verdicts.json",
+  "report_markdown_path": "benchmarks/runs/20260327-094144-webgoat-8f61ab4/reports/nightowl-fe0418fb-20260327-094215.md",
+  "report_html_path": "benchmarks/runs/20260327-094144-webgoat-8f61ab4/reports/nightowl-fe0418fb-20260327-094215.html",
+  "probe_results_path": "benchmarks/runs/20260327-094144-webgoat-8f61ab4/probe-results.json",
+  "environment": "python=3.14.3, cwd=/Users/pazent/Desktop/NightOwl, dirty_worktree=True",
+  "reachable": true,
+  "preflight_error": null
+}

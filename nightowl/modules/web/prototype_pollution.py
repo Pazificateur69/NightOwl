@@ -57,7 +57,8 @@ class PrototypePollutionPlugin(ScannerPlugin):
                                 references=["https://portswigger.net/research/server-side-prototype-pollution"],
                             ))
                             break
-                    except Exception:
+                    except (OSError, RuntimeError, ValueError, httpx.RequestError) as exc:
+                        logger.debug(f"Suppressed error: {exc}")
                         continue
 
                 # Test via JSON body
@@ -85,7 +86,8 @@ class PrototypePollutionPlugin(ScannerPlugin):
                                 category="prototype-pollution",
                             ))
                             break
-                    except Exception:
+                    except (OSError, RuntimeError, ValueError, httpx.RequestError) as exc:
+                        logger.debug(f"Suppressed error: {exc}")
                         continue
 
         except Exception as e:

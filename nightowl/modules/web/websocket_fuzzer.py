@@ -198,7 +198,8 @@ class WebSocketFuzzerPlugin(ScannerPlugin):
                     if "websocket" in upgrade_header:
                         found.append(f"{ws_scheme}://{parsed.netloc}{path}")
 
-            except Exception:
+            except (OSError, RuntimeError, ValueError, httpx.RequestError) as exc:
+                logger.debug(f"Suppressed error: {exc}")
                 continue
 
         # Also check if the main page references WebSocket URLs
@@ -213,8 +214,8 @@ class WebSocketFuzzerPlugin(ScannerPlugin):
                 ws_url = match.group(0).rstrip("\"';),")
                 if ws_url not in found:
                     found.append(ws_url)
-        except Exception:
-            pass
+        except (OSError, RuntimeError, ValueError, httpx.RequestError) as exc:
+            logger.debug(f"Suppressed error: {exc}")
 
         return list(dict.fromkeys(found))  # dedupe, preserve order
 
@@ -259,7 +260,8 @@ class WebSocketFuzzerPlugin(ScannerPlugin):
                                 "https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/11-Client-side_Testing/10-Testing_WebSockets",
                             ],
                         )
-                    except Exception:
+                    except (OSError, RuntimeError, ValueError, Exception) as exc:
+                        logger.debug(f"Error: {exc}")
                         # Connected but no response -- still an auth issue
                         return Finding(
                             title=f"WebSocket Unauthenticated Connection: {ws_url}",
@@ -334,7 +336,8 @@ class WebSocketFuzzerPlugin(ScannerPlugin):
                                             break
                                 except asyncio.TimeoutError:
                                     continue
-                                except Exception:
+                                except (OSError, RuntimeError, ValueError, httpx.RequestError) as exc:
+                                    logger.debug(f"Suppressed error: {exc}")
                                     continue
 
                             # Check for oversized message handling
@@ -348,7 +351,8 @@ class WebSocketFuzzerPlugin(ScannerPlugin):
 
                 except asyncio.TimeoutError:
                     continue
-                except Exception:
+                except (OSError, RuntimeError, ValueError, httpx.RequestError) as exc:
+                    logger.debug(f"Suppressed error: {exc}")
                     continue
 
         return findings

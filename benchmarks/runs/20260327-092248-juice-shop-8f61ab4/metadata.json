@@ -1,0 +1,48 @@
+{
+  "target_name": "juice-shop",
+  "profile_description": "Multi-probe benchmark for Juice Shop unauthenticated frontend routes.",
+  "expected_modules": [
+    "header-analyzer",
+    "dir-bruteforce",
+    "sqli-scanner"
+  ],
+  "probe_urls": [
+    "http://127.0.0.1:8082/",
+    "http://127.0.0.1:8082/robots.txt",
+    "http://127.0.0.1:8082/assets/public/images/uploads/",
+    "http://127.0.0.1:8082/rest/products/search?q=apple",
+    "http://127.0.0.1:8082/api/Challenges/?page=1"
+  ],
+  "url": "http://127.0.0.1:8082",
+  "command": [
+    ".venv/bin/python",
+    "-m",
+    "nightowl.cli.main",
+    "--config",
+    "benchmarks/runs/20260327-092248-juice-shop-8f61ab4/probe-01/benchmark-config.yaml",
+    "scan",
+    "web",
+    "http://127.0.0.1:8082/",
+    "--core"
+  ],
+  "commit": "8f61ab4",
+  "started_at": "2026-03-27T09:22:48.988795+00:00",
+  "finished_at": "2026-03-27T09:23:23.413922+00:00",
+  "duration_seconds": 34.425127,
+  "return_code": 0,
+  "findings_count": 24,
+  "scan_id": "dbc7b20c-868a-44b5-a285-e6f9294f4bae",
+  "stdout_path": "benchmarks/runs/20260327-092248-juice-shop-8f61ab4/stdout.txt",
+  "stderr_path": "benchmarks/runs/20260327-092248-juice-shop-8f61ab4/stderr.txt",
+  "raw_session_path": "benchmarks/runs/20260327-092248-juice-shop-8f61ab4/metadata.json",
+  "session_markdown_path": "benchmarks/sessions/2026-03-27-juice-shop-8f61ab4.md",
+  "findings_json_path": "benchmarks/runs/20260327-092248-juice-shop-8f61ab4/findings.json",
+  "stats_json_path": "benchmarks/runs/20260327-092248-juice-shop-8f61ab4/stats.json",
+  "verdicts_json_path": "benchmarks/runs/20260327-092248-juice-shop-8f61ab4/verdicts.json",
+  "report_markdown_path": "benchmarks/runs/20260327-092248-juice-shop-8f61ab4/reports/nightowl-dbc7b20c-20260327-092323.md",
+  "report_html_path": "benchmarks/runs/20260327-092248-juice-shop-8f61ab4/reports/nightowl-dbc7b20c-20260327-092323.html",
+  "probe_results_path": "benchmarks/runs/20260327-092248-juice-shop-8f61ab4/probe-results.json",
+  "environment": "python=3.14.3, cwd=/Users/pazent/Desktop/NightOwl, dirty_worktree=True",
+  "reachable": true,
+  "preflight_error": null
+}

@@ -1,0 +1,148 @@
+{
+  "verdict_counts": {
+    "confirmed_hit": 6,
+    "expected_hit": 5,
+    "quiet_expected": 0,
+    "quiet_violation": 0,
+    "likely_false_positive": 1,
+    "missed_expected": 1,
+    "inconclusive": 6
+  },
+  "findings": [
+    {
+      "family": "ssl-analyzer:No TLS \u2014 target uses plain HTTP",
+      "verdict": "expected_hit",
+      "rationale": "This finding family is declared as expected signal for the benchmark profile.",
+      "module_name": "ssl-analyzer",
+      "title": "No TLS \u2014 target uses plain HTTP"
+    },
+    {
+      "family": "sqli-scanner:error-based:assignment5b:userid",
+      "verdict": "confirmed_hit",
+      "rationale": "This finding family is explicitly reviewed and confirmed for the target profile.",
+      "module_name": "sqli-scanner",
+      "title": "SQL Injection (Error-Based) in 'userid'"
+    },
+    {
+      "family": "sqli-scanner:error-based:attack8:name",
+      "verdict": "confirmed_hit",
+      "rationale": "This finding family is explicitly reviewed and confirmed for the target profile.",
+      "module_name": "sqli-scanner",
+      "title": "SQL Injection (Error-Based) in 'name'"
+    },
+    {
+      "family": "sqli-scanner:error-based:attack8:auth_tan",
+      "verdict": "confirmed_hit",
+      "rationale": "This finding family is explicitly reviewed and confirmed for the target profile.",
+      "module_name": "sqli-scanner",
+      "title": "SQL Injection (Error-Based) in 'auth_tan'"
+    },
+    {
+      "family": "sqli-scanner:error-based:attack9:name",
+      "verdict": "confirmed_hit",
+      "rationale": "This finding family is explicitly reviewed and confirmed for the target profile.",
+      "module_name": "sqli-scanner",
+      "title": "SQL Injection (Error-Based) in 'name'"
+    },
+    {
+      "family": "sqli-scanner:error-based:attack9:auth_tan",
+      "verdict": "confirmed_hit",
+      "rationale": "This finding family is explicitly reviewed and confirmed for the target profile.",
+      "module_name": "sqli-scanner",
+      "title": "SQL Injection (Error-Based) in 'auth_tan'"
+    },
+    {
+      "family": "sqli-scanner:error-based:attack10:action_string",
+      "verdict": "confirmed_hit",
+      "rationale": "This finding family is explicitly reviewed and confirmed for the target profile.",
+      "module_name": "sqli-scanner",
+      "title": "SQL Injection (Error-Based) in 'action_string'"
+    },
+    {
+      "family": "xss-scanner:Reflected XSS in parameter 'query'",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "xss-scanner",
+      "title": "Reflected XSS in parameter 'query'"
+    },
+    {
+      "family": "xss-scanner:Reflected XSS in parameter 'login_count'",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "xss-scanner",
+      "title": "Reflected XSS in parameter 'login_count'"
+    },
+    {
+      "family": "xss-scanner:Reflected XSS in parameter 'userid'",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "xss-scanner",
+      "title": "Reflected XSS in parameter 'userid'"
+    },
+    {
+      "family": "xss-scanner:Reflected XSS in parameter 'field1'",
+      "verdict": "expected_hit",
+      "rationale": "This finding family is declared as expected signal for the benchmark profile.",
+      "module_name": "xss-scanner",
+      "title": "Reflected XSS in parameter 'field1'"
+    },
+    {
+      "family": "xss-scanner:Reflected XSS in parameter 'field1'",
+      "verdict": "expected_hit",
+      "rationale": "This finding family is declared as expected signal for the benchmark profile.",
+      "module_name": "xss-scanner",
+      "title": "Reflected XSS in parameter 'field1'"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-Content-Type-Options",
+      "verdict": "expected_hit",
+      "rationale": "This finding family is declared as expected signal for the benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-Content-Type-Options"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-Frame-Options",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-Frame-Options"
+    },
+    {
+      "family": "header-analyzer:missing-header:Content-Security-Policy",
+      "verdict": "expected_hit",
+      "rationale": "This finding family is declared as expected signal for the benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Content-Security-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:Referrer-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Referrer-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:Permissions-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Permissions-Policy"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/login",
+      "verdict": "likely_false_positive",
+      "rationale": "The discovered path `/login` is a common public route or static location, so surfacing it as a security finding is likely noisy.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /login (200)"
+    }
+  ],
+  "missed_expected": [
+    {
+      "family": "dir-bruteforce:discovered-path:/robots.txt",
+      "verdict": "missed_expected",
+      "rationale": "This expected finding family was not observed in the benchmark run."
+    }
+  ],
+  "quiet_expected": [],
+  "quiet_violations": []
+}

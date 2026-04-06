@@ -79,10 +79,13 @@ class SubdomainPlugin(ScannerPlugin):
             fqdn = f"{sub}.{domain}"
             async with semaphore:
                 await limiter.acquire()
-                result = await self._resolve(fqdn)
-                if result:
-                    discovered.append({"subdomain": fqdn, "addresses": result})
-                    logger.debug(f"[{self.name}] Found: {fqdn} -> {', '.join(result)}")
+                try:
+                    result = await self._resolve(fqdn)
+                    if result:
+                        discovered.append({"subdomain": fqdn, "addresses": result})
+                        logger.debug(f"[{self.name}] Found: {fqdn} -> {', '.join(result)}")
+                finally:
+                    limiter.release()
 
         tasks = [_check(word) for word in wordlist]
         await asyncio.gather(*tasks, return_exceptions=True)

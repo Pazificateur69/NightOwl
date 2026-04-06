@@ -1,0 +1,11 @@
+{
+  "verdict_counts": {
+    "confirmed_hit": 1,
+    "expected_hit": 0,
+    "quiet_expected": 1,
+    "quiet_violation": 0,
+    "missed_expected": 0,
+    "inconclusive": 2,
+    "likely_false_positive": 0
+  }
+}

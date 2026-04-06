@@ -36,6 +36,9 @@ class NightOwlConfig(BaseModel):
     threads: int = 10
     timeout: int = 30
     user_agent: str = "NightOwl/1.0"
+    headers: dict = Field(default_factory=dict)
+    cookies: dict = Field(default_factory=dict)
+    auth: dict = Field(default_factory=dict)
     proxy: str | None = None
     wordlist_dir: str = "./wordlists"
 

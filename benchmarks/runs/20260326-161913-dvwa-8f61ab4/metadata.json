@@ -1,0 +1,33 @@
+{
+  "target_name": "dvwa",
+  "url": "http://127.0.0.1:8081",
+  "command": [
+    ".venv/bin/python",
+    "-m",
+    "nightowl.cli.main",
+    "--config",
+    "benchmarks/runs/20260326-161913-dvwa-8f61ab4/benchmark-config.yaml",
+    "scan",
+    "web",
+    "http://127.0.0.1:8081",
+    "--core"
+  ],
+  "commit": "8f61ab4",
+  "started_at": "2026-03-26T16:19:13.820237+00:00",
+  "finished_at": "2026-03-26T16:19:19.739645+00:00",
+  "duration_seconds": 5.919408,
+  "return_code": 0,
+  "findings_count": 11,
+  "scan_id": "771369d5-2d04-4b7b-a761-aa0404fd0268",
+  "stdout_path": "benchmarks/runs/20260326-161913-dvwa-8f61ab4/stdout.txt",
+  "stderr_path": "benchmarks/runs/20260326-161913-dvwa-8f61ab4/stderr.txt",
+  "raw_session_path": "benchmarks/runs/20260326-161913-dvwa-8f61ab4/metadata.json",
+  "session_markdown_path": "benchmarks/sessions/2026-03-26-dvwa-8f61ab4.md",
+  "findings_json_path": "benchmarks/runs/20260326-161913-dvwa-8f61ab4/findings.json",
+  "stats_json_path": "benchmarks/runs/20260326-161913-dvwa-8f61ab4/stats.json",
+  "report_markdown_path": "benchmarks/runs/20260326-161913-dvwa-8f61ab4/reports/nightowl-771369d5-20260326-161919.md",
+  "report_html_path": "benchmarks/runs/20260326-161913-dvwa-8f61ab4/reports/nightowl-771369d5-20260326-161919.html",
+  "environment": "python=3.14.3, cwd=/Users/pazent/Desktop/NightOwl, dirty_worktree=True",
+  "reachable": true,
+  "preflight_error": null
+}

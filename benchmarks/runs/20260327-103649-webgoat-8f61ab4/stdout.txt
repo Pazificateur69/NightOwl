@@ -1,0 +1,101 @@
+## Probe: http://127.0.0.1:8083/WebGoat/
+
+
+    _   _ _       _     _    ___           _
+   | \ | (_) __ _| |__ | |_ / _ \__      _| |
+   |  \| | |/ _` | '_ \| __| | | \ \ /\ / / |
+   | |\  | | (_| | | | | |_| |_| |\ V  V /| |
+   |_| \_|_|\__, |_| |_|\__|\___/  \_/\_/ |_|
+            |___/
+
+Advanced Penetration Testing Framework v1.0.0
+
+[*] Target: http://127.0.0.1:8083/WebGoat/
+[*] Modules: cors-checker, dir-bruteforce, header-analyzer, sqli-scanner, 
+ssl-analyzer, xss-scanner
+[+] Scan complete: 7 findings
+
+## Probe: http://127.0.0.1:8083/WebGoat/welcome.mvc
+
+
+    _   _ _       _     _    ___           _
+   | \ | (_) __ _| |__ | |_ / _ \__      _| |
+   |  \| | |/ _` | '_ \| __| | | \ \ /\ / / |
+   | |\  | | (_| | | | | |_| |_| |\ V  V /| |
+   |_| \_|_|\__, |_| |_|\__|\___/  \_/\_/ |_|
+            |___/
+
+Advanced Penetration Testing Framework v1.0.0
+
+[*] Target: http://127.0.0.1:8083/WebGoat/welcome.mvc
+[*] Modules: cors-checker, dir-bruteforce, header-analyzer, sqli-scanner, 
+ssl-analyzer, xss-scanner
+[+] Scan complete: 6 findings
+
+## Probe: http://127.0.0.1:8083/WebGoat/start.mvc?lang=en
+
+
+    _   _ _       _     _    ___           _
+   | \ | (_) __ _| |__ | |_ / _ \__      _| |
+   |  \| | |/ _` | '_ \| __| | | \ \ /\ / / |
+   | |\  | | (_| | | | | |_| |_| |\ V  V /| |
+   |_| \_|_|\__, |_| |_|\__|\___/  \_/\_/ |_|
+            |___/
+
+Advanced Penetration Testing Framework v1.0.0
+
+[*] Target: http://127.0.0.1:8083/WebGoat/start.mvc?lang=en
+[*] Modules: cors-checker, dir-bruteforce, header-analyzer, sqli-scanner, 
+ssl-analyzer, xss-scanner
+[+] Scan complete: 6 findings
+
+## Probe: http://127.0.0.1:8083/WebGoat/service/lessonmenu.mvc
+
+
+    _   _ _       _     _    ___           _
+   | \ | (_) __ _| |__ | |_ / _ \__      _| |
+   |  \| | |/ _` | '_ \| __| | | \ \ /\ / / |
+   | |\  | | (_| | | | | |_| |_| |\ V  V /| |
+   |_| \_|_|\__, |_| |_|\__|\___/  \_/\_/ |_|
+            |___/
+
+Advanced Penetration Testing Framework v1.0.0
+
+[*] Target: http://127.0.0.1:8083/WebGoat/service/lessonmenu.mvc
+[*] Modules: cors-checker, dir-bruteforce, header-analyzer, sqli-scanner, 
+ssl-analyzer, xss-scanner
+[+] Scan complete: 6 findings
+
+## Probe: http://127.0.0.1:8083/WebGoat/SqlInjection.lesson
+
+
+    _   _ _       _     _    ___           _
+   | \ | (_) __ _| |__ | |_ / _ \__      _| |
+   |  \| | |/ _` | '_ \| __| | | \ \ /\ / / |
+   | |\  | | (_| | | | | |_| |_| |\ V  V /| |
+   |_| \_|_|\__, |_| |_|\__|\___/  \_/\_/ |_|
+            |___/
+
+Advanced Penetration Testing Framework v1.0.0
+
+[*] Target: http://127.0.0.1:8083/WebGoat/SqlInjection.lesson
+[*] Modules: cors-checker, dir-bruteforce, header-analyzer, sqli-scanner, 
+ssl-analyzer, xss-scanner
+[+] Scan complete: 6 findings
+
+## Probe: http://127.0.0.1:8083/WebGoat/CrossSiteScripting.lesson
+
+
+    _   _ _       _     _    ___           _
+   | \ | (_) __ _| |__ | |_ / _ \__      _| |
+   |  \| | |/ _` | '_ \| __| | | \ \ /\ / / |
+   | |\  | | (_| | | | | |_| |_| |\ V  V /| |
+   |_| \_|_|\__, |_| |_|\__|\___/  \_/\_/ |_|
+            |___/
+
+Advanced Penetration Testing Framework v1.0.0
+
+[*] Target: http://127.0.0.1:8083/WebGoat/CrossSiteScripting.lesson
+[*] Modules: cors-checker, dir-bruteforce, header-analyzer, sqli-scanner, 
+ssl-analyzer, xss-scanner
+[+] Scan complete: 6 findings

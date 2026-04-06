@@ -1,0 +1,24 @@
+{
+  "target_name": "juice-shop",
+  "url": "http://127.0.0.1:8082",
+  "command": [
+    ".venv/bin/nightowl",
+    "scan",
+    "web",
+    "http://127.0.0.1:8082",
+    "--core"
+  ],
+  "commit": "8f61ab4",
+  "started_at": "2026-03-26T16:15:58.673793+00:00",
+  "finished_at": "2026-03-26T16:15:59.186157+00:00",
+  "duration_seconds": 0.512364,
+  "return_code": 1,
+  "findings_count": null,
+  "stdout_path": "benchmarks/runs/20260326-161558-juice-shop-8f61ab4/stdout.txt",
+  "stderr_path": "benchmarks/runs/20260326-161558-juice-shop-8f61ab4/stderr.txt",
+  "raw_session_path": "benchmarks/runs/20260326-161558-juice-shop-8f61ab4/metadata.json",
+  "session_markdown_path": "benchmarks/sessions/2026-03-26-juice-shop-8f61ab4.md",
+  "environment": "python=3.14.3, cwd=/Users/pazent/Desktop/NightOwl, dirty_worktree=True",
+  "reachable": true,
+  "preflight_error": null
+}

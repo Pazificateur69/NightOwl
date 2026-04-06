@@ -11,7 +11,7 @@ from typing import Any
 import nmap
 
 from nightowl.core.plugin_base import ScannerPlugin
-from nightowl.models.finding import Finding, Severity
+from nightowl.models.finding import Finding, FindingState, Severity
 from nightowl.models.target import Target
 
 logger = logging.getLogger("nightowl")
@@ -141,6 +141,8 @@ class PortScannerPlugin(ScannerPlugin):
                                 f"running {service_str}."
                             ),
                             severity=severity,
+                            finding_state=FindingState.CONFIRMED,
+                            confidence_score=0.99,
                             category="open-port",
                             port=port,
                             protocol=proto,
@@ -169,6 +171,8 @@ class PortScannerPlugin(ScannerPlugin):
                         f"Discovered {len(open_ports)} open port(s) on {host}."
                     ),
                     severity=Severity.INFO,
+                    finding_state=FindingState.INFO,
+                    confidence_score=0.99,
                     category="port-scan",
                     evidence="\n".join(
                         f"{p['port']}/{p['protocol']} - {p['service']} "
@@ -189,6 +193,8 @@ class PortScannerPlugin(ScannerPlugin):
                     title=f"No open ports found on {host}",
                     description="The port scan did not discover any open ports.",
                     severity=Severity.INFO,
+                    finding_state=FindingState.INFO,
+                    confidence_score=0.9,
                     category="port-scan",
                     metadata={"host": host, "scan_args": self._scan_args},
                 )

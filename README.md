@@ -3,8 +3,8 @@
 </p>
 
 <p align="center">
-  <strong>The most complete open-source penetration testing framework.</strong><br/>
-  <em>57 automated modules. Full pipeline. Zero manual work.</em>
+  <strong>An open-source penetration testing framework under active hardening.</strong><br/>
+  <em>72 modules. Full pipeline. Core modules are being benchmarked and stabilized.</em>
 </p>
 
 <p align="center">
@@ -26,28 +26,41 @@
 
 ## Why NightOwl?
 
-Most pentest tools do **one thing**. You end up juggling nmap, Nikto, sqlmap, Burp, Metasploit, and 15 other tools just to do a basic assessment.
+Most pentest tools do **one thing**. You end up juggling nmap, Nikto, sqlmap, Burp, Metasploit, and 15 other tools for a single assessment.
 
-**NightOwl replaces all of them.** One command. Full pipeline. From recon to exploitation to report.
+NightOwl aims to **unify** these into a single framework. Depending on scope, enabled modules, and target type, one command can orchestrate recon, scanning, and reporting from the same workflow.
 
 ```bash
 nightowl full https://target.com --mode auto
 ```
 
-That's it. NightOwl runs 57 modules automatically: DNS enumeration, port scanning, WAF detection, SQLi/XSS/SSTI/XXE testing, JWT attacks, HTTP smuggling, and more. Generates an HTML report when done.
+NightOwl ships 72 modules covering DNS enumeration, port scanning, WAF detection, OWASP Top 10 testing, JWT attacks, HTTP smuggling, CMS scanning, and more. It's an **early-stage framework** — many modules are basic implementations that still need real-world testing and refinement.
+
+> **Warning:** NightOwl is under active development. Test coverage is still limited. Detection accuracy varies by module. **Always verify findings manually** before reporting them. Do not rely on NightOwl as your only testing tool for production assessments.
+
+## Current Positioning
+
+NightOwl should currently be treated as:
+
+- a multi-module offensive security framework for labs, learning, and pre-audit automation
+- a project with a small core of prioritized modules under active hardening
+- a complement to mature tools such as ZAP, Burp, Nuclei, sqlmap, and Metasploit
+
+NightOwl should not yet be presented as a replacement for established professional tooling.
 
 ---
 
 ## Benchmarks
 
-How NightOwl compares to existing tools on a standard DVWA + WebGoat test suite:
+The comparison table below is a feature inventory, not a validated performance benchmark.
+Real benchmark work is being tracked in [benchmarks/README.md](benchmarks/README.md) and raw sessions should be recorded from the local DVWA, Juice Shop, and WebGoat lab before making quality claims.
 
 | Feature | NightOwl | OWASP ZAP | Nikto | Nuclei | Burp Free |
 |---|:---:|:---:|:---:|:---:|:---:|
-| **Modules** | **57** | ~12 | ~7 | templates | ~15 |
+| **Modules** | **72** | ~12 | ~7 | templates | ~15 |
 | **Auto full pipeline** | yes | no | no | no | no |
 | **Recon + Scan + Exploit** | yes | scan only | scan only | scan only | scan only |
-| **OWASP Top 10** | 10/10 | 8/10 | 4/10 | 7/10 | 8/10 |
+| **OWASP Top 10 coverage attempted** | 10/10 | 8/10 | 4/10 | 7/10 | 8/10 |
 | **SSTI detection** | yes | no | no | basic | no |
 | **JWT attacks** | yes | no | no | no | paid |
 | **GraphQL introspection** | yes | no | no | basic | paid |
@@ -60,19 +73,49 @@ How NightOwl compares to existing tools on a standard DVWA + WebGoat test suite:
 | **Active Directory** | yes | no | no | no | no |
 | **Metasploit bridge** | yes | no | no | no | no |
 | **Post-exploitation** | yes | no | no | no | no |
+| **WordPress/CMS scan** | yes | no | yes | basic | paid |
+| **Container/K8s audit** | yes | no | no | no | no |
+| **CI/CD audit** | yes | no | no | no | no |
+| **Database audit** | yes | no | no | no | no |
+| **Email security** | yes | no | no | basic | no |
+| **Dependency confusion** | yes | no | no | no | no |
+| **Cloud IAM audit** | yes | no | no | no | no |
+| **Hash cracker** | yes | no | no | no | no |
+| **Compliance mapping** | yes | no | no | no | paid |
+| **Scan diffing** | yes | no | no | no | paid |
+| **Traffic analyzer** | yes | no | no | no | yes |
 | **Web dashboard** | yes | yes | no | no | yes |
 | **PDF/HTML reports** | yes | yes | no | no | paid |
 | **Plugin system** | yes | yes | no | yes | paid |
 | **CLI + Web** | both | web only | CLI only | CLI only | web only |
 | **Price** | **Free** | Free | Free | Free | $449/yr |
 
-> NightOwl covers more attack vectors out of the box than any free tool available, and matches Burp Suite Pro on detection capabilities.
+> **Note:** These comparisons are based on feature availability, **not detection accuracy or quality**. NightOwl is an early-stage project and detection quality still varies significantly. This table shows what NightOwl *attempts* to cover, not what it proves at the level of mature tools.
+
+## Core Modules And Maturity
+
+The current hardening effort is focused on these core modules:
+
+- `header-analyzer`
+- `xss-scanner`
+- `sqli-scanner`
+- `cors-checker`
+- `ssl-analyzer`
+- `port-scanner`
+- `deep-port-scan`
+- `dir-bruteforce`
+
+Current maturity labels:
+
+- `recommended`: prioritized core modules under active hardening and benchmark preparation
+- `usable-with-caution`: useful modules with partial confidence, still needing more evidence
+- `experimental`: feature-present modules that should not be trusted without close manual validation
 
 ---
 
-## All 57 Modules
+## All 72 Modules
 
-### Reconnaissance (12 modules)
+### Reconnaissance (14 modules)
 | Module | What it does |
 |---|---|
 | `dns-enum` | A/AAAA/MX/NS/TXT/SOA records, zone transfer attempts |
@@ -87,8 +130,10 @@ How NightOwl compares to existing tools on a standard DVWA + WebGoat test suite:
 | `email-harvester` | Email discovery from HTML, metadata, headers |
 | `js-analyzer` | API keys, endpoints, secrets in JavaScript files |
 | `secrets-scanner` | Regex-based secret detection (AWS keys, tokens, passwords) |
+| `dependency-confusion` | Detect private packages vulnerable to public registry hijack |
+| `cloud-iam-audit` | AWS/GCP/Azure metadata exposure, IAM credential leaks |
 
-### Web Security (27 modules)
+### Web Security (34 modules)
 | Module | What it does |
 |---|---|
 | `header-analyzer` | Missing security headers (HSTS, CSP, X-Frame, etc.) |
@@ -118,8 +163,15 @@ How NightOwl compares to existing tools on a standard DVWA + WebGoat test suite:
 | `prototype-pollution` | JavaScript prototype pollution via URL params |
 | `host-header-injection` | Host header attacks, password reset poisoning |
 | `idor-scanner` | Insecure Direct Object Reference detection |
+| `wordpress-scanner` | WP version, users, plugins, xmlrpc, debug.log exposure |
+| `cms-scanner` | Drupal, Joomla, Magento, Shopify, Ghost, Laravel detection |
+| `email-security` | SPF/DKIM/DMARC validation, email spoofing assessment |
+| `dns-rebinding` | Host header validation, DNS rebinding attack detection |
+| `protocol-fuzzer` | Mutation-based HTTP fuzzing (overflow, format strings, null) |
+| `compliance-mapper` | Map findings to PCI-DSS, OWASP, NIST, ISO 27001 |
+| `traffic-analyzer` | Crawl & analyze HTTP traffic for leaks, errors, and exposed endpoints |
 
-### Network (7 modules)
+### Network (10 modules)
 | Module | What it does |
 |---|---|
 | `deep-port-scan` | nmap NSE scripts, version detection |
@@ -129,6 +181,9 @@ How NightOwl compares to existing tools on a standard DVWA + WebGoat test suite:
 | `ssh-audit` | Weak algorithms, key types, protocol audit |
 | `ftp-scanner` | Anonymous FTP access, writable directory check |
 | `network-map` | Ping sweep, live host discovery |
+| `container-audit` | Docker socket, K8s API, etcd, kubelet exposure |
+| `cicd-audit` | Jenkins, GitLab, GitHub Actions, Drone, ArgoCD, SonarQube |
+| `database-audit` | MySQL, PostgreSQL, MongoDB, Redis, Elasticsearch unauth check |
 
 ### Active Directory (4 modules)
 | Module | What it does |
@@ -138,32 +193,37 @@ How NightOwl compares to existing tools on a standard DVWA + WebGoat test suite:
 | `password-spray` | Rate-limited password spraying |
 | `ad-recon` | Domain controllers, trusts, password policies |
 
-### Exploitation (3 modules)
+### Exploitation (5 modules)
 | Module | What it does |
 |---|---|
 | `msf-bridge` | Metasploit RPC integration |
 | `exploit-db` | CVE to exploit mapping (30+ known exploits) |
 | `auto-exploit` | Automatic exploit selection by CVSS score |
+| `hash-cracker` | Dictionary attack on MD5/SHA/bcrypt/NTLM hashes |
+| `reverse-shell-gen` | Generate reverse shells (bash, python, php, powershell, nc...) |
 
-### Post-Exploitation (4 modules)
+### Post-Exploitation (5 modules)
 | Module | What it does |
 |---|---|
 | `privesc-check` | SUID, sudo, kernel, unquoted service paths |
 | `file-enum` | Sensitive files (.env, SSH keys, configs) |
 | `credential-dump` | Credential storage location identification |
 | `lateral-movement` | Network pivot opportunity detection |
+| `diff-scanner` | Compare scans to detect new, fixed, and changed findings |
 
 ---
 
 ## Install
 
-### One-liner (recommended)
+### Quick install
+
+> **Security note:** Review [install.sh](install.sh) before running. Piping to bash is convenient but skips inspection.
 
 ```bash
 curl -sSL https://raw.githubusercontent.com/Pazificateur69/NightOwl/main/install.sh | bash
 ```
 
-### Manual
+### Manual (recommended)
 
 ```bash
 git clone https://github.com/Pazificateur69/NightOwl.git
@@ -200,6 +260,7 @@ nightowl recon target.com --dns --ports --subdomains
 ### Web vulnerability scan
 ```bash
 nightowl scan web https://target.com --all
+nightowl scan web https://target.com --core
 nightowl scan web https://target.com --sqli --xss
 ```
 
@@ -224,9 +285,17 @@ nightowl report <scan-id> --format pdf
 nightowl dashboard --port 8080
 ```
 
+### Run a local benchmark session
+```bash
+make bench-up
+make bench-run-dvwa
+```
+
 ### List all plugins
 ```bash
 nightowl plugins --list
+nightowl plugins --list --core-only
+nightowl plugins --list --maturity recommended
 ```
 
 ---
@@ -287,7 +356,7 @@ nightowl/
 ├── models/         Pydantic models (Finding, Target, Scan, Config)
 ├── config/         YAML config, scope management, defaults
 ├── db/             SQLAlchemy + SQLite persistence
-├── modules/        57 scanner plugins across 6 stages
+├── modules/        72 scanner plugins across 6 stages
 │   ├── recon/      DNS, ports, subdomains, cloud, JS analysis
 │   ├── web/        OWASP Top 10 + advanced web attacks
 │   ├── network/    SMB, SNMP, SSH, FTP, CVE matching

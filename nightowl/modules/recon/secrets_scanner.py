@@ -95,7 +95,8 @@ class SecretsScannerPlugin(ScannerPlugin):
                             remediation="Block access to sensitive files via web server config. Add to .htaccess or nginx deny rules.",
                             category="secrets",
                         ))
-                except Exception:
+                except (OSError, RuntimeError, ValueError, httpx.RequestError) as exc:
+                    logger.debug(f"Suppressed error: {exc}")
                     continue
                 await asyncio.sleep(0.05)
 

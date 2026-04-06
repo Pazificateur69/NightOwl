@@ -1,6 +1,50 @@
 """Markdown report generator."""
 
 
+def _render_benchmark_section(context: dict) -> list[str]:
+    benchmark_target = context.get("benchmark_target")
+    if not benchmark_target:
+        return []
+
+    verdict_counts = context.get("benchmark_verdict_counts", {})
+    top_modules = context.get("benchmark_top_modules", [])
+    probe_urls = context.get("benchmark_probe_urls", [])
+    profile = context.get("benchmark_profile_description", "N/A")
+    artifact_scope = context.get("benchmark_artifact_scope", "raw")
+
+    lines = [
+        "## Benchmark Context",
+        "",
+        f"- **Target:** {benchmark_target}",
+        f"- **Profile:** {profile}",
+        f"- **Artifact Scope:** {artifact_scope}",
+        f"- **Probe Count:** {len(probe_urls)}",
+        f"- **Confirmed Hits:** {verdict_counts.get('confirmed_hit', 0)}",
+        f"- **Expected Hits:** {verdict_counts.get('expected_hit', 0)}",
+        f"- **Quiet Expected:** {verdict_counts.get('quiet_expected', 0)}",
+        f"- **Quiet Violations:** {verdict_counts.get('quiet_violation', 0)}",
+        f"- **Missed Expected:** {verdict_counts.get('missed_expected', 0)}",
+        f"- **Likely False Positives:** {verdict_counts.get('likely_false_positive', 0)}",
+        f"- **Inconclusive:** {verdict_counts.get('inconclusive', 0)}",
+        "",
+    ]
+
+    if top_modules:
+        lines.extend(["### Strongest Module Signal", ""])
+        for item in top_modules:
+            lines.append(f"- `{item['name']}`: {item['count']} findings")
+        lines.append("")
+
+    if probe_urls:
+        lines.extend(["### Probe URLs", ""])
+        for probe in probe_urls:
+            lines.append(f"- `{probe}`")
+        lines.append("")
+
+    lines.extend(["---", ""])
+    return lines
+
+
 def generate_markdown_report(context: dict) -> str:
     findings = context.get("findings", [])
     stats = context.get("severity_counts", {})
@@ -30,29 +74,42 @@ def generate_markdown_report(context: dict) -> str:
         "",
         "---",
         "",
+    ]
+
+    lines.extend(_render_benchmark_section(context))
+
+    lines.extend([
         "## Findings Summary",
         "",
-        "| # | Severity | Title | Target | CVSS | Module |",
-        "|---|----------|-------|--------|------|--------|",
-    ]
+        "| # | Severity | State | Confidence | Title | Target | CVSS | Module |",
+        "|---|----------|-------|------------|-------|--------|------|--------|",
+    ])
 
     for i, f in enumerate(findings, 1):
         sev = f.get("severity", "info").upper()
+        state = f.get("finding_state", "info").upper()
+        confidence = float(f.get("confidence_score", 0.5))
         lines.append(
-            f"| {i} | {sev} | {f.get('title', '')} | {f.get('target', '')} | {f.get('cvss_score', 0)} | {f.get('module_name', '')} |"
+            f"| {i} | {sev} | {state} | {confidence:.2f} | {f.get('title', '')} | {f.get('target', '')} | {f.get('cvss_score', 0)} | {f.get('module_name', '')} |"
         )
 
     lines.extend(["", "---", "", "## Detailed Findings", ""])
 
     for i, f in enumerate(findings, 1):
         sev = f.get("severity", "info").upper()
+        state = f.get("finding_state", "info").upper()
+        confidence = float(f.get("confidence_score", 0.5))
+        maturity = f.get("metadata", {}).get("module_maturity", "experimental")
         lines.extend([
             f"### {i}. {f.get('title', '')}",
             "",
             f"- **Severity:** {sev}",
+            f"- **State:** {state}",
+            f"- **Confidence:** {confidence:.2f}",
             f"- **CVSS Score:** {f.get('cvss_score', 0)}",
             f"- **Target:** {f.get('target', '')}",
             f"- **Module:** {f.get('module_name', '')}",
+            f"- **Module Maturity:** {maturity}",
             "",
             "**Evidence:**",
             "```",

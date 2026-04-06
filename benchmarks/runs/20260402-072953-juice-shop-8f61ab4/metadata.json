@@ -1,0 +1,51 @@
+{
+  "target_name": "juice-shop",
+  "profile_description": "Multi-probe benchmark for Juice Shop unauthenticated frontend routes.",
+  "expected_modules": [
+    "header-analyzer",
+    "dir-bruteforce",
+    "sqli-scanner",
+    "ssl-analyzer"
+  ],
+  "probe_urls": [
+    "http://127.0.0.1:8082/",
+    "http://127.0.0.1:8082/robots.txt",
+    "http://127.0.0.1:8082/assets/public/images/uploads/",
+    "http://127.0.0.1:8082/rest/products/search?q=apple",
+    "http://127.0.0.1:8082/api/Challenges/?page=1"
+  ],
+  "url": "http://127.0.0.1:8082",
+  "command": [
+    ".venv/bin/python",
+    "-m",
+    "nightowl.cli.main",
+    "--config",
+    "benchmarks/runs/20260402-072953-juice-shop-8f61ab4/probe-01/benchmark-config.yaml",
+    "scan",
+    "web",
+    "http://127.0.0.1:8082/",
+    "--core"
+  ],
+  "commit": "8f61ab4",
+  "started_at": "2026-04-02T07:29:53.175944+00:00",
+  "finished_at": "2026-04-02T07:30:31.520359+00:00",
+  "duration_seconds": 38.344415,
+  "return_code": 0,
+  "findings_count": 20,
+  "scan_id": "7fb8d548-16d3-4e46-b48b-80227840ea08",
+  "stdout_path": "benchmarks/runs/20260402-072953-juice-shop-8f61ab4/stdout.txt",
+  "stderr_path": "benchmarks/runs/20260402-072953-juice-shop-8f61ab4/stderr.txt",
+  "raw_session_path": "benchmarks/runs/20260402-072953-juice-shop-8f61ab4/metadata.json",
+  "session_markdown_path": "benchmarks/sessions/2026-04-02-juice-shop-8f61ab4.md",
+  "findings_json_path": "benchmarks/runs/20260402-072953-juice-shop-8f61ab4/findings.json",
+  "stats_json_path": "benchmarks/runs/20260402-072953-juice-shop-8f61ab4/stats.json",
+  "verdicts_json_path": "benchmarks/runs/20260402-072953-juice-shop-8f61ab4/verdicts.json",
+  "report_markdown_path": "benchmarks/runs/20260402-072953-juice-shop-8f61ab4/reports/nightowl-7fb8d548-20260402-073031.md",
+  "report_html_path": "benchmarks/runs/20260402-072953-juice-shop-8f61ab4/reports/nightowl-7fb8d548-20260402-073031.html",
+  "probe_results_path": "benchmarks/runs/20260402-072953-juice-shop-8f61ab4/probe-results.json",
+  "environment": "python=3.14.3, cwd=/Users/pazent/Desktop/NightOwl, dirty_worktree=True",
+  "reachable": true,
+  "preflight_error": null,
+  "auth_mode": null,
+  "auth_notes": []
+}

@@ -38,6 +38,8 @@ class ScanSession(BaseModel):
     finished_at: datetime | None = None
     findings_count: int = 0
     config: dict = Field(default_factory=dict)
+    errors: list[dict] = Field(default_factory=list)
+    module_status: list[dict] = Field(default_factory=list)
 
     def start(self) -> None:
         self.status = ScanStatus.RUNNING

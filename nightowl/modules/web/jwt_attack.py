@@ -19,6 +19,7 @@ import httpx
 from nightowl.core.plugin_base import ScannerPlugin
 from nightowl.models.finding import Finding, Severity
 from nightowl.models.target import Target
+from nightowl.utils.web_auth import bootstrap_login_from_config
 
 logger = logging.getLogger("nightowl")
 
@@ -89,17 +90,27 @@ class JWTAttackPlugin(ScannerPlugin):
         url = target.url or f"https://{target.host}"
 
         try:
-            async with httpx.AsyncClient(
-                verify=False, follow_redirects=True, timeout=10
-            ) as client:
+            async with self.create_http_client() as client:
                 # Fetch the target to extract JWTs from response
                 try:
-                    resp = await client.get(url)
+                    resp = await client.get(url, headers=self.get_request_headers())
                 except Exception as e:
                     logger.warning(f"JWT attack initial request failed: {e}")
                     return findings
 
                 tokens = self._extract_tokens(resp)
+
+                if not tokens and self.auth_config:
+                    try:
+                        login_resp = await bootstrap_login_from_config(
+                            client,
+                            self.auth_config,
+                            headers=self.get_request_headers(),
+                        )
+                        if login_resp is not None:
+                            tokens.extend(self._extract_tokens(login_resp))
+                    except Exception as exc:
+                        logger.debug(f"[jwt-attack] configured auth bootstrap failed: {exc}")
 
                 if not tokens:
                     # Try common auth endpoints
@@ -111,9 +122,11 @@ class JWTAttackPlugin(ScannerPlugin):
                             auth_resp = await client.post(
                                 auth_url,
                                 json={"username": "test", "password": "test"},
+                                headers=self.get_request_headers(),
                             )
                             tokens.extend(self._extract_tokens(auth_resp))
-                        except Exception:
+                        except (OSError, RuntimeError, ValueError, httpx.RequestError) as exc:
+                            logger.debug(f"Suppressed error: {exc}")
                             continue
 
                 if not tokens:
@@ -291,7 +304,8 @@ class JWTAttackPlugin(ScannerPlugin):
                             "https://auth0.com/blog/critical-vulnerabilities-in-json-web-token-libraries/",
                         ],
                     )
-            except Exception:
+            except (OSError, RuntimeError, ValueError, httpx.RequestError) as exc:
+                logger.debug(f"Suppressed error: {exc}")
                 continue
 
         return None
@@ -341,7 +355,8 @@ class JWTAttackPlugin(ScannerPlugin):
                             "https://cwe.mitre.org/data/definitions/521.html",
                         ],
                     )
-            except Exception:
+            except (OSError, RuntimeError, ValueError, httpx.RequestError) as exc:
+                logger.debug(f"Suppressed error: {exc}")
                 continue
 
         return None
@@ -397,8 +412,8 @@ class JWTAttackPlugin(ScannerPlugin):
                         "https://cwe.mitre.org/data/definitions/613.html",
                     ],
                 )
-        except Exception:
-            pass
+        except (OSError, RuntimeError, ValueError, httpx.RequestError) as exc:
+            logger.debug(f"Suppressed error: {exc}")
 
         return None
 

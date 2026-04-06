@@ -27,12 +27,19 @@ command -v git &>/dev/null || { echo -e "${RED}[-] git required${NC}"; exit 1; }
 
 DIR="$HOME/.nightowl"
 echo -e "\n${CYAN}[*]${NC} Installing to $DIR"
-[ -d "$DIR" ] && { cd "$DIR" && git pull -q 2>/dev/null||true; } || git clone -q https://github.com/Pazificateur69/NightOwl.git "$DIR"
-cd "$DIR"
+if [ -d "$DIR" ]; then
+    cd "$DIR"
+    git pull -q || { echo -e "${RED}[-] git pull failed${NC}"; exit 1; }
+else
+    git clone -q https://github.com/Pazificateur69/NightOwl.git "$DIR" || {
+        echo -e "${RED}[-] git clone failed${NC}"; exit 1;
+    }
+    cd "$DIR"
+fi
 
 echo -e "${CYAN}[*]${NC} Setting up environment..."
 python3 -m venv .venv && source .venv/bin/activate
-pip install -e . -q 2>/dev/null
+python -m pip install -e . || { echo -e "${RED}[-] pip install failed${NC}"; exit 1; }
 
 BIN="$DIR/.venv/bin/nightowl"; LINK="$HOME/.local/bin"
 mkdir -p "$LINK" && ln -sf "$BIN" "$LINK/nightowl"

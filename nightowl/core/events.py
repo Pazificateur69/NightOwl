@@ -23,16 +23,10 @@ class Event(str, Enum):
 
 
 class EventBus:
-    """Async event bus for pub/sub communication."""
+    """Per-scan event bus. Create a new instance per scan to avoid leaks."""
 
-    _instance: "EventBus | None" = None
-    _subscribers: dict[Event, list[Callable]]
-
-    def __new__(cls) -> "EventBus":
-        if cls._instance is None:
-            cls._instance = super().__new__(cls)
-            cls._instance._subscribers = {}
-        return cls._instance
+    def __init__(self):
+        self._subscribers: dict[Event, list[Callable]] = {}
 
     def subscribe(self, event: Event, callback: Callable) -> None:
         if event not in self._subscribers:
@@ -58,7 +52,3 @@ class EventBus:
 
     def clear(self) -> None:
         self._subscribers.clear()
-
-    @classmethod
-    def reset(cls) -> None:
-        cls._instance = None

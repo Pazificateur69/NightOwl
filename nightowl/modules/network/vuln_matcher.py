@@ -176,7 +176,8 @@ def _version_in_range(version: str, ver_min: str, ver_max: str) -> bool:
         lo = _parse_version(ver_min)
         hi = _parse_version(ver_max)
         return lo <= v <= hi
-    except Exception:
+    except (OSError, RuntimeError, ValueError, Exception) as exc:
+        logger.debug(f"Error: {exc}")
         return False
 
 

@@ -143,8 +143,8 @@ class HTTPSmugglingPlugin(ScannerPlugin):
                         category="http-smuggling",
                     )
                 )
-        except Exception:
-            pass
+        except (OSError, RuntimeError, ValueError, httpx.RequestError) as exc:
+            logger.debug(f"Suppressed error: {exc}")
 
         return findings
 
@@ -167,7 +167,8 @@ class HTTPSmugglingPlugin(ScannerPlugin):
                 headers={"Content-Type": "application/x-www-form-urlencoded"},
             )
             baseline_time = time.time() - start
-        except Exception:
+        except (OSError, RuntimeError, ValueError, Exception) as exc:
+            logger.debug(f"Error: {exc}")
             baseline_time = 1.0
 
         # CL.TE probe: CL says body is short, but chunked encoding is incomplete
@@ -244,8 +245,8 @@ class HTTPSmugglingPlugin(ScannerPlugin):
                 ],
                 metadata={"type": "CL.TE"},
             )
-        except Exception:
-            pass
+        except (OSError, RuntimeError, ValueError, httpx.RequestError) as exc:
+            logger.debug(f"Suppressed error: {exc}")
 
         return None
 
@@ -267,7 +268,8 @@ class HTTPSmugglingPlugin(ScannerPlugin):
                 headers={"Content-Type": "application/x-www-form-urlencoded"},
             )
             baseline_time = time.time() - start
-        except Exception:
+        except (OSError, RuntimeError, ValueError, Exception) as exc:
+            logger.debug(f"Error: {exc}")
             baseline_time = 1.0
 
         # TE.CL probe: chunked body is complete (0\r\n\r\n) but CL is much larger
@@ -329,8 +331,8 @@ class HTTPSmugglingPlugin(ScannerPlugin):
                 category="http-smuggling",
                 metadata={"type": "TE.CL"},
             )
-        except Exception:
-            pass
+        except (OSError, RuntimeError, ValueError, httpx.RequestError) as exc:
+            logger.debug(f"Suppressed error: {exc}")
 
         return None
 
@@ -352,7 +354,8 @@ class HTTPSmugglingPlugin(ScannerPlugin):
             )
             baseline_status = baseline.status_code
             baseline_len = len(baseline.text)
-        except Exception:
+        except (OSError, RuntimeError, ValueError, Exception) as exc:
+            logger.debug(f"Error: {exc}")
             return findings
 
         inconsistent_tes: list[str] = []
@@ -379,7 +382,8 @@ class HTTPSmugglingPlugin(ScannerPlugin):
                 ):
                     inconsistent_tes.append(te_variant)
 
-            except Exception:
+            except (OSError, RuntimeError, ValueError, httpx.RequestError) as exc:
+                logger.debug(f"Suppressed error: {exc}")
                 continue
 
         if inconsistent_tes:
@@ -464,7 +468,7 @@ class HTTPSmugglingPlugin(ScannerPlugin):
                     metadata={"type": "CL.0"},
                 )
 
-        except Exception:
-            pass
+        except (OSError, RuntimeError, ValueError, httpx.RequestError) as exc:
+            logger.debug(f"Suppressed error: {exc}")
 
         return None

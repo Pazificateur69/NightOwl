@@ -1,0 +1,34 @@
+[
+  {
+    "url": "http://127.0.0.1:8081/",
+    "reachable": true,
+    "preflight_error": "HTTP 200",
+    "return_code": 0,
+    "scan_id": "a3a9c88a-0d7a-4102-941f-1ab8a03807ca",
+    "findings_count": 11
+  },
+  {
+    "url": "http://127.0.0.1:8081/login.php",
+    "reachable": true,
+    "preflight_error": "HTTP 200",
+    "return_code": 0,
+    "scan_id": "b1300e7c-29ed-4a02-9d23-25d12f77c4fa",
+    "findings_count": 7
+  },
+  {
+    "url": "http://127.0.0.1:8081/robots.txt",
+    "reachable": true,
+    "preflight_error": "HTTP 200",
+    "return_code": 0,
+    "scan_id": "d7ba55d6-0926-4673-9051-d928979f9cc5",
+    "findings_count": 7
+  },
+  {
+    "url": "http://127.0.0.1:8081/instructions.php",
+    "reachable": true,
+    "preflight_error": "HTTP 200",
+    "return_code": 0,
+    "scan_id": "48e652ff-1616-49d6-8a0b-2f51b3f57fa4",
+    "findings_count": 7
+  }
+]

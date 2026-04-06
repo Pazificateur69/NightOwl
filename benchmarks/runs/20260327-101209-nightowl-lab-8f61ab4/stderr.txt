@@ -1,0 +1,26 @@
+## Probe: http://127.0.0.1:8084/
+SSL analysis failed for 127.0.0.1:443: [Errno 61] Connection refused
+
+## Probe: http://127.0.0.1:8084/robots.txt
+SSL analysis failed for 127.0.0.1:443: [Errno 61] Connection refused
+
+## Probe: http://127.0.0.1:8084/xss/reflected?q=hello
+SSL analysis failed for 127.0.0.1:443: [Errno 61] Connection refused
+
+## Probe: http://127.0.0.1:8084/xss/escaped?q=hello
+SSL analysis failed for 127.0.0.1:443: [Errno 61] Connection refused
+
+## Probe: http://127.0.0.1:8084/xss/json?q=hello
+SSL analysis failed for 127.0.0.1:443: [Errno 61] Connection refused
+
+## Probe: http://127.0.0.1:8084/xss/comment?q=hello
+SSL analysis failed for 127.0.0.1:443: [Errno 61] Connection refused
+
+## Probe: http://127.0.0.1:8084/xss/attr?q=hello
+SSL analysis failed for 127.0.0.1:443: [Errno 61] Connection refused
+
+## Probe: http://127.0.0.1:8084/sql/error?q=apple
+SSL analysis failed for 127.0.0.1:443: [Errno 61] Connection refused
+
+## Probe: http://127.0.0.1:8084/sql/time?q=apple
+SSL analysis failed for 127.0.0.1:443: [Errno 61] Connection refused

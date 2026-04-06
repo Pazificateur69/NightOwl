@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NightOwl Pentest Report</title>
+<style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0f172a; color: #e2e8f0; line-height: 1.6; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 2rem; }
+    header { background: linear-gradient(135deg, #1e293b, #0f172a); padding: 2rem; border-radius: 12px; margin-bottom: 2rem; border: 1px solid #334155; }
+    header h1 { font-size: 2rem; color: #38bdf8; }
+    header p { color: #94a3b8; }
+    .stats { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; margin-bottom: 2rem; }
+    .stat { background: #1e293b; padding: 1.5rem; border-radius: 8px; text-align: center; border: 1px solid #334155; }
+    .stat .num { font-size: 2rem; font-weight: bold; }
+    .stat .label { color: #94a3b8; font-size: 0.85rem; text-transform: uppercase; }
+    .chart-container { background: #1e293b; border-radius: 8px; padding: 2rem; margin-bottom: 2rem; border: 1px solid #334155; display: flex; justify-content: center; }
+    .benchmark-panel { background: #1e293b; border-radius: 8px; padding: 1.5rem; margin-bottom: 2rem; border: 1px solid #334155; }
+    .benchmark-panel h2 { color: #38bdf8; margin-bottom: 0.75rem; }
+    .benchmark-panel h3 { color: #94a3b8; margin: 1rem 0 0.5rem; font-size: 1rem; }
+    .mini-stats { display: grid; grid-template-columns: repeat(7, 1fr); gap: 0.75rem; margin: 1rem 0; }
+    .mini-stat { background: #0f172a; border: 1px solid #334155; border-radius: 8px; padding: 0.75rem; }
+    .mini-label { color: #94a3b8; font-size: 0.75rem; text-transform: uppercase; }
+    .mini-num { color: #e2e8f0; font-size: 1.5rem; font-weight: bold; }
+    table { width: 100%; border-collapse: collapse; background: #1e293b; border-radius: 8px; overflow: hidden; margin-bottom: 2rem; }
+    th { background: #334155; padding: 12px; text-align: left; font-size: 0.85rem; text-transform: uppercase; color: #94a3b8; }
+    td { padding: 12px; border-bottom: 1px solid #1e293b; }
+    tr:hover { background: #334155; }
+    .badge { padding: 4px 10px; border-radius: 4px; color: white; font-size: 0.75rem; font-weight: bold; }
+    .finding-detail { background: #1e293b; border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; border: 1px solid #334155; }
+    .finding-detail h3 { color: #38bdf8; margin-bottom: 0.5rem; }
+    .finding-detail h4 { color: #94a3b8; margin-top: 1rem; margin-bottom: 0.5rem; }
+    pre { background: #0f172a; padding: 1rem; border-radius: 4px; overflow-x: auto; font-size: 0.85rem; }
+    .owl-logo { font-size: 2.5rem; }
+</style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <span class="owl-logo">&#x1F989;</span>
+        <h1>NightOwl Pentest Report</h1>
+        <p>Scan ID: 91d7ba94-1b12-402d-bd92-01b6ecd7c035 | Generated: 20260330-065747</p>
+    </header>
+
+    <div class="stats">
+        <div class="stat"><div class="num" style="color:#dc2626">0</div><div class="label">Critical</div></div>
+        <div class="stat"><div class="num" style="color:#ea580c">0</div><div class="label">High</div></div>
+        <div class="stat"><div class="num" style="color:#ca8a04">18</div><div class="label">Medium</div></div>
+        <div class="stat"><div class="num" style="color:#2563eb">18</div><div class="label">Low</div></div>
+        <div class="stat"><div class="num" style="color:#6b7280">1</div><div class="label">Info</div></div>
+    </div>
+
+    <div class="chart-container">
+        <svg viewBox="0 0 360 200" width="360" height="200" xmlns="http://www.w3.org/2000/svg">
+<circle cx="100" cy="100" r="70" fill="none" stroke="#ca8a04" stroke-width="30" stroke-dasharray="214.0 225.9" stroke-dashoffset="0.0" transform="rotate(-90 100 100)"/>
+<circle cx="100" cy="100" r="70" fill="none" stroke="#2563eb" stroke-width="30" stroke-dasharray="214.0 225.9" stroke-dashoffset="-214.0" transform="rotate(-90 100 100)"/>
+<circle cx="100" cy="100" r="70" fill="none" stroke="#6b7280" stroke-width="30" stroke-dasharray="11.9 427.9" stroke-dashoffset="-427.9" transform="rotate(-90 100 100)"/>
+<text x="100" y="105" text-anchor="middle" fill="#e2e8f0" font-size="22" font-weight="bold">37</text>
+<text x="100" y="122" text-anchor="middle" fill="#94a3b8" font-size="11">findings</text>
+<rect x="220" y="10" width="12" height="12" fill="#ca8a04" rx="2"/><text x="238" y="21" fill="#e2e8f0" font-size="12">Medium: 18</text>
+<rect x="220" y="32" width="12" height="12" fill="#2563eb" rx="2"/><text x="238" y="43" fill="#e2e8f0" font-size="12">Low: 18</text>
+<rect x="220" y="54" width="12" height="12" fill="#6b7280" rx="2"/><text x="238" y="65" fill="#e2e8f0" font-size="12">Info: 1</text>
+</svg>
+    </div>
+
+    
+        <section class="benchmark-panel">
+            <h2>Benchmark Context</h2>
+            <p><strong>Target:</strong> webgoat</p>
+            <p><strong>Profile:</strong> Authenticated multi-probe benchmark for WebGoat shell routes and lesson menu access.</p>
+            <div class="mini-stats">
+            <div class="mini-stat">
+                <div class="mini-label">confirmed_hit</div>
+                <div class="mini-num"></div>
+            </div>
+            
+            <div class="mini-stat">
+                <div class="mini-label">expected_hit</div>
+                <div class="mini-num">12</div>
+            </div>
+            
+            <div class="mini-stat">
+                <div class="mini-label">quiet_expected</div>
+                <div class="mini-num"></div>
+            </div>
+            
+            <div class="mini-stat">
+                <div class="mini-label">quiet_violation</div>
+                <div class="mini-num"></div>
+            </div>
+            
+            <div class="mini-stat">
+                <div class="mini-label">missed_expected</div>
+                <div class="mini-num">2</div>
+            </div>
+            
+            <div class="mini-stat">
+                <div class="mini-label">likely_false_positive</div>
+                <div class="mini-num">7</div>
+            </div>
+            
+            <div class="mini-stat">
+                <div class="mini-label">inconclusive</div>
+                <div class="mini-num">18</div>
+            </div>
+            </div>
+            <h3>Strongest Module Signal</h3><ul><li><code>header-analyzer</code>: 36</li><li><code>dir-bruteforce</code>: 1</li></ul>
+            <h3>Probe URLs</h3><ul><li><code>http://127.0.0.1:8083/WebGoat/</code></li><li><code>http://127.0.0.1:8083/WebGoat/welcome.mvc</code></li><li><code>http://127.0.0.1:8083/WebGoat/start.mvc?lang=en</code></li><li><code>http://127.0.0.1:8083/WebGoat/service/lessonmenu.mvc</code></li><li><code>http://127.0.0.1:8083/WebGoat/SqlInjection.lesson</code></li><li><code>http://127.0.0.1:8083/WebGoat/CrossSiteScripting.lesson</code></li></ul>
+        </section>
+        
+
+    <h2 style="margin-bottom:1rem; color:#38bdf8;">Findings Summary</h2>
+    <table>
+        <thead><tr><th>Severity</th><th>Title</th><th>Target</th><th>State</th><th>Confidence</th><th>CVSS</th><th>Module</th></tr></thead>
+        <tbody>
+        <tr>
+            <td><span class="badge" style="background:#6b7280">INFO</span></td>
+            <td>Discovered: /login (200)</td>
+            <td>http://127.0.0.1:8083/WebGoat/</td>
+            <td>INFO</td>
+            <td>0.35</td>
+            <td></td>
+            <td>dir-bruteforce</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#ca8a04">MEDIUM</span></td>
+            <td>Missing Security Header: X-Content-Type-Options</td>
+            <td>http://127.0.0.1:8083/WebGoat/</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>4.3</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#ca8a04">MEDIUM</span></td>
+            <td>Missing Security Header: X-Frame-Options</td>
+            <td>http://127.0.0.1:8083/WebGoat/</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>4.3</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#ca8a04">MEDIUM</span></td>
+            <td>Missing Security Header: Content-Security-Policy</td>
+            <td>http://127.0.0.1:8083/WebGoat/</td>
+            <td>SUSPECTED</td>
+            <td>0.75</td>
+            <td>5.4</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#2563eb">LOW</span></td>
+            <td>Missing Security Header: X-XSS-Protection</td>
+            <td>http://127.0.0.1:8083/WebGoat/</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>3.1</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#2563eb">LOW</span></td>
+            <td>Missing Security Header: Referrer-Policy</td>
+            <td>http://127.0.0.1:8083/WebGoat/</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>3.1</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#2563eb">LOW</span></td>
+            <td>Missing Security Header: Permissions-Policy</td>
+            <td>http://127.0.0.1:8083/WebGoat/</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>3.1</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#ca8a04">MEDIUM</span></td>
+            <td>Missing Security Header: X-Content-Type-Options</td>
+            <td>http://127.0.0.1:8083/WebGoat/welcome.mvc</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>4.3</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#ca8a04">MEDIUM</span></td>
+            <td>Missing Security Header: X-Frame-Options</td>
+            <td>http://127.0.0.1:8083/WebGoat/welcome.mvc</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>4.3</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#ca8a04">MEDIUM</span></td>
+            <td>Missing Security Header: Content-Security-Policy</td>
+            <td>http://127.0.0.1:8083/WebGoat/welcome.mvc</td>
+            <td>SUSPECTED</td>
+            <td>0.75</td>
+            <td>5.4</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#2563eb">LOW</span></td>
+            <td>Missing Security Header: X-XSS-Protection</td>
+            <td>http://127.0.0.1:8083/WebGoat/welcome.mvc</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>3.1</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#2563eb">LOW</span></td>
+            <td>Missing Security Header: Referrer-Policy</td>
+            <td>http://127.0.0.1:8083/WebGoat/welcome.mvc</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>3.1</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#2563eb">LOW</span></td>
+            <td>Missing Security Header: Permissions-Policy</td>
+            <td>http://127.0.0.1:8083/WebGoat/welcome.mvc</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>3.1</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#ca8a04">MEDIUM</span></td>
+            <td>Missing Security Header: X-Content-Type-Options</td>
+            <td>http://127.0.0.1:8083/WebGoat/start.mvc?lang=en</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>4.3</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#ca8a04">MEDIUM</span></td>
+            <td>Missing Security Header: X-Frame-Options</td>
+            <td>http://127.0.0.1:8083/WebGoat/start.mvc?lang=en</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>4.3</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#ca8a04">MEDIUM</span></td>
+            <td>Missing Security Header: Content-Security-Policy</td>
+            <td>http://127.0.0.1:8083/WebGoat/start.mvc?lang=en</td>
+            <td>SUSPECTED</td>
+            <td>0.75</td>
+            <td>5.4</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#2563eb">LOW</span></td>
+            <td>Missing Security Header: X-XSS-Protection</td>
+            <td>http://127.0.0.1:8083/WebGoat/start.mvc?lang=en</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>3.1</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#2563eb">LOW</span></td>
+            <td>Missing Security Header: Referrer-Policy</td>
+            <td>http://127.0.0.1:8083/WebGoat/start.mvc?lang=en</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>3.1</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#2563eb">LOW</span></td>
+            <td>Missing Security Header: Permissions-Policy</td>
+            <td>http://127.0.0.1:8083/WebGoat/start.mvc?lang=en</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>3.1</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#ca8a04">MEDIUM</span></td>
+            <td>Missing Security Header: X-Content-Type-Options</td>
+            <td>http://127.0.0.1:8083/WebGoat/service/lessonmenu.mvc</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>4.3</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#ca8a04">MEDIUM</span></td>
+            <td>Missing Security Header: X-Frame-Options</td>
+            <td>http://127.0.0.1:8083/WebGoat/service/lessonmenu.mvc</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>4.3</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#ca8a04">MEDIUM</span></td>
+            <td>Missing Security Header: Content-Security-Policy</td>
+            <td>http://127.0.0.1:8083/WebGoat/service/lessonmenu.mvc</td>
+            <td>SUSPECTED</td>
+            <td>0.75</td>
+            <td>5.4</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#2563eb">LOW</span></td>
+            <td>Missing Security Header: X-XSS-Protection</td>
+            <td>http://127.0.0.1:8083/WebGoat/service/lessonmenu.mvc</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>3.1</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#2563eb">LOW</span></td>
+            <td>Missing Security Header: Referrer-Policy</td>
+            <td>http://127.0.0.1:8083/WebGoat/service/lessonmenu.mvc</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>3.1</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#2563eb">LOW</span></td>
+            <td>Missing Security Header: Permissions-Policy</td>
+            <td>http://127.0.0.1:8083/WebGoat/service/lessonmenu.mvc</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>3.1</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#ca8a04">MEDIUM</span></td>
+            <td>Missing Security Header: X-Content-Type-Options</td>
+            <td>http://127.0.0.1:8083/WebGoat/SqlInjection.lesson</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>4.3</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#ca8a04">MEDIUM</span></td>
+            <td>Missing Security Header: X-Frame-Options</td>
+            <td>http://127.0.0.1:8083/WebGoat/SqlInjection.lesson</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>4.3</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#ca8a04">MEDIUM</span></td>
+            <td>Missing Security Header: Content-Security-Policy</td>
+            <td>http://127.0.0.1:8083/WebGoat/SqlInjection.lesson</td>
+            <td>SUSPECTED</td>
+            <td>0.75</td>
+            <td>5.4</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#2563eb">LOW</span></td>
+            <td>Missing Security Header: X-XSS-Protection</td>
+            <td>http://127.0.0.1:8083/WebGoat/SqlInjection.lesson</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>3.1</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#2563eb">LOW</span></td>
+            <td>Missing Security Header: Referrer-Policy</td>
+            <td>http://127.0.0.1:8083/WebGoat/SqlInjection.lesson</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>3.1</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#2563eb">LOW</span></td>
+            <td>Missing Security Header: Permissions-Policy</td>
+            <td>http://127.0.0.1:8083/WebGoat/SqlInjection.lesson</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>3.1</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#ca8a04">MEDIUM</span></td>
+            <td>Missing Security Header: X-Content-Type-Options</td>
+            <td>http://127.0.0.1:8083/WebGoat/CrossSiteScripting.lesson</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>4.3</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#ca8a04">MEDIUM</span></td>
+            <td>Missing Security Header: X-Frame-Options</td>
+            <td>http://127.0.0.1:8083/WebGoat/CrossSiteScripting.lesson</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>4.3</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#ca8a04">MEDIUM</span></td>
+            <td>Missing Security Header: Content-Security-Policy</td>
+            <td>http://127.0.0.1:8083/WebGoat/CrossSiteScripting.lesson</td>
+            <td>SUSPECTED</td>
+            <td>0.75</td>
+            <td>5.4</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#2563eb">LOW</span></td>
+            <td>Missing Security Header: X-XSS-Protection</td>
+            <td>http://127.0.0.1:8083/WebGoat/CrossSiteScripting.lesson</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>3.1</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#2563eb">LOW</span></td>
+            <td>Missing Security Header: Referrer-Policy</td>
+            <td>http://127.0.0.1:8083/WebGoat/CrossSiteScripting.lesson</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>3.1</td>
+            <td>header-analyzer</td>
+        </tr>
+        <tr>
+            <td><span class="badge" style="background:#2563eb">LOW</span></td>
+            <td>Missing Security Header: Permissions-Policy</td>
+            <td>http://127.0.0.1:8083/WebGoat/CrossSiteScripting.lesson</td>
+            <td>SUSPECTED</td>
+            <td>0.90</td>
+            <td>3.1</td>
+            <td>header-analyzer</td>
+        </tr></tbody>
+    </table>
+
+    <h2 style="margin-bottom:1rem; color:#38bdf8;">Detailed Findings</h2>
+    
+        <div class="finding-detail" id="finding-1">
+            <h3>1. Discovered: /login (200)</h3>
+            <p><strong>Severity:</strong> INFO | <strong>State:</strong> INFO | <strong>Confidence:</strong> 0.35 | <strong>CVSS:</strong>  | <strong>Module:</strong> dir-bruteforce</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8083/WebGoat/</p>
+            <h4>Evidence</h4><pre>URL: http://127.0.0.1:8083/WebGoat/login
+Status: 200
+Size: 1929 bytes
+Content-Type: text/html;charset=UTF-8
+Location: n/a</pre>
+            <h4>Remediation</h4><p></p>
+        </div>
+        <div class="finding-detail" id="finding-2">
+            <h3>2. Missing Security Header: X-Content-Type-Options</h3>
+            <p><strong>Severity:</strong> MEDIUM | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 4.3 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8083/WebGoat/</p>
+            <h4>Evidence</h4><pre>Header &#x27;X-Content-Type-Options&#x27; absent in response from http://127.0.0.1:8083/WebGoat/</pre>
+            <h4>Remediation</h4><p>Add &#x27;X-Content-Type-Options: nosniff&#x27; to all responses.</p>
+        </div>
+        <div class="finding-detail" id="finding-3">
+            <h3>3. Missing Security Header: X-Frame-Options</h3>
+            <p><strong>Severity:</strong> MEDIUM | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 4.3 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8083/WebGoat/</p>
+            <h4>Evidence</h4><pre>Header &#x27;X-Frame-Options&#x27; absent in response from http://127.0.0.1:8083/WebGoat/</pre>
+            <h4>Remediation</h4><p>Add &#x27;X-Frame-Options: DENY&#x27; or &#x27;X-Frame-Options: SAMEORIGIN&#x27;. Consider also using CSP frame-ancestors directive.</p>
+        </div>
+        <div class="finding-detail" id="finding-4">
+            <h3>4. Missing Security Header: Content-Security-Policy</h3>
+            <p><strong>Severity:</strong> MEDIUM | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.75 | <strong>CVSS:</strong> 5.4 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8083/WebGoat/</p>
+            <h4>Evidence</h4><pre>Header &#x27;Content-Security-Policy&#x27; absent in response from http://127.0.0.1:8083/WebGoat/</pre>
+            <h4>Remediation</h4><p>Implement a Content-Security-Policy header with restrictive directives. Start with &#x27;Content-Security-Policy: default-src &#x27;self&#x27;&#x27; and refine as needed.</p>
+        </div>
+        <div class="finding-detail" id="finding-5">
+            <h3>5. Missing Security Header: X-XSS-Protection</h3>
+            <p><strong>Severity:</strong> LOW | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 3.1 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8083/WebGoat/</p>
+            <h4>Evidence</h4><pre>Header &#x27;X-XSS-Protection&#x27; absent in response from http://127.0.0.1:8083/WebGoat/</pre>
+            <h4>Remediation</h4><p>Add &#x27;X-XSS-Protection: 0&#x27; if CSP is implemented, or &#x27;X-XSS-Protection: 1; mode=block&#x27; for legacy browser support.</p>
+        </div>
+        <div class="finding-detail" id="finding-6">
+            <h3>6. Missing Security Header: Referrer-Policy</h3>
+            <p><strong>Severity:</strong> LOW | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 3.1 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8083/WebGoat/</p>
+            <h4>Evidence</h4><pre>Header &#x27;Referrer-Policy&#x27; absent in response from http://127.0.0.1:8083/WebGoat/</pre>
+            <h4>Remediation</h4><p>Add &#x27;Referrer-Policy: strict-origin-when-cross-origin&#x27; or &#x27;Referrer-Policy: no-referrer&#x27; depending on requirements.</p>
+        </div>
+        <div class="finding-detail" id="finding-7">
+            <h3>7. Missing Security Header: Permissions-Policy</h3>
+            <p><strong>Severity:</strong> LOW | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 3.1 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8083/WebGoat/</p>
+            <h4>Evidence</h4><pre>Header &#x27;Permissions-Policy&#x27; absent in response from http://127.0.0.1:8083/WebGoat/</pre>
+            <h4>Remediation</h4><p>Add a Permissions-Policy header restricting unused browser features, e.g., &#x27;Permissions-Policy: camera=(), microphone=(), geolocation=()&#x27;.</p>
+        </div>
+        <div class="finding-detail" id="finding-8">
+            <h3>8. Missing Security Header: X-Content-Type-Options</h3>
+            <p><strong>Severity:</strong> MEDIUM | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 4.3 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8083/WebGoat/welcome.mvc</p>
+            <h4>Evidence</h4><pre>Header &#x27;X-Content-Type-Options&#x27; absent in response from http://127.0.0.1:8083/WebGoat/welcome.mvc</pre>
+            <h4>Remediation</h4><p>Add &#x27;X-Content-Type-Options: nosniff&#x27; to all responses.</p>
+        </div>
+        <div class="finding-detail" id="finding-9">
+            <h3>9. Missing Security Header: X-Frame-Options</h3>
+            <p><strong>Severity:</strong> MEDIUM | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 4.3 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8083/WebGoat/welcome.mvc</p>
+            <h4>Evidence</h4><pre>Header &#x27;X-Frame-Options&#x27; absent in response from http://127.0.0.1:8083/WebGoat/welcome.mvc</pre>
+            <h4>Remediation</h4><p>Add &#x27;X-Frame-Options: DENY&#x27; or &#x27;X-Frame-Options: SAMEORIGIN&#x27;. Consider also using CSP frame-ancestors directive.</p>
+        </div>
+        <div class="finding-detail" id="finding-10">
+            <h3>10. Missing Security Header: Content-Security-Policy</h3>
+            <p><strong>Severity:</strong> MEDIUM | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.75 | <strong>CVSS:</strong> 5.4 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8083/WebGoat/welcome.mvc</p>
+            <h4>Evidence</h4><pre>Header &#x27;Content-Security-Policy&#x27; absent in response from http://127.0.0.1:8083/WebGoat/welcome.mvc</pre>
+            <h4>Remediation</h4><p>Implement a Content-Security-Policy header with restrictive directives. Start with &#x27;Content-Security-Policy: default-src &#x27;self&#x27;&#x27; and refine as needed.</p>
+        </div>
+        <div class="finding-detail" id="finding-11">
+            <h3>11. Missing Security Header: X-XSS-Protection</h3>
+            <p><strong>Severity:</strong> LOW | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 3.1 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8083/WebGoat/welcome.mvc</p>
+            <h4>Evidence</h4><pre>Header &#x27;X-XSS-Protection&#x27; absent in response from http://127.0.0.1:8083/WebGoat/welcome.mvc</pre>
+            <h4>Remediation</h4><p>Add &#x27;X-XSS-Protection: 0&#x27; if CSP is implemented, or &#x27;X-XSS-Protection: 1; mode=block&#x27; for legacy browser support.</p>
+        </div>
+        <div class="finding-detail" id="finding-12">
+            <h3>12. Missing Security Header: Referrer-Policy</h3>
+            <p><strong>Severity:</strong> LOW | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 3.1 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8083/WebGoat/welcome.mvc</p>
+            <h4>Evidence</h4><pre>Header &#x27;Referrer-Policy&#x27; absent in response from http://127.0.0.1:8083/WebGoat/welcome.mvc</pre>
+            <h4>Remediation</h4><p>Add &#x27;Referrer-Policy: strict-origin-when-cross-origin&#x27; or &#x27;Referrer-Policy: no-referrer&#x27; depending on requirements.</p>
+        </div>
+        <div class="finding-detail" id="finding-13">
+            <h3>13. Missing Security Header: Permissions-Policy</h3>
+            <p><strong>Severity:</strong> LOW | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 3.1 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8083/WebGoat/welcome.mvc</p>
+            <h4>Evidence</h4><pre>Header &#x27;Permissions-Policy&#x27; absent in response from http://127.0.0.1:8083/WebGoat/welcome.mvc</pre>
+            <h4>Remediation</h4><p>Add a Permissions-Policy header restricting unused browser features, e.g., &#x27;Permissions-Policy: camera=(), microphone=(), geolocation=()&#x27;.</p>
+        </div>
+        <div class="finding-detail" id="finding-14">
+            <h3>14. Missing Security Header: X-Content-Type-Options</h3>
+            <p><strong>Severity:</strong> MEDIUM | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 4.3 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8083/WebGoat/start.mvc?lang=en</p>
+            <h4>Evidence</h4><pre>Header &#x27;X-Content-Type-Options&#x27; absent in response from http://127.0.0.1:8083/WebGoat/start.mvc?lang=en</pre>
+            <h4>Remediation</h4><p>Add &#x27;X-Content-Type-Options: nosniff&#x27; to all responses.</p>
+        </div>
+        <div class="finding-detail" id="finding-15">
+            <h3>15. Missing Security Header: X-Frame-Options</h3>
+            <p><strong>Severity:</strong> MEDIUM | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 4.3 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8083/WebGoat/start.mvc?lang=en</p>
+            <h4>Evidence</h4><pre>Header &#x27;X-Frame-Options&#x27; absent in response from http://127.0.0.1:8083/WebGoat/start.mvc?lang=en</pre>
+            <h4>Remediation</h4><p>Add &#x27;X-Frame-Options: DENY&#x27; or &#x27;X-Frame-Options: SAMEORIGIN&#x27;. Consider also using CSP frame-ancestors directive.</p>
+        </div>
+        <div class="finding-detail" id="finding-16">
+            <h3>16. Missing Security Header: Content-Security-Policy</h3>
+            <p><strong>Severity:</strong> MEDIUM | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.75 | <strong>CVSS:</strong> 5.4 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8083/WebGoat/start.mvc?lang=en</p>
+            <h4>Evidence</h4><pre>Header &#x27;Content-Security-Policy&#x27; absent in response from http://127.0.0.1:8083/WebGoat/start.mvc?lang=en</pre>
+            <h4>Remediation</h4><p>Implement a Content-Security-Policy header with restrictive directives. Start with &#x27;Content-Security-Policy: default-src &#x27;self&#x27;&#x27; and refine as needed.</p>
+        </div>
+        <div class="finding-detail" id="finding-17">
+            <h3>17. Missing Security Header: X-XSS-Protection</h3>
+            <p><strong>Severity:</strong> LOW | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 3.1 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8083/WebGoat/start.mvc?lang=en</p>
+            <h4>Evidence</h4><pre>Header &#x27;X-XSS-Protection&#x27; absent in response from http://127.0.0.1:8083/WebGoat/start.mvc?lang=en</pre>
+            <h4>Remediation</h4><p>Add &#x27;X-XSS-Protection: 0&#x27; if CSP is implemented, or &#x27;X-XSS-Protection: 1; mode=block&#x27; for legacy browser support.</p>
+        </div>
+        <div class="finding-detail" id="finding-18">
+            <h3>18. Missing Security Header: Referrer-Policy</h3>
+            <p><strong>Severity:</strong> LOW | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 3.1 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8083/WebGoat/start.mvc?lang=en</p>
+            <h4>Evidence</h4><pre>Header &#x27;Referrer-Policy&#x27; absent in response from http://127.0.0.1:8083/WebGoat/start.mvc?lang=en</pre>
+            <h4>Remediation</h4><p>Add &#x27;Referrer-Policy: strict-origin-when-cross-origin&#x27; or &#x27;Referrer-Policy: no-referrer&#x27; depending on requirements.</p>
+        </div>
+        <div class="finding-detail" id="finding-19">
+            <h3>19. Missing Security Header: Permissions-Policy</h3>
+            <p><strong>Severity:</strong> LOW | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 3.1 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8083/WebGoat/start.mvc?lang=en</p>
+            <h4>Evidence</h4><pre>Header &#x27;Permissions-Policy&#x27; absent in response from http://127.0.0.1:8083/WebGoat/start.mvc?lang=en</pre>
+            <h4>Remediation</h4><p>Add a Permissions-Policy header restricting unused browser features, e.g., &#x27;Permissions-Policy: camera=(), microphone=(), geolocation=()&#x27;.</p>
+        </div>
+        <div class="finding-detail" id="finding-20">
+            <h3>20. Missing Security Header: X-Content-Type-Options</h3>
+            <p><strong>Severity:</strong> MEDIUM | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 4.3 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8083/WebGoat/service/lessonmenu.mvc</p>
+            <h4>Evidence</h4><pre>Header &#x27;X-Content-Type-Options&#x27; absent in response from http://127.0.0.1:8083/WebGoat/service/lessonmenu.mvc</pre>
+            <h4>Remediation</h4><p>Add &#x27;X-Content-Type-Options: nosniff&#x27; to all responses.</p>
+        </div>
+        <div class="finding-detail" id="finding-21">
+            <h3>21. Missing Security Header: X-Frame-Options</h3>
+            <p><strong>Severity:</strong> MEDIUM | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 4.3 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8083/WebGoat/service/lessonmenu.mvc</p>
+            <h4>Evidence</h4><pre>Header &#x27;X-Frame-Options&#x27; absent in response from http://127.0.0.1:8083/WebGoat/service/lessonmenu.mvc</pre>
+            <h4>Remediation</h4><p>Add &#x27;X-Frame-Options: DENY&#x27; or &#x27;X-Frame-Options: SAMEORIGIN&#x27;. Consider also using CSP frame-ancestors directive.</p>
+        </div>
+        <div class="finding-detail" id="finding-22">
+            <h3>22. Missing Security Header: Content-Security-Policy</h3>
+            <p><strong>Severity:</strong> MEDIUM | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.75 | <strong>CVSS:</strong> 5.4 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8083/WebGoat/service/lessonmenu.mvc</p>
+            <h4>Evidence</h4><pre>Header &#x27;Content-Security-Policy&#x27; absent in response from http://127.0.0.1:8083/WebGoat/service/lessonmenu.mvc</pre>
+            <h4>Remediation</h4><p>Implement a Content-Security-Policy header with restrictive directives. Start with &#x27;Content-Security-Policy: default-src &#x27;self&#x27;&#x27; and refine as needed.</p>
+        </div>
+        <div class="finding-detail" id="finding-23">
+            <h3>23. Missing Security Header: X-XSS-Protection</h3>
+            <p><strong>Severity:</strong> LOW | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 3.1 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8083/WebGoat/service/lessonmenu.mvc</p>
+            <h4>Evidence</h4><pre>Header &#x27;X-XSS-Protection&#x27; absent in response from http://127.0.0.1:8083/WebGoat/service/lessonmenu.mvc</pre>
+            <h4>Remediation</h4><p>Add &#x27;X-XSS-Protection: 0&#x27; if CSP is implemented, or &#x27;X-XSS-Protection: 1; mode=block&#x27; for legacy browser support.</p>
+        </div>
+        <div class="finding-detail" id="finding-24">
+            <h3>24. Missing Security Header: Referrer-Policy</h3>
+            <p><strong>Severity:</strong> LOW | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 3.1 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8083/WebGoat/service/lessonmenu.mvc</p>
+            <h4>Evidence</h4><pre>Header &#x27;Referrer-Policy&#x27; absent in response from http://127.0.0.1:8083/WebGoat/service/lessonmenu.mvc</pre>
+            <h4>Remediation</h4><p>Add &#x27;Referrer-Policy: strict-origin-when-cross-origin&#x27; or &#x27;Referrer-Policy: no-referrer&#x27; depending on requirements.</p>
+        </div>
+        <div class="finding-detail" id="finding-25">
+            <h3>25. Missing Security Header: Permissions-Policy</h3>
+            <p><strong>Severity:</strong> LOW | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 3.1 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8083/WebGoat/service/lessonmenu.mvc</p>
+            <h4>Evidence</h4><pre>Header &#x27;Permissions-Policy&#x27; absent in response from http://127.0.0.1:8083/WebGoat/service/lessonmenu.mvc</pre>
+            <h4>Remediation</h4><p>Add a Permissions-Policy header restricting unused browser features, e.g., &#x27;Permissions-Policy: camera=(), microphone=(), geolocation=()&#x27;.</p>
+        </div>
+        <div class="finding-detail" id="finding-26">
+            <h3>26. Missing Security Header: X-Content-Type-Options</h3>
+            <p><strong>Severity:</strong> MEDIUM | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 4.3 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8083/WebGoat/SqlInjection.lesson</p>
+            <h4>Evidence</h4><pre>Header &#x27;X-Content-Type-Options&#x27; absent in response from http://127.0.0.1:8083/WebGoat/SqlInjection.lesson</pre>
+            <h4>Remediation</h4><p>Add &#x27;X-Content-Type-Options: nosniff&#x27; to all responses.</p>
+        </div>
+        <div class="finding-detail" id="finding-27">
+            <h3>27. Missing Security Header: X-Frame-Options</h3>
+            <p><strong>Severity:</strong> MEDIUM | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 4.3 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8083/WebGoat/SqlInjection.lesson</p>
+            <h4>Evidence</h4><pre>Header &#x27;X-Frame-Options&#x27; absent in response from http://127.0.0.1:8083/WebGoat/SqlInjection.lesson</pre>
+            <h4>Remediation</h4><p>Add &#x27;X-Frame-Options: DENY&#x27; or &#x27;X-Frame-Options: SAMEORIGIN&#x27;. Consider also using CSP frame-ancestors directive.</p>
+        </div>
+        <div class="finding-detail" id="finding-28">
+            <h3>28. Missing Security Header: Content-Security-Policy</h3>
+            <p><strong>Severity:</strong> MEDIUM | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.75 | <strong>CVSS:</strong> 5.4 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8083/WebGoat/SqlInjection.lesson</p>
+            <h4>Evidence</h4><pre>Header &#x27;Content-Security-Policy&#x27; absent in response from http://127.0.0.1:8083/WebGoat/SqlInjection.lesson</pre>
+            <h4>Remediation</h4><p>Implement a Content-Security-Policy header with restrictive directives. Start with &#x27;Content-Security-Policy: default-src &#x27;self&#x27;&#x27; and refine as needed.</p>
+        </div>
+        <div class="finding-detail" id="finding-29">
+            <h3>29. Missing Security Header: X-XSS-Protection</h3>
+            <p><strong>Severity:</strong> LOW | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 3.1 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8083/WebGoat/SqlInjection.lesson</p>
+            <h4>Evidence</h4><pre>Header &#x27;X-XSS-Protection&#x27; absent in response from http://127.0.0.1:8083/WebGoat/SqlInjection.lesson</pre>
+            <h4>Remediation</h4><p>Add &#x27;X-XSS-Protection: 0&#x27; if CSP is implemented, or &#x27;X-XSS-Protection: 1; mode=block&#x27; for legacy browser support.</p>
+        </div>
+        <div class="finding-detail" id="finding-30">
+            <h3>30. Missing Security Header: Referrer-Policy</h3>
+            <p><strong>Severity:</strong> LOW | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 3.1 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8083/WebGoat/SqlInjection.lesson</p>
+            <h4>Evidence</h4><pre>Header &#x27;Referrer-Policy&#x27; absent in response from http://127.0.0.1:8083/WebGoat/SqlInjection.lesson</pre>
+            <h4>Remediation</h4><p>Add &#x27;Referrer-Policy: strict-origin-when-cross-origin&#x27; or &#x27;Referrer-Policy: no-referrer&#x27; depending on requirements.</p>
+        </div>
+        <div class="finding-detail" id="finding-31">
+            <h3>31. Missing Security Header: Permissions-Policy</h3>
+            <p><strong>Severity:</strong> LOW | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 3.1 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8083/WebGoat/SqlInjection.lesson</p>
+            <h4>Evidence</h4><pre>Header &#x27;Permissions-Policy&#x27; absent in response from http://127.0.0.1:8083/WebGoat/SqlInjection.lesson</pre>
+            <h4>Remediation</h4><p>Add a Permissions-Policy header restricting unused browser features, e.g., &#x27;Permissions-Policy: camera=(), microphone=(), geolocation=()&#x27;.</p>
+        </div>
+        <div class="finding-detail" id="finding-32">
+            <h3>32. Missing Security Header: X-Content-Type-Options</h3>
+            <p><strong>Severity:</strong> MEDIUM | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 4.3 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8083/WebGoat/CrossSiteScripting.lesson</p>
+            <h4>Evidence</h4><pre>Header &#x27;X-Content-Type-Options&#x27; absent in response from http://127.0.0.1:8083/WebGoat/CrossSiteScripting.lesson</pre>
+            <h4>Remediation</h4><p>Add &#x27;X-Content-Type-Options: nosniff&#x27; to all responses.</p>
+        </div>
+        <div class="finding-detail" id="finding-33">
+            <h3>33. Missing Security Header: X-Frame-Options</h3>
+            <p><strong>Severity:</strong> MEDIUM | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 4.3 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8083/WebGoat/CrossSiteScripting.lesson</p>
+            <h4>Evidence</h4><pre>Header &#x27;X-Frame-Options&#x27; absent in response from http://127.0.0.1:8083/WebGoat/CrossSiteScripting.lesson</pre>
+            <h4>Remediation</h4><p>Add &#x27;X-Frame-Options: DENY&#x27; or &#x27;X-Frame-Options: SAMEORIGIN&#x27;. Consider also using CSP frame-ancestors directive.</p>
+        </div>
+        <div class="finding-detail" id="finding-34">
+            <h3>34. Missing Security Header: Content-Security-Policy</h3>
+            <p><strong>Severity:</strong> MEDIUM | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.75 | <strong>CVSS:</strong> 5.4 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8083/WebGoat/CrossSiteScripting.lesson</p>
+            <h4>Evidence</h4><pre>Header &#x27;Content-Security-Policy&#x27; absent in response from http://127.0.0.1:8083/WebGoat/CrossSiteScripting.lesson</pre>
+            <h4>Remediation</h4><p>Implement a Content-Security-Policy header with restrictive directives. Start with &#x27;Content-Security-Policy: default-src &#x27;self&#x27;&#x27; and refine as needed.</p>
+        </div>
+        <div class="finding-detail" id="finding-35">
+            <h3>35. Missing Security Header: X-XSS-Protection</h3>
+            <p><strong>Severity:</strong> LOW | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 3.1 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8083/WebGoat/CrossSiteScripting.lesson</p>
+            <h4>Evidence</h4><pre>Header &#x27;X-XSS-Protection&#x27; absent in response from http://127.0.0.1:8083/WebGoat/CrossSiteScripting.lesson</pre>
+            <h4>Remediation</h4><p>Add &#x27;X-XSS-Protection: 0&#x27; if CSP is implemented, or &#x27;X-XSS-Protection: 1; mode=block&#x27; for legacy browser support.</p>
+        </div>
+        <div class="finding-detail" id="finding-36">
+            <h3>36. Missing Security Header: Referrer-Policy</h3>
+            <p><strong>Severity:</strong> LOW | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 3.1 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8083/WebGoat/CrossSiteScripting.lesson</p>
+            <h4>Evidence</h4><pre>Header &#x27;Referrer-Policy&#x27; absent in response from http://127.0.0.1:8083/WebGoat/CrossSiteScripting.lesson</pre>
+            <h4>Remediation</h4><p>Add &#x27;Referrer-Policy: strict-origin-when-cross-origin&#x27; or &#x27;Referrer-Policy: no-referrer&#x27; depending on requirements.</p>
+        </div>
+        <div class="finding-detail" id="finding-37">
+            <h3>37. Missing Security Header: Permissions-Policy</h3>
+            <p><strong>Severity:</strong> LOW | <strong>State:</strong> SUSPECTED | <strong>Confidence:</strong> 0.90 | <strong>CVSS:</strong> 3.1 | <strong>Module:</strong> header-analyzer</p>
+            <p><strong>Module maturity:</strong> recommended</p>
+            <p><strong>Target:</strong> http://127.0.0.1:8083/WebGoat/CrossSiteScripting.lesson</p>
+            <h4>Evidence</h4><pre>Header &#x27;Permissions-Policy&#x27; absent in response from http://127.0.0.1:8083/WebGoat/CrossSiteScripting.lesson</pre>
+            <h4>Remediation</h4><p>Add a Permissions-Policy header restricting unused browser features, e.g., &#x27;Permissions-Policy: camera=(), microphone=(), geolocation=()&#x27;.</p>
+        </div>
+
+    <footer style="text-align:center; color:#475569; margin-top:3rem; padding:2rem;">
+        Generated by NightOwl v1.0.0
+    </footer>
+</div>
+</body></html>

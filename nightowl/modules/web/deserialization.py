@@ -160,8 +160,8 @@ class DeserializationPlugin(ScannerPlugin):
                         f"Cookie: {cookie.name}\nDecoded magic bytes: AC ED 00 05",
                         "java",
                     ))
-            except Exception:
-                pass
+            except (OSError, RuntimeError, ValueError, httpx.RequestError) as exc:
+                logger.debug(f"Suppressed error: {exc}")
 
             # Check for PHP serialized data
             if PHP_SERIAL_REGEX.search(value):
@@ -245,7 +245,8 @@ class DeserializationPlugin(ScannerPlugin):
             # ViewState without MAC is typically shorter and doesn't end with 20-byte HMAC
             # A properly MAC'd ViewState has an HMAC signature appended
             has_mac = len(decoded) > 20 and len(viewstate_value) > 50
-        except Exception:
+        except (OSError, RuntimeError, ValueError, Exception) as exc:
+            logger.debug(f"Error: {exc}")
             has_mac = True  # assume protected if we can't decode
 
         if not has_event_validation:
@@ -359,7 +360,8 @@ class DeserializationPlugin(ScannerPlugin):
                                 tech.lower().replace(" ", "_"),
                             ))
                             break
-                except Exception:
+                except (OSError, RuntimeError, ValueError, httpx.RequestError) as exc:
+                    logger.debug(f"Suppressed error: {exc}")
                     continue
 
         # Test URL parameters
@@ -388,7 +390,8 @@ class DeserializationPlugin(ScannerPlugin):
                                 tech.lower().replace(" ", "_"),
                             ))
                             break
-                except Exception:
+                except (OSError, RuntimeError, ValueError, httpx.RequestError) as exc:
+                    logger.debug(f"Suppressed error: {exc}")
                     continue
 
         return findings

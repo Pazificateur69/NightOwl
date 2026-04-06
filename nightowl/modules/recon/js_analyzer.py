@@ -84,7 +84,8 @@ class JSAnalyzerPlugin(ScannerPlugin):
                         js_resp = await client.get(js_url)
                         if js_resp.status_code == 200 and len(js_resp.text) < 5_000_000:
                             self._analyze_js(js_resp.text, js_url, findings)
-                    except Exception:
+                    except (OSError, RuntimeError, ValueError, httpx.RequestError) as exc:
+                        logger.debug(f"Suppressed error: {exc}")
                         continue
 
         except Exception as e:

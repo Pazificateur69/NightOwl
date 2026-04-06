@@ -1,0 +1,121 @@
+{
+  "verdict_counts": {
+    "confirmed_hit": 0,
+    "expected_hit": 7,
+    "quiet_expected": 0,
+    "quiet_violation": 0,
+    "likely_false_positive": 1,
+    "missed_expected": 0,
+    "inconclusive": 7
+  },
+  "findings": [
+    {
+      "family": "dir-bruteforce:discovered-path:/docs",
+      "verdict": "likely_false_positive",
+      "rationale": "The discovered path `/docs` is a common public route or static location, so surfacing it as a security finding is likely noisy.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /docs (301)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/.htaccess",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /.htaccess (403)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/robots.txt",
+      "verdict": "expected_hit",
+      "rationale": "This finding family is declared as expected signal for the benchmark profile.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /robots.txt (200)"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/config",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /config (301)"
+    },
+    {
+      "family": "ssl-analyzer:No TLS \u2014 target uses plain HTTP",
+      "verdict": "expected_hit",
+      "rationale": "This finding family is declared as expected signal for the benchmark profile.",
+      "module_name": "ssl-analyzer",
+      "title": "No TLS \u2014 target uses plain HTTP"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/.htaccess",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /.htaccess (403)"
+    },
+    {
+      "family": "xss-scanner:Reflected XSS in parameter 'name'",
+      "verdict": "expected_hit",
+      "rationale": "This finding family is declared as expected signal for the benchmark profile.",
+      "module_name": "xss-scanner",
+      "title": "Reflected XSS in parameter 'name'"
+    },
+    {
+      "family": "dir-bruteforce:discovered-path:/.htaccess",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /.htaccess (403)"
+    },
+    {
+      "family": "sqli-scanner:SQL Injection (Error-Based) in 'id'",
+      "verdict": "expected_hit",
+      "rationale": "This finding family is declared as expected signal for the benchmark profile.",
+      "module_name": "sqli-scanner",
+      "title": "SQL Injection (Error-Based) in 'id'"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-Content-Type-Options",
+      "verdict": "expected_hit",
+      "rationale": "This finding family is declared as expected signal for the benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-Content-Type-Options"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-Frame-Options",
+      "verdict": "expected_hit",
+      "rationale": "This finding family is declared as expected signal for the benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-Frame-Options"
+    },
+    {
+      "family": "header-analyzer:missing-header:Content-Security-Policy",
+      "verdict": "expected_hit",
+      "rationale": "This finding family is declared as expected signal for the benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Content-Security-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:Referrer-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Referrer-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:Permissions-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Permissions-Policy"
+    },
+    {
+      "family": "header-analyzer:Information Disclosure: Server",
+      "verdict": "inconclusive",
+      "rationale": "The module is expected on this profile, but this exact finding family is not yet reviewed.",
+      "module_name": "header-analyzer",
+      "title": "Information Disclosure: Server"
+    }
+  ],
+  "missed_expected": [],
+  "quiet_expected": [],
+  "quiet_violations": []
+}

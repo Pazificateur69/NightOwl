@@ -1,0 +1,74 @@
+[
+  {
+    "url": "http://127.0.0.1:8084/",
+    "reachable": true,
+    "preflight_error": "HTTP 200",
+    "return_code": 0,
+    "scan_id": "9f74de5c-9234-46f3-98b8-5eea72c9ac9e",
+    "findings_count": 8
+  },
+  {
+    "url": "http://127.0.0.1:8084/robots.txt",
+    "reachable": true,
+    "preflight_error": "HTTP 200",
+    "return_code": 0,
+    "scan_id": "78fd94d2-c1e8-4d92-ba30-1d2f77a1c92c",
+    "findings_count": 7
+  },
+  {
+    "url": "http://127.0.0.1:8084/xss/reflected?q=hello",
+    "reachable": true,
+    "preflight_error": "HTTP 200",
+    "return_code": 0,
+    "scan_id": "2b89c8ca-d74d-4d7d-8a4c-7c873a0ad7bf",
+    "findings_count": 42
+  },
+  {
+    "url": "http://127.0.0.1:8084/xss/escaped?q=hello",
+    "reachable": true,
+    "preflight_error": "HTTP 200",
+    "return_code": 0,
+    "scan_id": "d9e1b23c-1c9f-42cf-b9f6-4c0a212f9eee",
+    "findings_count": 41
+  },
+  {
+    "url": "http://127.0.0.1:8084/xss/json?q=hello",
+    "reachable": true,
+    "preflight_error": "HTTP 200",
+    "return_code": 0,
+    "scan_id": "6a84251a-ddd3-498b-b6b6-5e210d04ccdd",
+    "findings_count": 41
+  },
+  {
+    "url": "http://127.0.0.1:8084/xss/comment?q=hello",
+    "reachable": true,
+    "preflight_error": "HTTP 200",
+    "return_code": 0,
+    "scan_id": "c5d8b6e0-b099-466f-9856-1e8a943a8d74",
+    "findings_count": 41
+  },
+  {
+    "url": "http://127.0.0.1:8084/xss/attr?q=hello",
+    "reachable": true,
+    "preflight_error": "HTTP 200",
+    "return_code": 0,
+    "scan_id": "ec03c64c-7035-43da-bf0e-68cce6d06a82",
+    "findings_count": 41
+  },
+  {
+    "url": "http://127.0.0.1:8084/sql/error?q=apple",
+    "reachable": true,
+    "preflight_error": "HTTP 200",
+    "return_code": 0,
+    "scan_id": "70adcb09-ceb3-4972-b813-5c90d0082b2b",
+    "findings_count": 8
+  },
+  {
+    "url": "http://127.0.0.1:8084/sql/time?q=apple",
+    "reachable": true,
+    "preflight_error": "HTTP 200",
+    "return_code": 0,
+    "scan_id": "a48e35d0-b5d0-4533-b6b9-7527b1afe35b",
+    "findings_count": 42
+  }
+]

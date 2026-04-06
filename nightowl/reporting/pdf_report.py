@@ -12,18 +12,22 @@ except ImportError:
 
 
 def generate_pdf_report(context: dict) -> bytes:
-    """Generate PDF report. Falls back to HTML-to-bytes if WeasyPrint unavailable."""
+    """Generate PDF report. Raises if WeasyPrint is not available."""
     from nightowl.reporting.html_report import generate_html_report
 
     html_content = generate_html_report(context)
 
-    if HAS_WEASYPRINT:
-        try:
-            doc = HTML(string=html_content)
-            return doc.write_pdf()
-        except Exception as e:
-            logger.warning(f"WeasyPrint failed: {e}. Install system deps: apt install libpango-1.0-0 libgdk-pixbuf2.0-0")
+    if not HAS_WEASYPRINT:
+        raise RuntimeError(
+            "WeasyPrint is required for PDF generation. "
+            "Install it with: pip install weasyprint"
+        )
 
-    # Fallback: return HTML as bytes
-    logger.info("WeasyPrint not available, saving as HTML")
-    return html_content.encode("utf-8")
+    try:
+        doc = HTML(string=html_content)
+        return doc.write_pdf()
+    except Exception as e:
+        raise RuntimeError(
+            f"PDF generation failed: {e}. "
+            "Ensure system deps are installed: apt install libpango-1.0-0 libgdk-pixbuf2.0-0"
+        ) from e

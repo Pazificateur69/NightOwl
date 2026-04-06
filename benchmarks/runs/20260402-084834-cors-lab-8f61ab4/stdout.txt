@@ -1,0 +1,84 @@
+## Probe: http://127.0.0.1:8085/wildcard-credentials
+
+
+    _   _ _       _     _    ___           _
+   | \ | (_) __ _| |__ | |_ / _ \__      _| |
+   |  \| | |/ _` | '_ \| __| | | \ \ /\ / / |
+   | |\  | | (_| | | | | |_| |_| |\ V  V /| |
+   |_| \_|_|\__, |_| |_|\__|\___/  \_/\_/ |_|
+            |___/
+
+Advanced Penetration Testing Framework v1.0.0
+
+[*] Target: http://127.0.0.1:8085/wildcard-credentials
+[*] Modules: cors-checker, dir-bruteforce, header-analyzer, sqli-scanner, 
+ssl-analyzer, xss-scanner
+[+] Scan complete: 8 findings
+
+## Probe: http://127.0.0.1:8085/reflect-credentials
+
+
+    _   _ _       _     _    ___           _
+   | \ | (_) __ _| |__ | |_ / _ \__      _| |
+   |  \| | |/ _` | '_ \| __| | | \ \ /\ / / |
+   | |\  | | (_| | | | | |_| |_| |\ V  V /| |
+   |_| \_|_|\__, |_| |_|\__|\___/  \_/\_/ |_|
+            |___/
+
+Advanced Penetration Testing Framework v1.0.0
+
+[*] Target: http://127.0.0.1:8085/reflect-credentials
+[*] Modules: cors-checker, dir-bruteforce, header-analyzer, sqli-scanner, 
+ssl-analyzer, xss-scanner
+[+] Scan complete: 8 findings
+
+## Probe: http://127.0.0.1:8085/null-origin
+
+
+    _   _ _       _     _    ___           _
+   | \ | (_) __ _| |__ | |_ / _ \__      _| |
+   |  \| | |/ _` | '_ \| __| | | \ \ /\ / / |
+   | |\  | | (_| | | | | |_| |_| |\ V  V /| |
+   |_| \_|_|\__, |_| |_|\__|\___/  \_/\_/ |_|
+            |___/
+
+Advanced Penetration Testing Framework v1.0.0
+
+[*] Target: http://127.0.0.1:8085/null-origin
+[*] Modules: cors-checker, dir-bruteforce, header-analyzer, sqli-scanner, 
+ssl-analyzer, xss-scanner
+[+] Scan complete: 8 findings
+
+## Probe: http://127.0.0.1:8085/dangerous-methods
+
+
+    _   _ _       _     _    ___           _
+   | \ | (_) __ _| |__ | |_ / _ \__      _| |
+   |  \| | |/ _` | '_ \| __| | | \ \ /\ / / |
+   | |\  | | (_| | | | | |_| |_| |\ V  V /| |
+   |_| \_|_|\__, |_| |_|\__|\___/  \_/\_/ |_|
+            |___/
+
+Advanced Penetration Testing Framework v1.0.0
+
+[*] Target: http://127.0.0.1:8085/dangerous-methods
+[*] Modules: cors-checker, dir-bruteforce, header-analyzer, sqli-scanner, 
+ssl-analyzer, xss-scanner
+[+] Scan complete: 8 findings
+
+## Probe: http://127.0.0.1:8085/allowlist
+
+
+    _   _ _       _     _    ___           _
+   | \ | (_) __ _| |__ | |_ / _ \__      _| |
+   |  \| | |/ _` | '_ \| __| | | \ \ /\ / / |
+   | |\  | | (_| | | | | |_| |_| |\ V  V /| |
+   |_| \_|_|\__, |_| |_|\__|\___/  \_/\_/ |_|
+            |___/
+
+Advanced Penetration Testing Framework v1.0.0
+
+[*] Target: http://127.0.0.1:8085/allowlist
+[*] Modules: cors-checker, dir-bruteforce, header-analyzer, sqli-scanner, 
+ssl-analyzer, xss-scanner
+[+] Scan complete: 7 findings

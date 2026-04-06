@@ -69,7 +69,7 @@
 
   <!-- Stats pills - all red theme -->
   <rect x="345" y="212" width="100" height="30" rx="6" fill="#ff0030" opacity="0.12"/>
-  <text x="358" y="232" font-family="'SF Mono',monospace" font-size="13" font-weight="700" fill="#ff0030">57 modules</text>
+  <text x="358" y="232" font-family="'SF Mono',monospace" font-size="13" font-weight="700" fill="#ff0030">72 modules</text>
 
   <rect x="460" y="212" width="80" height="30" rx="6" fill="#ff0030" opacity="0.12"/>
   <text x="472" y="232" font-family="'SF Mono',monospace" font-size="13" font-weight="700" fill="#ff4455">full auto</text>

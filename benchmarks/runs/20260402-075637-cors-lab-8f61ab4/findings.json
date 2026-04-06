@@ -1,0 +1,410 @@
+[
+  {
+    "id": "9e375f19-2a9a-425f-960a-8444166f8439",
+    "title": "CORS: Wildcard with credentials",
+    "description": "CORS allows any origin with credentials, enabling data theft",
+    "severity": "high",
+    "cvss_score": 7.5,
+    "cvss_vector": "",
+    "category": "cors",
+    "target": "http://127.0.0.1:8085/wildcard-credentials",
+    "port": null,
+    "protocol": "",
+    "evidence": "Server returned Access-Control-Allow-Origin: * with Access-Control-Allow-Credentials: true.",
+    "remediation": "Never combine wildcard origins with allow-credentials. Whitelist specific trusted origins.",
+    "references": [],
+    "module_name": "cors-checker",
+    "timestamp": "2026-04-02 07:56:39.033002",
+    "false_positive": false,
+    "finding_state": "confirmed",
+    "confidence_score": 0.98,
+    "metadata": {
+      "module_maturity": "recommended",
+      "core_module": true,
+      "finding_state": "confirmed",
+      "confidence_score": 0.98,
+      "benchmark_probe_url": "http://127.0.0.1:8085/wildcard-credentials"
+    }
+  },
+  {
+    "id": "160384ff-7f35-4f31-82a4-93190858c02f",
+    "title": "CORS allows dangerous methods: DELETE, PATCH, PUT",
+    "description": "Preflight responses allow state-changing HTTP methods (DELETE, PATCH, PUT) from arbitrary origins.",
+    "severity": "medium",
+    "cvss_score": 4.3,
+    "cvss_vector": "",
+    "category": "cors",
+    "target": "http://127.0.0.1:8085/wildcard-credentials",
+    "port": null,
+    "protocol": "",
+    "evidence": "Allowed methods: DELETE, PATCH, PUT",
+    "remediation": "Restrict Access-Control-Allow-Methods to only the methods required by legitimate origins.",
+    "references": [],
+    "module_name": "cors-checker",
+    "timestamp": "2026-04-02 07:56:39.033085",
+    "false_positive": false,
+    "finding_state": "suspected",
+    "confidence_score": 0.85,
+    "metadata": {
+      "module_maturity": "recommended",
+      "core_module": true,
+      "finding_state": "suspected",
+      "confidence_score": 0.85,
+      "benchmark_probe_url": "http://127.0.0.1:8085/wildcard-credentials"
+    }
+  },
+  {
+    "id": "81339e1e-dabf-4fc0-87ad-9d585e9611c0",
+    "title": "No TLS \u2014 target uses plain HTTP",
+    "description": "The target is using plain HTTP without TLS encryption.",
+    "severity": "medium",
+    "cvss_score": 5.4,
+    "cvss_vector": "",
+    "category": "ssl",
+    "target": "http://127.0.0.1:8085/wildcard-credentials",
+    "port": null,
+    "protocol": "",
+    "evidence": "Scheme: http, Host: 127.0.0.1, Port: 8085",
+    "remediation": "Enable HTTPS with a valid TLS certificate. Redirect all HTTP traffic to HTTPS.",
+    "references": [],
+    "module_name": "ssl-analyzer",
+    "timestamp": "2026-04-02 07:56:43.479426",
+    "false_positive": false,
+    "finding_state": "confirmed",
+    "confidence_score": 0.95,
+    "metadata": {
+      "module_maturity": "recommended",
+      "core_module": true,
+      "finding_state": "confirmed",
+      "confidence_score": 0.95,
+      "benchmark_probe_url": "http://127.0.0.1:8085/wildcard-credentials"
+    }
+  },
+  {
+    "id": "89adfc40-d131-4782-90ed-2938c1759631",
+    "title": "CORS reflects arbitrary origins",
+    "description": "Server reflects multiple attacker-controlled Origin values in CORS responses.",
+    "severity": "high",
+    "cvss_score": 6.5,
+    "cvss_vector": "",
+    "category": "cors",
+    "target": "http://127.0.0.1:8085/reflect-credentials",
+    "port": null,
+    "protocol": "",
+    "evidence": "Reflected origins:\nOrigin: https://evil.com\nReturned ACAO: https://evil.com\nOrigin: https://attacker.example.com\nReturned ACAO: https://attacker.example.com\nOrigin: https://subdomain.evil.com\nReturned ACAO: https://subdomain.evil.com\nOrigin: https://evil-mirror.com\nReturned ACAO: https://evil-mirror.com\nCredentials allowed: True",
+    "remediation": "Validate the Origin header against a strict allowlist of trusted domains.",
+    "references": [],
+    "module_name": "cors-checker",
+    "timestamp": "2026-04-02 07:56:45.283361",
+    "false_positive": false,
+    "finding_state": "confirmed",
+    "confidence_score": 0.95,
+    "metadata": {
+      "module_maturity": "recommended",
+      "core_module": true,
+      "finding_state": "confirmed",
+      "confidence_score": 0.95,
+      "benchmark_probe_url": "http://127.0.0.1:8085/reflect-credentials"
+    }
+  },
+  {
+    "id": "9b0184a3-1d91-4361-9147-f357ab3fffbc",
+    "title": "CORS allows null origin",
+    "description": "Server allows null origin which can be exploited via sandboxed iframes",
+    "severity": "medium",
+    "cvss_score": 4.3,
+    "cvss_vector": "",
+    "category": "cors",
+    "target": "http://127.0.0.1:8085/reflect-credentials",
+    "port": null,
+    "protocol": "",
+    "evidence": "Access-Control-Allow-Origin: null",
+    "remediation": "Do not allow null as a valid origin.",
+    "references": [],
+    "module_name": "cors-checker",
+    "timestamp": "2026-04-02 07:56:45.283409",
+    "false_positive": false,
+    "finding_state": "suspected",
+    "confidence_score": 0.8,
+    "metadata": {
+      "module_maturity": "recommended",
+      "core_module": true,
+      "finding_state": "suspected",
+      "confidence_score": 0.8,
+      "benchmark_probe_url": "http://127.0.0.1:8085/reflect-credentials"
+    }
+  },
+  {
+    "id": "bb034558-3c23-4594-9dc0-04a72c509582",
+    "title": "Missing Security Header: X-Content-Type-Options",
+    "description": "X-Content-Type-Options header is missing. Browsers may MIME-sniff the response body, potentially executing untrusted content as an unexpected type.",
+    "severity": "medium",
+    "cvss_score": 4.3,
+    "cvss_vector": "",
+    "category": "security-headers",
+    "target": "http://127.0.0.1:8085/wildcard-credentials",
+    "port": null,
+    "protocol": "",
+    "evidence": "Header 'X-Content-Type-Options' absent in response from http://127.0.0.1:8085/wildcard-credentials\n\nObserved across benchmark probes:\n- http://127.0.0.1:8085/allowlist\n- http://127.0.0.1:8085/dangerous-methods\n- http://127.0.0.1:8085/null-origin\n- http://127.0.0.1:8085/reflect-credentials\n- http://127.0.0.1:8085/wildcard-credentials",
+    "remediation": "Add 'X-Content-Type-Options: nosniff' to all responses.",
+    "references": [
+      "https://owasp.org/www-project-secure-headers/#x-content-type-options"
+    ],
+    "module_name": "header-analyzer",
+    "timestamp": "2026-04-02 07:56:43.471894",
+    "false_positive": false,
+    "finding_state": "suspected",
+    "confidence_score": 0.9,
+    "metadata": {
+      "url": "http://127.0.0.1:8085/wildcard-credentials",
+      "status_code": 200,
+      "module_maturity": "recommended",
+      "core_module": true,
+      "finding_state": "suspected",
+      "confidence_score": 0.9,
+      "benchmark_probe_url": "http://127.0.0.1:8085/wildcard-credentials",
+      "aggregation_scope": "benchmark-application",
+      "aggregated_probe_count": 5,
+      "aggregated_probe_urls": [
+        "http://127.0.0.1:8085/allowlist",
+        "http://127.0.0.1:8085/dangerous-methods",
+        "http://127.0.0.1:8085/null-origin",
+        "http://127.0.0.1:8085/reflect-credentials",
+        "http://127.0.0.1:8085/wildcard-credentials"
+      ],
+      "aggregated_response_urls": [
+        "http://127.0.0.1:8085/allowlist",
+        "http://127.0.0.1:8085/dangerous-methods",
+        "http://127.0.0.1:8085/null-origin",
+        "http://127.0.0.1:8085/reflect-credentials",
+        "http://127.0.0.1:8085/wildcard-credentials"
+      ]
+    }
+  },
+  {
+    "id": "a5e1798d-30b3-4595-a219-5c687d38dcf1",
+    "title": "Missing Security Header: X-Frame-Options",
+    "description": "X-Frame-Options header is missing. The page can be embedded in iframes, enabling clickjacking attacks.",
+    "severity": "medium",
+    "cvss_score": 4.3,
+    "cvss_vector": "",
+    "category": "security-headers",
+    "target": "http://127.0.0.1:8085/wildcard-credentials",
+    "port": null,
+    "protocol": "",
+    "evidence": "Header 'X-Frame-Options' absent in response from http://127.0.0.1:8085/wildcard-credentials\n\nObserved across benchmark probes:\n- http://127.0.0.1:8085/allowlist\n- http://127.0.0.1:8085/dangerous-methods\n- http://127.0.0.1:8085/null-origin\n- http://127.0.0.1:8085/reflect-credentials\n- http://127.0.0.1:8085/wildcard-credentials",
+    "remediation": "Add 'X-Frame-Options: DENY' or 'X-Frame-Options: SAMEORIGIN'. Consider also using CSP frame-ancestors directive.",
+    "references": [
+      "https://cheatsheetseries.owasp.org/cheatsheets/Clickjacking_Defense_Cheat_Sheet.html"
+    ],
+    "module_name": "header-analyzer",
+    "timestamp": "2026-04-02 07:56:43.471953",
+    "false_positive": false,
+    "finding_state": "suspected",
+    "confidence_score": 0.9,
+    "metadata": {
+      "url": "http://127.0.0.1:8085/wildcard-credentials",
+      "status_code": 200,
+      "module_maturity": "recommended",
+      "core_module": true,
+      "finding_state": "suspected",
+      "confidence_score": 0.9,
+      "benchmark_probe_url": "http://127.0.0.1:8085/wildcard-credentials",
+      "aggregation_scope": "benchmark-application",
+      "aggregated_probe_count": 5,
+      "aggregated_probe_urls": [
+        "http://127.0.0.1:8085/allowlist",
+        "http://127.0.0.1:8085/dangerous-methods",
+        "http://127.0.0.1:8085/null-origin",
+        "http://127.0.0.1:8085/reflect-credentials",
+        "http://127.0.0.1:8085/wildcard-credentials"
+      ],
+      "aggregated_response_urls": [
+        "http://127.0.0.1:8085/allowlist",
+        "http://127.0.0.1:8085/dangerous-methods",
+        "http://127.0.0.1:8085/null-origin",
+        "http://127.0.0.1:8085/reflect-credentials",
+        "http://127.0.0.1:8085/wildcard-credentials"
+      ]
+    }
+  },
+  {
+    "id": "62f4a877-058e-4128-87b4-46dd9b696c94",
+    "title": "Missing Security Header: Content-Security-Policy",
+    "description": "Content-Security-Policy header is missing. Without CSP, the application is more vulnerable to XSS and data injection attacks.",
+    "severity": "medium",
+    "cvss_score": 5.4,
+    "cvss_vector": "",
+    "category": "security-headers",
+    "target": "http://127.0.0.1:8085/wildcard-credentials",
+    "port": null,
+    "protocol": "",
+    "evidence": "Header 'Content-Security-Policy' absent in response from http://127.0.0.1:8085/wildcard-credentials\n\nObserved across benchmark probes:\n- http://127.0.0.1:8085/allowlist\n- http://127.0.0.1:8085/dangerous-methods\n- http://127.0.0.1:8085/null-origin\n- http://127.0.0.1:8085/reflect-credentials\n- http://127.0.0.1:8085/wildcard-credentials",
+    "remediation": "Implement a Content-Security-Policy header with restrictive directives. Start with 'Content-Security-Policy: default-src 'self'' and refine as needed.",
+    "references": [
+      "https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html"
+    ],
+    "module_name": "header-analyzer",
+    "timestamp": "2026-04-02 07:56:43.471976",
+    "false_positive": false,
+    "finding_state": "suspected",
+    "confidence_score": 0.75,
+    "metadata": {
+      "url": "http://127.0.0.1:8085/wildcard-credentials",
+      "status_code": 200,
+      "module_maturity": "recommended",
+      "core_module": true,
+      "finding_state": "suspected",
+      "confidence_score": 0.75,
+      "benchmark_probe_url": "http://127.0.0.1:8085/wildcard-credentials",
+      "aggregation_scope": "benchmark-application",
+      "aggregated_probe_count": 5,
+      "aggregated_probe_urls": [
+        "http://127.0.0.1:8085/allowlist",
+        "http://127.0.0.1:8085/dangerous-methods",
+        "http://127.0.0.1:8085/null-origin",
+        "http://127.0.0.1:8085/reflect-credentials",
+        "http://127.0.0.1:8085/wildcard-credentials"
+      ],
+      "aggregated_response_urls": [
+        "http://127.0.0.1:8085/allowlist",
+        "http://127.0.0.1:8085/dangerous-methods",
+        "http://127.0.0.1:8085/null-origin",
+        "http://127.0.0.1:8085/reflect-credentials",
+        "http://127.0.0.1:8085/wildcard-credentials"
+      ]
+    }
+  },
+  {
+    "id": "0236207a-bb52-416a-86f0-e5f833cb18d4",
+    "title": "Missing Security Header: Referrer-Policy",
+    "description": "Referrer-Policy header is missing. Sensitive information in URLs may leak via the Referer header to third-party sites.",
+    "severity": "low",
+    "cvss_score": 3.1,
+    "cvss_vector": "",
+    "category": "security-headers",
+    "target": "http://127.0.0.1:8085/wildcard-credentials",
+    "port": null,
+    "protocol": "",
+    "evidence": "Header 'Referrer-Policy' absent in response from http://127.0.0.1:8085/wildcard-credentials\n\nObserved across benchmark probes:\n- http://127.0.0.1:8085/allowlist\n- http://127.0.0.1:8085/dangerous-methods\n- http://127.0.0.1:8085/null-origin\n- http://127.0.0.1:8085/reflect-credentials\n- http://127.0.0.1:8085/wildcard-credentials",
+    "remediation": "Add 'Referrer-Policy: strict-origin-when-cross-origin' or 'Referrer-Policy: no-referrer' depending on requirements.",
+    "references": [
+      "https://owasp.org/www-project-secure-headers/#referrer-policy"
+    ],
+    "module_name": "header-analyzer",
+    "timestamp": "2026-04-02 07:56:43.471999",
+    "false_positive": false,
+    "finding_state": "suspected",
+    "confidence_score": 0.9,
+    "metadata": {
+      "url": "http://127.0.0.1:8085/wildcard-credentials",
+      "status_code": 200,
+      "module_maturity": "recommended",
+      "core_module": true,
+      "finding_state": "suspected",
+      "confidence_score": 0.9,
+      "benchmark_probe_url": "http://127.0.0.1:8085/wildcard-credentials",
+      "aggregation_scope": "benchmark-application",
+      "aggregated_probe_count": 5,
+      "aggregated_probe_urls": [
+        "http://127.0.0.1:8085/allowlist",
+        "http://127.0.0.1:8085/dangerous-methods",
+        "http://127.0.0.1:8085/null-origin",
+        "http://127.0.0.1:8085/reflect-credentials",
+        "http://127.0.0.1:8085/wildcard-credentials"
+      ],
+      "aggregated_response_urls": [
+        "http://127.0.0.1:8085/allowlist",
+        "http://127.0.0.1:8085/dangerous-methods",
+        "http://127.0.0.1:8085/null-origin",
+        "http://127.0.0.1:8085/reflect-credentials",
+        "http://127.0.0.1:8085/wildcard-credentials"
+      ]
+    }
+  },
+  {
+    "id": "21ff989d-37d3-4444-84d1-48a95b4c81fa",
+    "title": "Missing Security Header: Permissions-Policy",
+    "description": "Permissions-Policy header is missing. Browser features like camera, microphone, and geolocation are not explicitly restricted.",
+    "severity": "low",
+    "cvss_score": 3.1,
+    "cvss_vector": "",
+    "category": "security-headers",
+    "target": "http://127.0.0.1:8085/wildcard-credentials",
+    "port": null,
+    "protocol": "",
+    "evidence": "Header 'Permissions-Policy' absent in response from http://127.0.0.1:8085/wildcard-credentials\n\nObserved across benchmark probes:\n- http://127.0.0.1:8085/allowlist\n- http://127.0.0.1:8085/dangerous-methods\n- http://127.0.0.1:8085/null-origin\n- http://127.0.0.1:8085/reflect-credentials\n- http://127.0.0.1:8085/wildcard-credentials",
+    "remediation": "Add a Permissions-Policy header restricting unused browser features, e.g., 'Permissions-Policy: camera=(), microphone=(), geolocation=()'.",
+    "references": [
+      "https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Permissions-Policy"
+    ],
+    "module_name": "header-analyzer",
+    "timestamp": "2026-04-02 07:56:43.472020",
+    "false_positive": false,
+    "finding_state": "suspected",
+    "confidence_score": 0.9,
+    "metadata": {
+      "url": "http://127.0.0.1:8085/wildcard-credentials",
+      "status_code": 200,
+      "module_maturity": "recommended",
+      "core_module": true,
+      "finding_state": "suspected",
+      "confidence_score": 0.9,
+      "benchmark_probe_url": "http://127.0.0.1:8085/wildcard-credentials",
+      "aggregation_scope": "benchmark-application",
+      "aggregated_probe_count": 5,
+      "aggregated_probe_urls": [
+        "http://127.0.0.1:8085/allowlist",
+        "http://127.0.0.1:8085/dangerous-methods",
+        "http://127.0.0.1:8085/null-origin",
+        "http://127.0.0.1:8085/reflect-credentials",
+        "http://127.0.0.1:8085/wildcard-credentials"
+      ],
+      "aggregated_response_urls": [
+        "http://127.0.0.1:8085/allowlist",
+        "http://127.0.0.1:8085/dangerous-methods",
+        "http://127.0.0.1:8085/null-origin",
+        "http://127.0.0.1:8085/reflect-credentials",
+        "http://127.0.0.1:8085/wildcard-credentials"
+      ]
+    }
+  },
+  {
+    "id": "a2158fe2-21ec-4213-a43b-85d3c5a3857b",
+    "title": "Information Disclosure: Server",
+    "description": "The Server header reveals web server software and potentially its version. This aids attackers in fingerprinting the target.",
+    "severity": "info",
+    "cvss_score": 0.0,
+    "cvss_vector": "",
+    "category": "information-disclosure",
+    "target": "http://127.0.0.1:8085/wildcard-credentials",
+    "port": null,
+    "protocol": "",
+    "evidence": "Server: NightOwlCORSLab/1.0 Python/3.12.13\n\nObserved across benchmark probes:\n- http://127.0.0.1:8085/wildcard-credentials",
+    "remediation": "Remove or genericize the Server header in your web server configuration.",
+    "references": [],
+    "module_name": "header-analyzer",
+    "timestamp": "2026-04-02 07:56:43.472053",
+    "false_positive": false,
+    "finding_state": "info",
+    "confidence_score": 0.98,
+    "metadata": {
+      "url": "http://127.0.0.1:8085/wildcard-credentials",
+      "header_name": "Server",
+      "header_value": "NightOwlCORSLab/1.0 Python/3.12.13",
+      "module_maturity": "recommended",
+      "core_module": true,
+      "finding_state": "info",
+      "confidence_score": 0.98,
+      "benchmark_probe_url": "http://127.0.0.1:8085/wildcard-credentials",
+      "aggregation_scope": "benchmark-application",
+      "aggregated_probe_count": 1,
+      "aggregated_probe_urls": [
+        "http://127.0.0.1:8085/wildcard-credentials"
+      ],
+      "aggregated_response_urls": [
+        "http://127.0.0.1:8085/wildcard-credentials"
+      ]
+    }
+  }
+]

@@ -36,7 +36,8 @@ class RaceConditionPlugin(ScannerPlugin):
                         resp = await client.get(url)
                         elapsed = time.monotonic() - start
                         return {"status": resp.status_code, "size": len(resp.content), "time": elapsed}
-                    except Exception:
+                    except (OSError, RuntimeError, ValueError, Exception) as exc:
+                        logger.debug(f"Error: {exc}")
                         return None
 
                 tasks = [send_request() for _ in range(concurrency)]

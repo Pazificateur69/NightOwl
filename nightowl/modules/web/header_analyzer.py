@@ -10,7 +10,7 @@ from urllib.parse import urlparse
 import httpx
 
 from nightowl.core.plugin_base import ScannerPlugin
-from nightowl.models.finding import Finding, Severity
+from nightowl.models.finding import Finding, FindingState, Severity
 from nightowl.models.target import Target
 
 logger = logging.getLogger("nightowl")
@@ -172,9 +172,7 @@ class HeaderAnalyzerPlugin(ScannerPlugin):
 
     def __init__(self, config: dict | None = None):
         super().__init__(config)
-        self.timeout: float = self.config.get("timeout", 15.0)
-        self.user_agent: str = self.config.get("user_agent", "NightOwl/1.0")
-        self.follow_redirects: bool = self.config.get("follow_redirects", True)
+        self.include_legacy_headers = bool(self.config.get("include_legacy_headers", False))
 
     def _resolve_url(self, target: Target) -> str:
         """Build the URL to scan from the target."""
@@ -185,19 +183,30 @@ class HeaderAnalyzerPlugin(ScannerPlugin):
         host = target.domain or target.ip or target.host
         return f"{scheme}://{host}{port_part}"
 
+    @staticmethod
+    def _is_https_url(url: str) -> bool:
+        return urlparse(url).scheme.lower() == "https"
+
     async def run(self, target: Target, **kwargs) -> list[Finding]:
         findings: list[Finding] = []
         url = self._resolve_url(target)
+        is_https = self._is_https_url(url)
+
+        # Skip if we've already analyzed this exact URL in a prior run
+        prior_findings = kwargs.get("findings", [])
+        already_analyzed = any(
+            f.module_name == self.name and f.metadata.get("url") == url
+            for f in prior_findings
+        )
+        if already_analyzed:
+            logger.debug(f"[header-analyzer] Already analyzed {url}, skipping")
+            return findings
 
         try:
-            async with httpx.AsyncClient(
-                verify=False,
-                follow_redirects=self.follow_redirects,
-                timeout=self.timeout,
-            ) as client:
+            async with self.create_http_client() as client:
                 response = await client.get(
                     url,
-                    headers={"User-Agent": self.user_agent},
+                    headers=self.get_request_headers(),
                 )
         except httpx.RequestError as exc:
             logger.warning(f"[header-analyzer] Request to {url} failed: {exc}")
@@ -211,12 +220,18 @@ class HeaderAnalyzerPlugin(ScannerPlugin):
 
         # Check for missing security headers
         for header_name, meta in SECURITY_HEADERS.items():
+            if header_name == "Strict-Transport-Security" and not is_https:
+                continue
+            if header_name == "X-XSS-Protection" and not self.include_legacy_headers:
+                continue
             if header_name.lower() not in resp_headers:
                 findings.append(
                     Finding(
                         title=f"Missing Security Header: {header_name}",
                         description=meta["description"],
                         severity=meta["severity"],
+                        finding_state=FindingState.SUSPECTED,
+                        confidence_score=0.9 if header_name != "Content-Security-Policy" else 0.75,
                         cvss_score=meta["cvss"],
                         category="security-headers",
                         evidence=f"Header '{header_name}' absent in response from {url}",
@@ -236,6 +251,8 @@ class HeaderAnalyzerPlugin(ScannerPlugin):
                         title=f"Information Disclosure: {header_name}",
                         description=meta["description"],
                         severity=meta["severity"],
+                        finding_state=FindingState.INFO,
+                        confidence_score=0.98,
                         cvss_score=meta["cvss"],
                         category="information-disclosure",
                         evidence=f"{header_name}: {value}",

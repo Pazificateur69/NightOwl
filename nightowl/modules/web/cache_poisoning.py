@@ -92,7 +92,8 @@ class CachePoisoningPlugin(ScannerPlugin):
                                     category="cache-poisoning",
                                 ))
 
-                    except Exception:
+                    except (OSError, RuntimeError, ValueError, httpx.RequestError) as exc:
+                        logger.debug(f"Suppressed error: {exc}")
                         continue
 
         except Exception as e:

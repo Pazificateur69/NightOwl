@@ -59,13 +59,90 @@ BUILTIN_MODULES = {
     "msf-bridge": "nightowl.modules.exploit.msf_bridge",
     "exploit-db": "nightowl.modules.exploit.exploit_db",
     "auto-exploit": "nightowl.modules.exploit.auto_exploit",
+    "hash-cracker": "nightowl.modules.exploit.hash_cracker",
+    "reverse-shell-gen": "nightowl.modules.exploit.reverse_shell_gen",
+    # Web (extended)
+    "wordpress-scanner": "nightowl.modules.web.wordpress_scanner",
+    "cms-scanner": "nightowl.modules.web.cms_scanner",
+    "email-security": "nightowl.modules.web.email_security",
+    "dns-rebinding": "nightowl.modules.web.dns_rebinding",
+    "protocol-fuzzer": "nightowl.modules.web.protocol_fuzzer",
+    "compliance-mapper": "nightowl.modules.web.compliance_mapper",
+    "traffic-analyzer": "nightowl.modules.web.proxy_interceptor",
+    # Network (extended)
+    "container-audit": "nightowl.modules.network.container_audit",
+    "cicd-audit": "nightowl.modules.network.cicd_audit",
+    "database-audit": "nightowl.modules.network.database_audit",
+    # Recon (extended)
+    "dependency-confusion": "nightowl.modules.recon.dependency_confusion",
+    "cloud-iam-audit": "nightowl.modules.recon.cloud_iam_audit",
     # Post-exploit
     "privesc-check": "nightowl.modules.postexploit.privesc_check",
     "file-enum": "nightowl.modules.postexploit.file_enum",
     "credential-dump": "nightowl.modules.postexploit.credential_dump",
     "lateral-movement": "nightowl.modules.postexploit.lateral_movement",
+    "diff-scanner": "nightowl.modules.postexploit.diff_scanner",
+}
+
+CORE_MODULES = {
+    "header-analyzer",
+    "xss-scanner",
+    "sqli-scanner",
+    "cors-checker",
+    "ssl-analyzer",
+    "port-scanner",
+    "deep-port-scan",
+    "dir-bruteforce",
+}
+
+MODULE_MATURITY = {
+    name: (
+        "recommended" if name in CORE_MODULES
+        else "usable-with-caution" if name in {
+            "tech-detect",
+            "service-fingerprint",
+            "api-scanner",
+            "waf-detect",
+            "http-smuggling",
+            "wordpress-scanner",
+            "dependency-confusion",
+            "container-audit",
+            "database-audit",
+            "cicd-audit",
+            "hash-cracker",
+            "diff-scanner",
+        }
+        else "experimental"
+    )
+    for name in BUILTIN_MODULES
 }
 
 
+def get_module_maturity(name: str) -> str:
+    return MODULE_MATURITY.get(name, "experimental")
+
+
+def is_core_module(name: str) -> bool:
+    return name in CORE_MODULES
+
+
 def get_all_modules() -> list[dict]:
-    return [{"name": k, "path": v} for k, v in BUILTIN_MODULES.items()]
+    return [
+        {
+            "name": name,
+            "path": path,
+            "maturity": get_module_maturity(name),
+            "core": is_core_module(name),
+        }
+        for name, path in BUILTIN_MODULES.items()
+    ]
+
+
+def get_core_modules(module_path_fragment: str | None = None) -> list[str]:
+    modules = []
+    for name in CORE_MODULES:
+        path = BUILTIN_MODULES.get(name, "")
+        if module_path_fragment and module_path_fragment not in path:
+            continue
+        modules.append(name)
+    return sorted(modules)

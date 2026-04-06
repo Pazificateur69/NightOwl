@@ -1,0 +1,52 @@
+{
+  "target_name": "nightowl-lab",
+  "profile_description": "Dedicated local benchmark lab for reflected XSS and SQL injection routes.",
+  "expected_modules": [
+    "xss-scanner",
+    "sqli-scanner",
+    "dir-bruteforce"
+  ],
+  "probe_urls": [
+    "http://127.0.0.1:8084/",
+    "http://127.0.0.1:8084/robots.txt",
+    "http://127.0.0.1:8084/xss/reflected?q=hello",
+    "http://127.0.0.1:8084/xss/escaped?q=hello",
+    "http://127.0.0.1:8084/xss/json?q=hello",
+    "http://127.0.0.1:8084/xss/comment?q=hello",
+    "http://127.0.0.1:8084/xss/attr?q=hello",
+    "http://127.0.0.1:8084/sql/error?q=apple",
+    "http://127.0.0.1:8084/sql/time?q=apple"
+  ],
+  "url": "http://127.0.0.1:8084",
+  "command": [
+    ".venv/bin/python",
+    "-m",
+    "nightowl.cli.main",
+    "--config",
+    "benchmarks/runs/20260327-101209-nightowl-lab-8f61ab4/probe-01/benchmark-config.yaml",
+    "scan",
+    "web",
+    "http://127.0.0.1:8084/",
+    "--core"
+  ],
+  "commit": "8f61ab4",
+  "started_at": "2026-03-27T10:12:09.753486+00:00",
+  "finished_at": "2026-03-27T10:13:16.472664+00:00",
+  "duration_seconds": 66.719178,
+  "return_code": 0,
+  "findings_count": 59,
+  "scan_id": "8e422501-07fc-4104-b5fa-9a5d2eb611ad",
+  "stdout_path": "benchmarks/runs/20260327-101209-nightowl-lab-8f61ab4/stdout.txt",
+  "stderr_path": "benchmarks/runs/20260327-101209-nightowl-lab-8f61ab4/stderr.txt",
+  "raw_session_path": "benchmarks/runs/20260327-101209-nightowl-lab-8f61ab4/metadata.json",
+  "session_markdown_path": "benchmarks/sessions/2026-03-27-nightowl-lab-8f61ab4.md",
+  "findings_json_path": "benchmarks/runs/20260327-101209-nightowl-lab-8f61ab4/findings.json",
+  "stats_json_path": "benchmarks/runs/20260327-101209-nightowl-lab-8f61ab4/stats.json",
+  "verdicts_json_path": "benchmarks/runs/20260327-101209-nightowl-lab-8f61ab4/verdicts.json",
+  "report_markdown_path": "benchmarks/runs/20260327-101209-nightowl-lab-8f61ab4/reports/nightowl-8e422501-20260327-101316.md",
+  "report_html_path": "benchmarks/runs/20260327-101209-nightowl-lab-8f61ab4/reports/nightowl-8e422501-20260327-101316.html",
+  "probe_results_path": "benchmarks/runs/20260327-101209-nightowl-lab-8f61ab4/probe-results.json",
+  "environment": "python=3.14.3, cwd=/Users/pazent/Desktop/NightOwl, dirty_worktree=True",
+  "reachable": true,
+  "preflight_error": null
+}

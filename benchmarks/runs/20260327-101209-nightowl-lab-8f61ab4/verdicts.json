@@ -1,0 +1,425 @@
+{
+  "verdict_counts": {
+    "confirmed_hit": 3,
+    "expected_hit": 1,
+    "likely_false_positive": 9,
+    "missed_expected": 0,
+    "inconclusive": 46
+  },
+  "findings": [
+    {
+      "family": "dir-bruteforce:discovered-path:/robots.txt",
+      "verdict": "expected_hit",
+      "rationale": "This finding family is declared as expected signal for the benchmark profile.",
+      "module_name": "dir-bruteforce",
+      "title": "Discovered: /robots.txt (200)"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-Content-Type-Options",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-Content-Type-Options"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-Frame-Options",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-Frame-Options"
+    },
+    {
+      "family": "header-analyzer:missing-header:Content-Security-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Content-Security-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-XSS-Protection",
+      "verdict": "likely_false_positive",
+      "rationale": "X-XSS-Protection is deprecated in modern browsers, so treating its absence as a meaningful security weakness is often misleading.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-XSS-Protection"
+    },
+    {
+      "family": "header-analyzer:missing-header:Referrer-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Referrer-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:Permissions-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Permissions-Policy"
+    },
+    {
+      "family": "header-analyzer:Information Disclosure: Server",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Information Disclosure: Server"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-Content-Type-Options",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-Content-Type-Options"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-Frame-Options",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-Frame-Options"
+    },
+    {
+      "family": "header-analyzer:missing-header:Content-Security-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Content-Security-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-XSS-Protection",
+      "verdict": "likely_false_positive",
+      "rationale": "X-XSS-Protection is deprecated in modern browsers, so treating its absence as a meaningful security weakness is often misleading.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-XSS-Protection"
+    },
+    {
+      "family": "header-analyzer:missing-header:Referrer-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Referrer-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:Permissions-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Permissions-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-Content-Type-Options",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-Content-Type-Options"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-Frame-Options",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-Frame-Options"
+    },
+    {
+      "family": "header-analyzer:missing-header:Content-Security-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Content-Security-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-XSS-Protection",
+      "verdict": "likely_false_positive",
+      "rationale": "X-XSS-Protection is deprecated in modern browsers, so treating its absence as a meaningful security weakness is often misleading.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-XSS-Protection"
+    },
+    {
+      "family": "header-analyzer:missing-header:Referrer-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Referrer-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:Permissions-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Permissions-Policy"
+    },
+    {
+      "family": "xss-scanner:Reflected XSS in parameter 'q'",
+      "verdict": "confirmed_hit",
+      "rationale": "This finding family is explicitly reviewed and confirmed for the target profile.",
+      "module_name": "xss-scanner",
+      "title": "Reflected XSS in parameter 'q'"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-Content-Type-Options",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-Content-Type-Options"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-Frame-Options",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-Frame-Options"
+    },
+    {
+      "family": "header-analyzer:missing-header:Content-Security-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Content-Security-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-XSS-Protection",
+      "verdict": "likely_false_positive",
+      "rationale": "X-XSS-Protection is deprecated in modern browsers, so treating its absence as a meaningful security weakness is often misleading.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-XSS-Protection"
+    },
+    {
+      "family": "header-analyzer:missing-header:Referrer-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Referrer-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:Permissions-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Permissions-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-Content-Type-Options",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-Content-Type-Options"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-Frame-Options",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-Frame-Options"
+    },
+    {
+      "family": "header-analyzer:missing-header:Content-Security-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Content-Security-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-XSS-Protection",
+      "verdict": "likely_false_positive",
+      "rationale": "X-XSS-Protection is deprecated in modern browsers, so treating its absence as a meaningful security weakness is often misleading.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-XSS-Protection"
+    },
+    {
+      "family": "header-analyzer:missing-header:Referrer-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Referrer-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:Permissions-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Permissions-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-Content-Type-Options",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-Content-Type-Options"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-Frame-Options",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-Frame-Options"
+    },
+    {
+      "family": "header-analyzer:missing-header:Content-Security-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Content-Security-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-XSS-Protection",
+      "verdict": "likely_false_positive",
+      "rationale": "X-XSS-Protection is deprecated in modern browsers, so treating its absence as a meaningful security weakness is often misleading.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-XSS-Protection"
+    },
+    {
+      "family": "header-analyzer:missing-header:Referrer-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Referrer-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:Permissions-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Permissions-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-Content-Type-Options",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-Content-Type-Options"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-Frame-Options",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-Frame-Options"
+    },
+    {
+      "family": "header-analyzer:missing-header:Content-Security-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Content-Security-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-XSS-Protection",
+      "verdict": "likely_false_positive",
+      "rationale": "X-XSS-Protection is deprecated in modern browsers, so treating its absence as a meaningful security weakness is often misleading.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-XSS-Protection"
+    },
+    {
+      "family": "header-analyzer:missing-header:Referrer-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Referrer-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:Permissions-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Permissions-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-Content-Type-Options",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-Content-Type-Options"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-Frame-Options",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-Frame-Options"
+    },
+    {
+      "family": "header-analyzer:missing-header:Content-Security-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Content-Security-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-XSS-Protection",
+      "verdict": "likely_false_positive",
+      "rationale": "X-XSS-Protection is deprecated in modern browsers, so treating its absence as a meaningful security weakness is often misleading.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-XSS-Protection"
+    },
+    {
+      "family": "header-analyzer:missing-header:Referrer-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Referrer-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:Permissions-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Permissions-Policy"
+    },
+    {
+      "family": "sqli-scanner:SQL Injection (Error-Based) in 'q'",
+      "verdict": "confirmed_hit",
+      "rationale": "This finding family is explicitly reviewed and confirmed for the target profile.",
+      "module_name": "sqli-scanner",
+      "title": "SQL Injection (Error-Based) in 'q'"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-Content-Type-Options",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-Content-Type-Options"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-Frame-Options",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-Frame-Options"
+    },
+    {
+      "family": "header-analyzer:missing-header:Content-Security-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Content-Security-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:X-XSS-Protection",
+      "verdict": "likely_false_positive",
+      "rationale": "X-XSS-Protection is deprecated in modern browsers, so treating its absence as a meaningful security weakness is often misleading.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: X-XSS-Protection"
+    },
+    {
+      "family": "header-analyzer:missing-header:Referrer-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Referrer-Policy"
+    },
+    {
+      "family": "header-analyzer:missing-header:Permissions-Policy",
+      "verdict": "inconclusive",
+      "rationale": "The module is not part of the expected signal for this benchmark profile.",
+      "module_name": "header-analyzer",
+      "title": "Missing Security Header: Permissions-Policy"
+    },
+    {
+      "family": "sqli-scanner:SQL Injection (Time-Based Blind) in 'q'",
+      "verdict": "confirmed_hit",
+      "rationale": "This finding family is explicitly reviewed and confirmed for the target profile.",
+      "module_name": "sqli-scanner",
+      "title": "SQL Injection (Time-Based Blind) in 'q'"
+    }
+  ],
+  "missed_expected": []
+}

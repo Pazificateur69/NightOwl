@@ -1,0 +1,57 @@
+{
+  "target_name": "dvwa",
+  "profile_description": "Authenticated multi-probe benchmark for DVWA with setup bootstrap and targeted XSS/SQLi routes.",
+  "expected_modules": [
+    "header-analyzer",
+    "dir-bruteforce",
+    "xss-scanner",
+    "sqli-scanner",
+    "ssl-analyzer"
+  ],
+  "probe_urls": [
+    "http://127.0.0.1:8081/",
+    "http://127.0.0.1:8081/instructions.php",
+    "http://127.0.0.1:8081/vulnerabilities/xss_r/?name=test",
+    "http://127.0.0.1:8081/vulnerabilities/sqli/?id=1&Submit=Submit",
+    "http://127.0.0.1:8081/robots.txt"
+  ],
+  "url": "http://127.0.0.1:8081",
+  "command": [
+    ".venv/bin/python",
+    "-m",
+    "nightowl.cli.main",
+    "--config",
+    "benchmarks/runs/20260402-072953-dvwa-8f61ab4/probe-01/benchmark-config.yaml",
+    "scan",
+    "web",
+    "http://127.0.0.1:8081/",
+    "--core"
+  ],
+  "commit": "8f61ab4",
+  "started_at": "2026-04-02T07:29:53.267204+00:00",
+  "finished_at": "2026-04-02T07:30:33.888298+00:00",
+  "duration_seconds": 40.621094,
+  "return_code": 0,
+  "findings_count": 35,
+  "scan_id": "6958935f-0d88-4155-880e-045476be38de",
+  "stdout_path": "benchmarks/runs/20260402-072953-dvwa-8f61ab4/stdout.txt",
+  "stderr_path": "benchmarks/runs/20260402-072953-dvwa-8f61ab4/stderr.txt",
+  "raw_session_path": "benchmarks/runs/20260402-072953-dvwa-8f61ab4/metadata.json",
+  "session_markdown_path": "benchmarks/sessions/2026-04-02-dvwa-8f61ab4.md",
+  "findings_json_path": "benchmarks/runs/20260402-072953-dvwa-8f61ab4/findings.json",
+  "stats_json_path": "benchmarks/runs/20260402-072953-dvwa-8f61ab4/stats.json",
+  "verdicts_json_path": "benchmarks/runs/20260402-072953-dvwa-8f61ab4/verdicts.json",
+  "report_markdown_path": "benchmarks/runs/20260402-072953-dvwa-8f61ab4/reports/nightowl-6958935f-20260402-073033.md",
+  "report_html_path": "benchmarks/runs/20260402-072953-dvwa-8f61ab4/reports/nightowl-6958935f-20260402-073033.html",
+  "probe_results_path": "benchmarks/runs/20260402-072953-dvwa-8f61ab4/probe-results.json",
+  "environment": "python=3.14.3, cwd=/Users/pazent/Desktop/NightOwl, dirty_worktree=True",
+  "reachable": true,
+  "preflight_error": null,
+  "auth_mode": "dvwa-default-admin",
+  "auth_notes": [
+    "Bootstrapped DVWA setup via http://127.0.0.1:8081/setup.php.",
+    "Authenticated to DVWA as admin via http://127.0.0.1:8081/login.php.",
+    "Post-login shell reached at http://127.0.0.1:8081/index.php.",
+    "Final login response landed at http://127.0.0.1:8081/index.php."
+  ]
+}

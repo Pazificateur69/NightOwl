@@ -69,7 +69,8 @@ class SSRFScannerPlugin(ScannerPlugin):
                                         references=["https://owasp.org/www-community/attacks/Server_Side_Request_Forgery"],
                                     ))
                                     break
-                        except Exception:
+                        except (OSError, RuntimeError, ValueError, httpx.RequestError) as exc:
+                            logger.debug(f"Suppressed error: {exc}")
                             continue
 
         except Exception as e:

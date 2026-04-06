@@ -1,0 +1,13 @@
+## Probe: http://127.0.0.1:8083/WebGoat/
+
+## Probe: http://127.0.0.1:8083/WebGoat/welcome.mvc
+
+## Probe: http://127.0.0.1:8083/WebGoat/start.mvc?lang=en
+
+## Probe: http://127.0.0.1:8083/WebGoat/service/lessonmenu.mvc
+
+## Probe: http://127.0.0.1:8083/WebGoat/SqlInjection.lesson
+
+## Probe: http://127.0.0.1:8083/WebGoat/CrossSiteScripting.lesson
+
+## Probe: http://127.0.0.1:8083/WebGoat/CrossSiteScripting/attack5a?QTY1=1&QTY2=1&QTY3=1&QTY4=1&field1=test&field2=111
